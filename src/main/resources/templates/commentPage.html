@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
 
 <head>
 	<title>评论管理</title>
@@ -7,19 +7,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<!-- VENDOR CSS -->
-	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
-	<link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css">
+	<link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}">
+	<link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}">
+	<link rel="stylesheet" th:href="@{assets/vendor/toastr/toastr.min.css}">
 	<!-- MAIN CSS -->
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" th:href="@{assets/css/main.css}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-	<link rel="stylesheet" href="assets/css/demo.css">
+	<link rel="stylesheet" th:href="@{assets/css/demo.css}">
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}">
+	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a href="index.html"><img th:src="@{assets/img/logo-dark.png}" alt="Klorofil Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -87,12 +87,12 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.html" class=""><i class="lnr lnr-chart-bars"></i> <span>数据概览</span></a></li>
-						<li><a href="logPage.html" class=""><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
-						<li><a href="accountPage.html" class=""><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
-						<li><a href="wishPage.html" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
-						<li><a href="commentPage.html" class="active"><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
-						<li><a href="collectPage.html" class=""><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
+						<li><a th:href="@{/index}" class="active"><i class="lnr lnr-chart-bars"></i> <span>数据总览</span></a></li>
+						<li><a th:href="@{/logPage}" class=""><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
+						<li><a th:href="@{/accountPage}" class=""><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
+						<li><a th:href="@{/wishPage}" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
+						<li><a th:href="@{/commentPage}" class=""><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
+						<li><a th:href="@{/collectPage}" class=""><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
 					</ul>
 				</nav>
 			</div>

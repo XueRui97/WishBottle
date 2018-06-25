@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
 
 <head>
 	<title>账号管理</title>
@@ -7,19 +7,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<!-- VENDOR CSS -->
-	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
-	<link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
+	<link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}">
+	<link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}">
+	<link rel="stylesheet" th:href="@{assets/vendor/chartist/css/chartist-custom.css}">
 	<!-- MAIN CSS -->
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" th:href="@{assets/css/main.css}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-	<link rel="stylesheet" href="assets/css/demo.css">
+	<link rel="stylesheet" th:href="@{assets/css/demo.css}">
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}">
+	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html"><img src="assets/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a th:href="@{/index}"><img th:src="@{/assets/img/logo-dark.png}" alt="Klorofil Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -87,12 +87,12 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.html" class=""><i class="lnr lnr-chart-bars"></i> <span>数据概览</span></a></li>
-						<li><a href="logPage.html" class=""><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
-						<li><a href="accountPage.html" class="active"><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
-						<li><a href="wishPage.html" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
-						<li><a href="commentPage.html" class=""><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
-						<li><a href="collectPage.html" class=""><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
+						<li><a th:href="@{/index}" class="active"><i class="lnr lnr-chart-bars"></i> <span>数据总览</span></a></li>
+						<li><a th:href="@{/logPage}" class=""><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
+						<li><a th:href="@{/accountPage}" class=""><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
+						<li><a th:href="@{/wishPage}" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
+						<li><a th:href="@{/commentPage}" class=""><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
+						<li><a th:href="@{/collectPage}" class=""><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -131,7 +131,7 @@
 												<td>Steve</td>
 												<td>wukr@enet.com</td>
 												<td>在新的阅读视图中阅读更加容易。可以折叠文档某些部分并关注所需文本。如果在达到结尾处之前需要停止读取，Word 会记住您的停止位置 - 即使在另一个设备上。</td>
-												<td><img src="./assets/img/user1.png"><a href="./assets/img/user1.png">./assets/img/user1.png</a></td>
+												<td><img th:src="@{./assets/img/user1.png}"><a th:href="@{./assets/img/user1.png}">./assets/img/user1.png</a></td>
 												<td>2018.6.20</td>
 												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
 											</tr>
@@ -141,7 +141,7 @@
 												<td>Jack</td>
 												<td>wusadfasr@sina.com</td>
 												<td>主题和样式也有助于文档保持协调。当您单击设计并选择新的主题时，图片、图表或 SmartArt 图形将会更改以匹配新的主题。当应用样式时，您的标题会进行更改以匹配新的主题。</td>
-												<td><img src="./assets/img/user2.png"><a href="./assets/img/user2.png">./assets/img/user2.png</a></td>
+												<td><img th:src="@{./assets/img/user2.png}"><a th:href="@{./assets/img/user2.png}">./assets/img/user2.png</a></td>
 												<td>2018.6.20</td>
 												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
 											</tr>
@@ -151,7 +151,7 @@
 												<td>Alice</td>
 												<td>2343sr@sina.com</td>
 												<td>例如，您可以添加匹配的封面、页眉和提要栏。单击“插入”，然后从不同库中选择所需元素</td>
-												<td><img src="./assets/img/user3.png"><a href="./assets/img/user3.png">./assets/img/user3.png</a></td>
+												<td><img th:src="@{/./assets/img/user3.png}"><a th:href="@{./assets/img/user3.png}">./assets/img/user3.png</a></td>
 												<td>2018.6.23</td>
 												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
 											</tr>
