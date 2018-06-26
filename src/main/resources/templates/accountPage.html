@@ -121,39 +121,23 @@
 												<th width="500px">自我介绍</th>
 												<th>头像路径</th>
 												<th>注册时间</th>
-												<th>操作</th>
+												<!--th>操作</th-->
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>103</td>
-												<td>Steve</td>
-												<td>wukr@enet.com</td>
-												<td>在新的阅读视图中阅读更加容易。可以折叠文档某些部分并关注所需文本。如果在达到结尾处之前需要停止读取，Word 会记住您的停止位置 - 即使在另一个设备上。</td>
-												<td><img th:src="@{./assets/img/user1.png}"><a th:href="@{./assets/img/user1.png}">./assets/img/user1.png</a></td>
-												<td>2018.6.20</td>
-												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>484</td>
-												<td>Jack</td>
-												<td>wusadfasr@sina.com</td>
-												<td>主题和样式也有助于文档保持协调。当您单击设计并选择新的主题时，图片、图表或 SmartArt 图形将会更改以匹配新的主题。当应用样式时，您的标题会进行更改以匹配新的主题。</td>
-												<td><img th:src="@{./assets/img/user2.png}"><a th:href="@{./assets/img/user2.png}">./assets/img/user2.png</a></td>
-												<td>2018.6.20</td>
-												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>612</td>
-												<td>Alice</td>
-												<td>2343sr@sina.com</td>
-												<td>例如，您可以添加匹配的封面、页眉和提要栏。单击“插入”，然后从不同库中选择所需元素</td>
-												<td><img th:src="@{/./assets/img/user3.png}"><a th:href="@{./assets/img/user3.png}">./assets/img/user3.png</a></td>
-												<td>2018.6.23</td>
-												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
+											<tr th:each="AccountInfo : ${account}">
+												<td text="#">1</td><!--#-->
+												<td th:text="${AccountInfo.getAccountID()}">103</td><!--账号ID-->
+												<td th:text="${AccountInfo.getNikeName()}">Steve</td><!--用户名-->
+												<td th:text="${AccountInfo.getEmail()}">wukr@enet.com</td><!--邮箱-->
+												<td th:text="${AccountInfo.getSelfIntro()}">
+													在新的阅读视图中阅读更加容易。可以折叠文档某些部分并关注所需
+													文本。如果在达到结尾处之前需要停止读取，Word 会记住您的停止位置 - 即使在另一个设备上。</td><!--自我介绍-->
+												<td ><img th:src="${AccountInfo.getAvatar()}"> <a th:text="${AccountInfo.getAvatar()}" >
+												<!--td><img th:src="@{./assets/img/user1.png}"><a th:href="@{./assets/img/user1.png}"-->
+													./assets/img/user1.png</a></td><!--账号ID-->
+												<td th:text="${AccountInfo.getRegestTime()}">2018.6.20</td><!--账号ID-->
+												<!--td><a th:href="@{'deleteAccount/'+${AccountInfo.getAccountID()}}"><span class="lnr lnr-trash"></span>删除</a></td-->
 											</tr>
 										</tbody>
 									</table>

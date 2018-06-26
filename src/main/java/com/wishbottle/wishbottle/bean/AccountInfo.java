@@ -20,7 +20,7 @@ public class AccountInfo {
     @Column(length = 100)
     private String SelfIntro;//自我介绍
     @Column(length = 32,nullable=false)
-    private String Avatar;//头像照片路径
+    private String Avatar;//头像照片路径\src\main\resources\static\assets\img
     private Date RegestTime;//注册时间
 
     public Integer getAccountID() {
