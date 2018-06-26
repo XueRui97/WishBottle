@@ -60,7 +60,7 @@ public class AccountInfoController {
     //public String comment(){
     //    return "commentPage";
     //}
-    @GetMapping("/collectPage")
+   // @GetMapping("/collectPage")
     public String collect(){
         return "collectPage";
     }

@@ -13,7 +13,7 @@ public class Collection {
     @GeneratedValue
     private Integer collectionID;
     @Column(nullable = false)
-    private Date CLTime;//收藏时间
+    private Date CLTime;//收藏时间ss
     @ManyToOne
     private AccountInfo accountInfo;
     @ManyToOne
