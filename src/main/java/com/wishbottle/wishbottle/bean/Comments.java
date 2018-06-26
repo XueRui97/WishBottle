@@ -3,6 +3,8 @@ package com.wishbottle.wishbottle.bean;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.sql.DatabaseMetaData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Comments {

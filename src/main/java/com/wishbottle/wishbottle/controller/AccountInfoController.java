@@ -53,10 +53,15 @@ public class AccountInfoController {
     }
 
     @GetMapping("/accountPage")
+<<<<<<< HEAD
     public String account(Model model){
         List<AccountInfo> list=accountInfoService.getAllAccountInfo();
         model.addAttribute("account",list);
         return "accountPage";
+=======
+    public String account(){
+      return "accountPage";
+>>>>>>> 44f9bf93130679985b251066df6593efe50824a3
     }
     //删除学生信息
    /* @GetMapping("/deleteAccount/{AccountID}")
@@ -72,10 +77,10 @@ public class AccountInfoController {
     public String wish(){
         return "wishPage";
     }
-    @GetMapping("/commentPage")
-    public String comment(){
-        return "commentPage";
-    }
+    //@GetMapping("/commentPage")
+    //public String comment(){
+    //    return "commentPage";
+    //}
     @GetMapping("/collectPage")
     public String collect(){
         return "collectPage";

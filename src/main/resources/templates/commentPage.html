@@ -125,34 +125,14 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>255</td>
-												<td>1122</td>
-												<td>103</td>
-												<td>Steve</td>
-												<td>视频提供了功能强大的方法帮助您证明您的观点。当您单击联机视频时，可以在想要添加的视频的嵌入代码中进行粘贴。您也可以键入一个关键字以联机搜索最适合您的文档的视频。为使您的文档具有专业外观，</td>
-												<td>2018.6.22 14:28</td>
-												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>256</td>
-												<td>1122</td>
-												<td>484</td>
-												<td>Jack</td>
-												<td>使用在需要位置出现的新按钮在 Word 中保存时间。若要更改图片适应文档的方式，请单击该图片，图片旁边将会显示布局选项按钮。当处理表格时，单击要添加行或列的位置，然后单击加号</td>
-												<td>2018.6.22 10:29</td>
-												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>289</td>
-												<td>1552</td>
-												<td>612</td>
-												<td>Alice</td>
-												<td>这些设计可互为补充。例如，您可以添加匹配的封面、页眉和提要栏。单击“插入”，然后从不同库中选择所需元素。</td>
-												<td>2018.6.22 01:46</td>
+											<tr th:each="Comments : ${comments}">
+												<td th:text="${Comments.getCMID()}">1</td><!--#-->
+												<td th:text="${Comments.getCMID()}">1</td><!--评论ID-->
+												<td th:text="${Comments.getWish().getWishID()}">Steve</td><!--心愿ID-->
+												<td th:text="${Comments.getAccountInfo().getAccountID()}">Steve</td><!--评论者ID-->
+												<td th:text="${Comments.getAccountInfo().getNikeName()}">223.20.30.27</td><!--	评论者用户名-->
+												<td th:text="${Comments.getCMContent()}">湖北省武汉市</td><!--评论内容-->
+												<td th:text="${Comments.getCMTime()}">2018.6.24  10:32</td><!--发布时间-->
 												<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
 											</tr>
 										</tbody>
