@@ -4,12 +4,14 @@ package com.wishbottle.wishbottle.bean;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.sql.DatabaseMetaData;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Collection {
-   @Id
-   @GeneratedValue
-   private Integer collectionID;
+    @Id
+    @GeneratedValue
+    private Integer collectionID;
     @Column(nullable = false)
     private Date CLTime;//收藏时间
     @ManyToOne
@@ -22,7 +24,7 @@ public class Collection {
         return collectionID;
     }
 
-   public AccountInfo getAccountInfo() {
+    public AccountInfo getAccountInfo() {
         return accountInfo;
     }
 

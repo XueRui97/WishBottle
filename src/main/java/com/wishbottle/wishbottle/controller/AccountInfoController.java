@@ -3,19 +3,15 @@ package com.wishbottle.wishbottle.controller;
 
 
 import com.wishbottle.wishbottle.bean.AccountInfo;
-import com.wishbottle.wishbottle.bean.Log;
 import com.wishbottle.wishbottle.service.AccountInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -53,30 +49,13 @@ public class AccountInfoController {
     }
 
     @GetMapping("/accountPage")
-<<<<<<< HEAD
-    public String account(Model model){
-        List<AccountInfo> list=accountInfoService.getAllAccountInfo();
-        model.addAttribute("account",list);
-        return "accountPage";
-=======
     public String account(){
-      return "accountPage";
->>>>>>> 44f9bf93130679985b251066df6593efe50824a3
-    }
-    //删除学生信息
-   /* @GetMapping("/deleteAccount/{AccountID}")
-    public String deletAccount(@PathVariable("AccountID") Integer id,Model model){
-        Optional<AccountInfo> accountInfo = accountInfoService.findByID(id);
-        accountInfoService.deleteAccountInfo(accountInfo.get());
-        List<AccountInfo> list=accountInfoService.getAllAccountInfo();
-        model.addAttribute("account",list);
         return "accountPage";
     }
-*/
-    @GetMapping("/wishPage")
-    public String wish(){
-        return "wishPage";
-    }
+   // @GetMapping("/wishPage")
+   // public String wish(){
+    //    return "wishPage";
+   // }
     //@GetMapping("/commentPage")
     //public String comment(){
     //    return "commentPage";

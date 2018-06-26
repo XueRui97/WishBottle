@@ -136,37 +136,15 @@
 									</tr>
 									</thead>
 									<tbody>
-									<tr>
-										<td>1</td>
-										<td>1001</td>
-										<td>视频提供了功能强大的方法帮助您证明您的观点</td>
-										<td>视频提供了功能强大的方法帮助您证明您的观点。当您单击联机视频时，可以在想要添加的视频的嵌入代码中进行粘贴。您也可以键入一个关键字以联机搜索最适合您的文档的视频。为使您的文档具有专业外观，Word 提供了页眉、页脚、封面和文本框设计，这些设计可互为补充。例如，您可以添加匹配的封面、页眉和提要栏。单击“插入”，然后从不同库中选择所需元素。</td>
-										<td>0</td>
-										<td>45</td>
-										<td>2</td>
-										<td>2018.6.22 14:28</td>
-										<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>1002</td>
-										<td>主题和样式也有助于文档保持协调</td>
-										<td>主题和样式也有助于文档保持协调。当您单击设计并选择新的主题时，图片、图表或 SmartArt 图形将会更改以匹配新的主题。当应用样式时，您的标题会进行更改以匹配新的主题。</td>
-										<td>1</td>
-										<td>456</td>
-										<td>14</td>
-										<td>2018.6.22 12:44</td>
-										<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>1003</td>
-										<td>单击要添加行或列的位置</td>
-										<td>使用在需要位置出现的新按钮在 Word 中保存时间。若要更改图片适应文档的方式，请单击该图片，图片旁边将会显示布局选项按钮。当处理表格时，单击要添加行或列的位置，然后单击加号。</td>
-										<td>0</td>
-										<td>4346</td>
-										<td>242	</td>
-										<td>2018.6.22 11:28</td>
+									<tr th:each="Wish : ${wishes}">
+										<td th:text="${Wish.getWishID()}">101</td>
+										<td th:text="${Wish.getWishID()}">1001</td>
+										<td th:text="${Wish.getTitle()}">视频提供了功能强大的方法帮助您证明您的观点</td>
+										<td th:text="${Wish.getContent()}">视频提供了功能强大的方，您可以添加。</td>
+										<td th:text="${Wish.isPermision()}">0</td>
+										<td th:text="${Wish.getBrowseNum()}">45</td>
+										<td th:text="${Wish.getGoodNum()}">2</td>
+										<td th:text="${Wish.getRelTime()}">2018.6.22 14:28</td>
 										<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
 									</tr>
 									</tbody>
