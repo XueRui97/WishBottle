@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface AccountInfoService {
    AccountInfo addAccountInfo(AccountInfo accountInfo);
-   List<AccountInfo> queryByAccountName(String name);
+   List<AccountInfo> queryByAccountName(String name,String password);
 }

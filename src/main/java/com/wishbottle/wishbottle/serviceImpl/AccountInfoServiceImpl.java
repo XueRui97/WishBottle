@@ -18,7 +18,7 @@ public class AccountInfoServiceImpl implements AccountInfoService {
         return accountInfoRepository.save(accountInfo);
     }
     @Override
-   public List<AccountInfo> queryByAccountName(String name){
-        return accountInfoRepository.queryByName(name);
+   public List<AccountInfo> queryByAccountName(String name,String password){
+        return accountInfoRepository.queryByName(name,password);
     }
 }

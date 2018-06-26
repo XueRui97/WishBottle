@@ -122,29 +122,13 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>103</td>
-												<td>Steve</td>
-												<td>223.20.30.27</td>
-												<td>湖北省武汉市</td>
-												<td>2018.6.24  10:32</td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>675</td>
-												<td>Simon</td>
-												<td>223.20.30.15</td>
-												<td>湖北省武汉市</td>
-												<td>2018.6.24  07:10</td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>315</td>
-												<td>Jack</td>
-												<td>213.20.330.11</td>
-												<td>湖北省武汉市</td>
-												<td>2018.6.24  03:57</td>
+										    <tr th:each="Log : ${logs}">
+												<td th:text="${Log.getLogID()}">1</td><!--#-->
+												<td th:text="${Log.getAccountInfo().getAccountID()}">103</td><!--账号ID-->
+												<td th:text="${Log.getAccountInfo().getNikeName()}">Steve</td><!--用户名-->
+												<td th:text="${Log.getIP()}">223.20.30.27</td><!--	IP-->
+												<td th:text="${Log.getAddress()}">湖北省武汉市</td><!--地址-->
+												<td th:text="${Log.getLogTime()}">2018.6.24  10:32</td><!--时间-->
 											</tr>
 										</tbody>
 									</table>

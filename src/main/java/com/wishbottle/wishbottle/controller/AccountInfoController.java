@@ -47,10 +47,7 @@ public class AccountInfoController {
     public String index(){
         return "index";
     }
-   @GetMapping("/logPage")
-    public String log(){
-        return "logPage";
-   }
+
     @GetMapping("/accountPage")
     public String account(){
         return "accountPage";

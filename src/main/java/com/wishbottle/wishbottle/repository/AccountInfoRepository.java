@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface AccountInfoRepository extends JpaRepository<AccountInfo,Integer> {
-    @Query("select a from AccountInfo a where a.NikeName=?1")
-    public List<AccountInfo> queryByName(String name);
+    @Query("select a from AccountInfo a where a.NikeName=?1 and a.Password=?2")
+    public List<AccountInfo> queryByName(String name,String password);
 }
