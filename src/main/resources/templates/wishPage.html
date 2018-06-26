@@ -126,6 +126,7 @@
 									<tr>
 										<th>#</th>
 										<th>心愿ID</th>
+										<th>心愿作者</th>
 										<th width="200px">标题</th>
 										<th width="600px">内容</th>
 										<th>权限</th>
@@ -139,6 +140,7 @@
 									<tr th:each="Wish : ${wishes}">
 										<td th:text="${Wish.getWishID()}">101</td>
 										<td th:text="${Wish.getWishID()}">1001</td>
+										<td th:text="${Wish.getAccountInfo().getNikeName()}">1001</td>
 										<td th:text="${Wish.getTitle()}">视频提供了功能强大的方法帮助您证明您的观点</td>
 										<td th:text="${Wish.getContent()}">视频提供了功能强大的方，您可以添加。</td>
 										<td th:text="${Wish.isPermision()}">0</td>
