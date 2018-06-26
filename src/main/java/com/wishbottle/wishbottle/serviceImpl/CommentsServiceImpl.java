@@ -6,12 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CommentsServiceImpl implements CommentsService {
     @Autowired
-    private CommentsRepository CommentsRepository;
-   @Override
+    private CommentsRepository commentsRepository;
+    @Override
     public List<Comments> getAllComments() {
-        return CommentsRepository.findAll();
+        return commentsRepository.findAll();
+    }
+
+    @Override
+    public Optional<Comments> findByID(Integer id) {
+        return commentsRepository.findById(id);
+    }
+
+    @Override
+    public void deleteComment(Comments comments) {
+        commentsRepository.delete(comments);
     }
 }
