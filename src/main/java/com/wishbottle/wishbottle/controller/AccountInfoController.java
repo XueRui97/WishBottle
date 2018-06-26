@@ -6,6 +6,7 @@ import com.wishbottle.wishbottle.bean.AccountInfo;
 import com.wishbottle.wishbottle.service.AccountInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,8 +18,14 @@ import java.util.List;
 @RequestMapping("/")
 public class AccountInfoController {
     @Autowired
-    private AccountInfoService accountInfoService;
-    @GetMapping()
+    private AccountInfoService AccountInfoService;
+    @GetMapping("accountPage")
+    public String account(Model model){
+        List<AccountInfo> list=AccountInfoService.getAllAccountInfo();
+        model.addAttribute("account",list);
+        return "accountPage";
+    }
+    /*
     public String  first(){
         //add
        /* AccountInfo accountInfo=new AccountInfo();
@@ -33,7 +40,7 @@ public class AccountInfoController {
         accountInfoService.addAccountInfo(accountInfo);
     */
         //find
-        List<AccountInfo> accountInfoList=accountInfoService.queryByAccountName("12","12");
+        /*List<AccountInfo> accountInfoList=accountInfoService.queryByAccountName("12","12");
         if(accountInfoList.isEmpty()){
             System.out.print("查不到");
         }
@@ -42,13 +49,13 @@ public class AccountInfoController {
             System.out.print(accountInfo1.getAccountID());
         }
         return "index";
-    }
+    }*/
     @GetMapping("/index")
     public String index(){
         return "index";
     }
 
-    @GetMapping("/accountPage")
+    //@GetMapping("/accountPage")
     public String account(){
         return "accountPage";
     }
