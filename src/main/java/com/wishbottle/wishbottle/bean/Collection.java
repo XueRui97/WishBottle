@@ -4,20 +4,12 @@ package com.wishbottle.wishbottle.bean;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.sql.DatabaseMetaData;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Collection {
-<<<<<<< HEAD
    @Id
    @GeneratedValue
    private Integer collectionID;
-=======
-    @Id
-    @GeneratedValue
-    private Integer collectionID;
->>>>>>> 44f9bf93130679985b251066df6593efe50824a3
     @Column(nullable = false)
     private Date CLTime;//收藏时间
     @ManyToOne
@@ -30,11 +22,7 @@ public class Collection {
         return collectionID;
     }
 
-<<<<<<< HEAD
    public AccountInfo getAccountInfo() {
-=======
-    public AccountInfo getAccountInfo() {
->>>>>>> 44f9bf93130679985b251066df6593efe50824a3
         return accountInfo;
     }
 
