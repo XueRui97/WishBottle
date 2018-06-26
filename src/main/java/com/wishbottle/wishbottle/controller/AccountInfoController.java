@@ -50,16 +50,16 @@ public class AccountInfoController {
 
     @GetMapping("/accountPage")
     public String account(){
-        return "accountPage";
+      return "accountPage";
     }
     @GetMapping("/wishPage")
     public String wish(){
         return "wishPage";
     }
-    @GetMapping("/commentPage")
-    public String comment(){
-        return "commentPage";
-    }
+    //@GetMapping("/commentPage")
+    //public String comment(){
+    //    return "commentPage";
+    //}
     @GetMapping("/collectPage")
     public String collect(){
         return "collectPage";
