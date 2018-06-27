@@ -1,3 +1,22 @@
+Skip to content
+
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+@jianjake
+Sign out
+Watch 1
+Fork 1 HUSTWishBottle/WishBottle
+Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+Branch: master Find file Copy path WishBottle/src/main/resources/templates/wishPage.html
+8dc8a3d  13 minutes ago
+@XueRui97 XueRui97 add wish
+1 contributor
+RawBlameHistory
+179 lines (172 sloc)  7.27 KB
 <!doctype html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
 
@@ -126,7 +145,6 @@
 									<tr>
 										<th>#</th>
 										<th>心愿ID</th>
-										<th>心愿作者</th>
 										<th width="200px">标题</th>
 										<th width="600px">内容</th>
 										<th>权限</th>
@@ -140,14 +158,14 @@
 									<tr th:each="Wish : ${wishes}">
 										<td th:text="${Wish.getWishID()}">101</td>
 										<td th:text="${Wish.getWishID()}">1001</td>
-										<td th:text="${Wish.getAccountInfo().getNikeName()}">1001</td>
 										<td th:text="${Wish.getTitle()}">视频提供了功能强大的方法帮助您证明您的观点</td>
 										<td th:text="${Wish.getContent()}">视频提供了功能强大的方，您可以添加。</td>
 										<td th:text="${Wish.isPermision()}">0</td>
 										<td th:text="${Wish.getBrowseNum()}">45</td>
 										<td th:text="${Wish.getGoodNum()}">2</td>
 										<td th:text="${Wish.getRelTime()}">2018.6.22 14:28</td>
-										<td><a href="#"><span class="lnr lnr-trash"></span>删除</a></td>
+										<td><a  th:href="@{'deleteWish/'+${Wish.getWishID()}}">
+											<span class="lnr lnr-trash"></span>删除</a></td>
 									</tr>
 									</tbody>
 								</table>
@@ -178,3 +196,16 @@
 </body>
 
 </html>
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
+Press h to open a hovercard with more details. 

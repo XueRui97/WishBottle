@@ -2,6 +2,7 @@
 package com.wishbottle.wishbottle.bean;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.sql.DatabaseMetaData;
 import java.util.Date;

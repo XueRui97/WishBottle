@@ -24,8 +24,8 @@ public class CommentsController {
     }
     @GetMapping("/deleteComment/{CommentsID}")
     public String deletAccount(@PathVariable("CommentsID") Integer id, Model model){
-        Optional<Comments> comments = commentsService.findByID(id);
-        commentsService.deleteComment(comments.get());
+       Optional<Comments> comments = commentsService.findByID(id);
+       commentsService.deleteComment(comments.get());
         List<Comments> list=commentsService.getAllComments();
         model.addAttribute("comments",list);
         return "redirect:/commentPage";

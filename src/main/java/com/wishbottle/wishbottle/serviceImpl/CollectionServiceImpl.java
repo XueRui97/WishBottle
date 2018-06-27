@@ -15,4 +15,13 @@ public class CollectionServiceImpl implements CollectionService {
     public  List<Collection>  getAllCollection() {
         return collectionRepository.findAll();
     }
+
+    /*@Override
+    public void deleteCollectionByWishID(Integer id) {
+        collectionRepository.deleteCollectionByID(id);
+    }*/
+    @Override
+    public void deleteCollection(Collection collection){
+        collectionRepository.delete(collection);
+    }
 }
