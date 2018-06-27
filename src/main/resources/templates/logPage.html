@@ -22,23 +22,13 @@
 </head>
 
 <body>
-<!-- WRAPPER -->
-<div id="wrapper">
-	<!-- NAVBAR -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="brand">
-			<a href="index.html"><img th:src="@{assets/img/logo-dark.png}" alt="Klorofil Logo" class="img-responsive logo"></a>
-		</div>
-		<div class="container-fluid">
-			<div class="navbar-btn">
-				<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+				<a href="index.html"><img th:src="@{assets/img/logo-dark.png}" alt="Klorofil Logo" class="img-responsive logo"></a>
 			</div>
-<<<<<<< HEAD
-			<form class="navbar-form navbar-left">
-				<div class="input-group">
-					<input type="text" name="searchBox" class="form-control" placeholder="Search...">
-					<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
-=======
 			<div class="container-fluid">
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
@@ -87,104 +77,25 @@
 							<a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
 						</li> -->
 					</ul>
->>>>>>> 1114beddf88d721b44e0ac5688052418c16662e8
 				</div>
-			</form>
-			<div id="navbar-menu">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-							<i class="lnr lnr-alarm"></i>
-							<!--<span class="badge bg-danger">5</span>-->
-						</a>
-						<ul class="dropdown-menu notifications">
-							<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-							<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-							<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-							<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-							<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-							<li><a href="#" class="more">See all notifications</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Basic Use</a></li>
-							<li><a href="#">Working With Data</a></li>
-							<li><a href="#">Security</a></li>
-							<li><a href="#">Troubleshooting</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-							<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-							<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-							<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
-						</ul>
-					</li>
-					<!-- <li>
-                        <a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
-                    </li> -->
-				</ul>
+			</div>
+		</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a th:href="@{/index}" class=""><i class="lnr lnr-chart-bars"></i> <span>数据概览</span></a></li>
+						<li><a th:href="@{/logPage}" class="active"><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
+						<li><a th:href="@{/accountPage}" class=""><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
+						<li><a th:href="@{/wishPage}" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
+						<li><a th:href="@{/commentPage}" class=""><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
+						<li><a th:href="@{/collectPage}" class=""><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
-<<<<<<< HEAD
-	</nav>
-	<!-- END NAVBAR -->
-	<!-- LEFT SIDEBAR -->
-	<div id="sidebar-nav" class="sidebar">
-		<div class="sidebar-scroll">
-			<nav>
-				<ul class="nav">
-					<li><a th:href="@{/index}" class=""><i class="lnr lnr-chart-bars"></i> <span>数据概览</span></a></li>
-					<li><a th:href="@{/logPage}" class="active"><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
-					<li><a th:href="@{/accountPage}" class=""><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
-					<li><a th:href="@{/wishPage}" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
-					<li><a th:href="@{/commentPage}" class=""><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
-					<li><a th:href="@{/collectPage}" class=""><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-	<!-- END LEFT SIDEBAR -->
-	<!-- MAIN -->
-	<div class="main">
-		<!-- MAIN CONTENT -->
-		<div class="main-content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12">
-						<!-- BORDERED TABLE -->
-						<div class="panel">
-							<div class="panel-heading">
-								<h3 class="panel-title">登录记录</h3>
-							</div>
-							<div class="panel-body">
-								<table class="table table-bordered">
-									<thead>
-									<tr>
-										<th>#</th>
-										<th>账号ID</th>
-										<th>用户名</th>
-										<th>IP</th>
-										<th>地址</th>
-										<th>时间</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr th:each="Log : ${logs}">
-										<td th:text="${logs.indexOf(Log)+1}">1</td><!--#-->
-										<td th:text="${Log.getAccountInfo().getAccountID()}">103</td><!--账号ID-->
-										<td th:text="${Log.getAccountInfo().getNikeName()}">Steve</td><!--用户名-->
-										<td th:text="${Log.getIP()}">223.20.30.27</td><!--	IP-->
-										<td th:text="${Log.getAddress()}">湖北省武汉市</td><!--地址-->
-										<td th:text="${Log.getLogTime().toString().substring(0,16)}">2018.6.24  10:32</td><!--时间-->
-									</tr>
-									</tbody>
-								</table>
-=======
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN -->
 		<div class="main">
@@ -222,31 +133,29 @@
 										</tbody>
 									</table>
 								</div>
->>>>>>> 1114beddf88d721b44e0ac5688052418c16662e8
 							</div>
+							<!-- END BORDERED TABLE -->
 						</div>
-						<!-- END BORDERED TABLE -->
+						
 					</div>
-
 				</div>
 			</div>
+			<!-- END MAIN CONTENT -->
 		</div>
-		<!-- END MAIN CONTENT -->
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">Copyright &copy; 2018.HUST All rights reserved</p>
+			</div>
+		</footer>
 	</div>
-	<!-- END MAIN -->
-	<div class="clearfix"></div>
-	<footer>
-		<div class="container-fluid">
-			<p class="copyright">Copyright &copy; 2018.HUST All rights reserved</p>
-		</div>
-	</footer>
-</div>
-<!-- END WRAPPER -->
-<!-- Javascript -->
-<script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
-<script th:src="@{assets/scripts/klorofil-common.js}"></script>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+	<script th:src="@{assets/scripts/klorofil-common.js}"></script>
 </body>
 
 </html>
