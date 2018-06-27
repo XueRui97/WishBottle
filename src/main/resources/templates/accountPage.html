@@ -20,6 +20,14 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}">
 	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
+
+	<style type="text/css">
+		.mwrap{
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+	</style>
 </head>
 
 <body>
@@ -114,13 +122,14 @@
 									<table class="table table-bordered">
 										<thead>
 											<tr>
-												<th>#</th>
-												<th>账号ID</th>
-												<th>用户名</th>
-												<th>邮箱</th>
-												<th width="500px">自我介绍</th>
-												<th>头像路径</th>
-												<th>注册时间</th>
+												<th width="5%">#</th>
+												<th width="5%">账号ID</th>
+												<th width="10%">用户名</th>
+												<th width="10%">邮箱</th>
+												<th width="25%">自我介绍</th>
+												<th width="15%">头像路径</th>
+												<th width="10%">出生日期</th>
+												<th width="10%">注册时间</th>
 												<!--th>操作</th-->
 											</tr>
 										</thead>
@@ -131,10 +140,9 @@
 												<td th:text="${AccountInfo.getNikeName()}">Steve</td><!--用户名-->
 												<td th:text="${AccountInfo.getEmail()}">wukr@enet.com</td><!--邮箱-->
 												<td th:text="${AccountInfo.getSelfIntro()}">自我介绍</td><!--自我介绍-->
-												<td ><img th:src="${AccountInfo.getAvatar()}"> <a th:text="${AccountInfo.getAvatar()}" >
-												<!--td><img th:src="@{./assets/img/user1.png}"><a th:href="@{./assets/img/user1.png}"-->
-													./assets/img/user1.png</a></td><!--账号ID-->
-												<td th:text="${AccountInfo.getRegestTime()}">2018.6.20</td><!--账号ID-->
+												<td ><img th:src="${AccountInfo.getAvatar()}"> <a th:text="${AccountInfo.getAvatar()}" ></a></td><!--账号头像-->
+												<td th:text="${AccountInfo.getBirthday().toString().substring(0,10)}">2018.6.20</td><!--出生日期-->
+												<td th:text="${AccountInfo.getRegestTime()}">2018.6.20</td>
 												<!--td><a th:href="@{'deleteAccount/'+${AccountInfo.getAccountID()}}"><span class="lnr lnr-trash"></span>删除</a></td-->
 											</tr>
 										</tbody>

@@ -22,7 +22,7 @@ public class AccountInfo {
     @Column(length = 32,nullable=false)
     private String Avatar;//头像照片路径\src\main\resources\static\assets\img
     private Date RegestTime;//注册时间
-
+    private Date Birthday; //注册时间
     public Integer getAccountID() {
         return AccountID;
     }//得到账号ID
@@ -78,4 +78,8 @@ public class AccountInfo {
     public void setRegestTime(Date regestTime) {
         RegestTime = regestTime;
     }//设置注册时间
+
+    public Date getBirthday() { return Birthday; } //得到出生日期
+
+    public void setBirthday(Date birthday) { Birthday = birthday; } //设置出生日期
 }
