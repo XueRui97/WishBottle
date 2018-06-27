@@ -42,10 +42,61 @@
 			<div class="navbar-btn">
 				<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
 			</div>
+<<<<<<< HEAD
 			<form class="navbar-form navbar-left"method="post" th:action="@{/searchAccount}" role="form">
 				<div class="input-group">
 					<input type="text" name="searchBox" class="form-control" th:placeholder="${searchString}">
 					<span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
+=======
+			<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+				<form class="navbar-form navbar-left"method="post" th:action="@{/searchAccount}" role="form">
+					<div class="input-group">
+							<input type="text" name="searchBox" class="form-control" th:placeholder="${searchString}">
+							<span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
+					</div>
+				</form>
+				<div id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+								<i class="lnr lnr-alarm"></i>
+								<!--<span class="badge bg-danger">5</span>-->
+							</a>
+							<ul class="dropdown-menu notifications">
+								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
+								<li><a href="#" class="more">See all notifications</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Basic Use</a></li>
+								<li><a href="#">Working With Data</a></li>
+								<li><a href="#">Security</a></li>
+								<li><a href="#">Troubleshooting</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+							</ul>
+						</li>
+						<!-- <li>
+							<a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+						</li> -->
+					</ul>
+>>>>>>> 1114beddf88d721b44e0ac5688052418c16662e8
 				</div>
 			</form>
 			<div id="navbar-menu">
@@ -88,6 +139,7 @@
 				</ul>
 			</div>
 		</div>
+<<<<<<< HEAD
 	</nav>
 	<!-- END NAVBAR -->
 	<!-- LEFT SIDEBAR -->
@@ -147,6 +199,51 @@
 									</tr>
 									</tbody>
 								</table>
+=======
+		<!-- END LEFT SIDEBAR -->
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- BORDERED TABLE -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">用户信息</h3>
+								</div>
+								<div class="panel-body">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th width="5%">#</th>
+												<th width="5%">账号ID</th>
+												<th width="10%">用户名</th>
+												<th width="10%">邮箱</th>
+												<th width="25%">自我介绍</th>
+												<th width="15%">头像路径</th>
+												<th width="10%">出生日期</th>
+												<th width="10%">注册时间</th>
+												<!--th>操作</th-->
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="AccountInfo : ${account}">
+												<td th:text="${account.indexOf(AccountInfo)+1}">103</td><!--#-->
+												<td th:text="${AccountInfo.getAccountID()}">103</td><!--#-->
+												<td th:text="${AccountInfo.getNikeName()}">Steve</td><!--用户名-->
+												<td th:text="${AccountInfo.getEmail()}">wukr@enet.com</td><!--邮箱-->
+												<td th:text="${AccountInfo.getSelfIntro()}">自我介绍</td><!--自我介绍-->
+												<td ><img th:src="${AccountInfo.getAvatar()}"> <a th:text="${AccountInfo.getAvatar()}" ></a></td><!--账号头像-->
+												<td th:text="${AccountInfo.getBirthday().toString().substring(0,10)}">2018.6.20</td><!--出生日期-->
+												<td th:text="${AccountInfo.getRegestTime().toString().substring(0,16)}"></td>
+												<!--td><a th:href="@{'deleteAccount/'+${AccountInfo.getAccountID()}}"><span class="lnr lnr-trash"></span>删除</a></td-->
+											</tr>
+										</tbody>
+									</table>
+								</div>
+>>>>>>> 1114beddf88d721b44e0ac5688052418c16662e8
 							</div>
 						</div>
 						<!-- END BORDERED TABLE -->
