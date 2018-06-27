@@ -128,7 +128,7 @@
 												<td th:text="${Log.getAccountInfo().getNikeName()}">Steve</td><!--用户名-->
 												<td th:text="${Log.getIP()}">223.20.30.27</td><!--	IP-->
 												<td th:text="${Log.getAddress()}">湖北省武汉市</td><!--地址-->
-												<td th:text="${Log.getLogTime()}">2018.6.24  10:32</td><!--时间-->
+												<td th:text="${Log.getLogTime().toString().substring(0,16)}">2018.6.24  10:32</td><!--时间-->
 											</tr>
 										</tbody>
 									</table>

@@ -142,7 +142,7 @@
 										<td th:text="${Comments.getAccountInfo().getNikeName()}">223.20.30.27</td><!--	评论者用户名-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Comments.getWish().getContent()}" th:title="${Comments.getWish().getContent()}"></div></td><!--心愿内容-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Comments.getCMContent()}" th:title="${Comments.getCMContent()}"></div></td><!--评论内容-->
-										<td th:text="${Comments.getCMTime()}">2</td><!--发布时间-->
+										<td th:text="${Comments.getCMTime().toString().substring(0,16)}">2</td><!--发布时间-->
 										<td><a th:href="@{'deleteComment/'+${Comments.getCMID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
 									</tr>
 									</tbody>

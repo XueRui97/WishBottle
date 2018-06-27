@@ -138,7 +138,7 @@
 										<td th:text="${Collection.getWish().getWishID()}">223.20.30.27</td><!--	心愿ID-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Collection.getWish().getTitle()}" th:title="${Collection.getWish().getTitle()}"></div></td><!--心愿标题-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Collection.getWish().getContent()}" th:title="${Collection.getWish().getContent()}">内容</div></td><!--心愿内容-->
-										<td th:text="${Collection.getCLTime()}">2018.6.24  10:32</td><!--收藏时间-->
+										<td th:text="${Collection.getCLTime().toString().substring(0,16)}">2018.6.24  10:32</td><!--收藏时间-->
 									</tr>
 									</tbody>
 								</table>

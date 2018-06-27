@@ -145,7 +145,7 @@
 										<td th:text="${Wish.isPermision()}">0</td>
 										<td th:text="${Wish.getBrowseNum()}">45</td>
 										<td th:text="${Wish.getGoodNum()}">2</td>
-										<td th:text="${Wish.getRelTime()}">2018.6.22 14:28</td>
+										<td th:text="${Wish.getRelTime().toString().substring(0,16)}">2018.6.22 14:28</td>
 										<td><a  th:href="@{'deleteWish/'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
 									</tr>
 									</tbody>

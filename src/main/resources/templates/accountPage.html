@@ -142,7 +142,7 @@
 												<td th:text="${AccountInfo.getSelfIntro()}">自我介绍</td><!--自我介绍-->
 												<td ><img th:src="${AccountInfo.getAvatar()}"> <a th:text="${AccountInfo.getAvatar()}" ></a></td><!--账号头像-->
 												<td th:text="${AccountInfo.getBirthday().toString().substring(0,10)}">2018.6.20</td><!--出生日期-->
-												<td th:text="${AccountInfo.getRegestTime()}">2018.6.20</td>
+												<td th:text="${AccountInfo.getRegestTime().toString().substring(0,16)}"></td>
 												<!--td><a th:href="@{'deleteAccount/'+${AccountInfo.getAccountID()}}"><span class="lnr lnr-trash"></span>删除</a></td-->
 											</tr>
 										</tbody>
