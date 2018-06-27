@@ -26,4 +26,9 @@ public class WishServiceImpl implements WishService {
     public void deleteWish(Wish wish) {
         WishRepository.delete(wish);
     }
+    //查找
+    @Override
+    public List<Wish> search(String search) {
+        return  WishRepository.queryBySearch(search);
+    }
 }

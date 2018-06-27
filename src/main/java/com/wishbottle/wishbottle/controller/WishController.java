@@ -10,9 +10,8 @@ import com.wishbottle.wishbottle.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 import java.util.List;
@@ -27,15 +26,19 @@ public class WishController {
     private CollectionService collectionService;
     @Autowired
     private CommentsService commentsService;
+    String searchString="Search...";
     @GetMapping("/wishPage")//跳转到心愿管理页面
     public String log(Model model){
+        searchString="Search...";
         List<Wish> list=wishService.getAllWish();
         model.addAttribute("wishes",list);
+        model.addAttribute("searchString",searchString);
         return "wishPage";
     }
     @GetMapping("/deleteWish/{WishID}")//删除功能
     public String deletWish(@PathVariable("WishID") Integer id, Model model){
-       Optional<Wish> wishs =wishService.findByID(id);
+        searchString="Search...";
+        Optional<Wish> wishs =wishService.findByID(id);
 
         //delete collection
         List<Collection> collectionList=collectionService.getAllCollection();
@@ -53,6 +56,18 @@ public class WishController {
         wishService.deleteWish(wishs.get());
         List<Wish> list=wishService.getAllWish();
         model.addAttribute("wishes",list);
+        model.addAttribute("searchString",searchString);
         return "redirect:/wishPage";
+    }
+    //查询
+    @PostMapping("/searchWish")
+    public String searchWish(@RequestParam("searchBox") String searchBox, Model model){
+        this.searchString=searchBox;
+        System.out.println(searchBox);
+        List<Wish> wishList=wishService.search("%"+searchBox+"%");
+        System.out.println(wishList.size());
+        model.addAttribute("wishes",wishList);
+        model.addAttribute("searchString",searchString);
+        return "wishPage";
     }
 }

@@ -9,4 +9,5 @@ public interface WishService {
     List<Wish>  getAllWish();
     Optional<Wish> findByID(Integer id);
     void deleteWish(Wish wish);
+    List<Wish> search(String search);
 }
