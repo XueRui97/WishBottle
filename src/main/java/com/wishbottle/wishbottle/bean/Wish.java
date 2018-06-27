@@ -56,6 +56,13 @@ public class Wish {
         return Permision;
     }
 
+    public String showPermision() {
+        if (Permision)
+            return "所有人";
+        else
+            return "仅自己";
+    }
+
     public void setPermision(boolean permision) {
         Permision = permision;
     }
