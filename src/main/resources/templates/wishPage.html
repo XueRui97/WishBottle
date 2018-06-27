@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
 
@@ -22,15 +21,14 @@
 	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
 
 
-	<!-- 自定义CSS
+
 	<style type="text/css">
 		.mwrap{
-			width: 600px;
 			white-space: nowrap;
 			text-overflow: ellipsis;
 			overflow: hidden;
 		}
-	</style>-->
+	</style>
 </head>
 
 <body>
@@ -122,32 +120,33 @@
 								<h3 class="panel-title">心愿管理</h3>
 							</div>
 							<div class="panel-body">
-								<table class="table table-bordered">
+								<table class="table table-bordered" style="table-layout: fixed;">
 									<thead>
 									<tr>
-										<th>#</th>
-										<th>心愿ID</th>
-										<th width="200px">标题</th>
-										<th width="600px">内容</th>
-										<th>权限</th>
-										<th>浏览数</th>
-										<th>点赞数</th>
-										<th>发布时间</th>
-										<th>操作</th>
+										<th width="5%">#</th>
+										<th width="5%">心愿ID</th>
+										<th width="10%">心愿作者</th>
+										<th class="mwrap" width="15%"><div class="mwrap">标题</div></th>
+										<th class="mwrap" width="30%"><div class="mwrap">内容</div></th>
+										<th width="5%">权限</th>
+										<th width="5%">浏览数</th>
+										<th width="5%">点赞数</th>
+										<th width="10%">发布时间</th>
+										<th width="10%">操作</th>
 									</tr>
 									</thead>
 									<tbody>
 									<tr th:each="Wish : ${wishes}">
 										<td th:text="${Wish.getWishID()}">101</td>
 										<td th:text="${Wish.getWishID()}">1001</td>
-										<td th:text="${Wish.getTitle()}">视频提供了功能强大的方法帮助您证明您的观点</td>
-										<td th:text="${Wish.getContent()}">视频提供了功能强大的方，您可以添加。</td>
+										<td th:text="${Wish.getAccountInfo().getNikeName()}">1001</td>
+										<td class="mwrap"><div  class="mwrap" th:text="${Wish.getTitle()}" th:title="${Wish.getTitle()}">标题</div></td>
+										<td class="mwrap"><div  class="mwrap" th:text="${Wish.getContent()}" th:title="${Wish.getContent()}">内容</div></td>
 										<td th:text="${Wish.isPermision()}">0</td>
 										<td th:text="${Wish.getBrowseNum()}">45</td>
 										<td th:text="${Wish.getGoodNum()}">2</td>
 										<td th:text="${Wish.getRelTime()}">2018.6.22 14:28</td>
-										<td><a  th:href="@{'deleteWish/'+${Wish.getWishID()}}">
-											<span class="lnr lnr-trash"></span>删除</a></td>
+										<td><a  th:href="@{'deleteWish/'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
 									</tr>
 									</tbody>
 								</table>

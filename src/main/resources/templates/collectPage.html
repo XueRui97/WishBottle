@@ -19,6 +19,14 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
 	<link rel="icon" type="image/png" sizes="96x96" th:href="@{/assets/img/favicon.png}">
+
+	<style type="text/css">
+		.mwrap{
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+	</style>
 </head>
 
 <body>
@@ -87,11 +95,11 @@
 			<nav>
 				<ul class="nav">
 					<li><a th:href="@{/index}" class=""><i class="lnr lnr-chart-bars"></i> <span>数据概览</span></a></li>
-					<li><a th:href="@{/logPage}" class="active"><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
+					<li><a th:href="@{/logPage}" class=""><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
 					<li><a th:href="@{/accountPage}" class=""><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
 					<li><a th:href="@{/wishPage}" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
 					<li><a th:href="@{/commentPage}" class=""><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
-					<li><a th:href="@{/collectPage}" class=""><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
+					<li><a th:href="@{/collectPage}" class="active"><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
 				</ul>
 			</nav>
 		</div>
@@ -110,27 +118,27 @@
 								<h3 class="panel-title">收藏管理</h3>
 							</div>
 							<div class="panel-body">
-								<table class="table table-bordered">
+								<table class="table table-bordered" style="table-layout: fixed;">
 									<thead>
 									<tr>
-										<th>#</th>
-										<th>账号ID</th>
-										<th>用户名</th>
-										<th>心愿ID</th>
-										<th width="200px">心愿标题</th>
-										<th width="600px">心愿内容</th>
-										<th>收藏时间</th>
+										<th width="5%">#</th>
+										<th width="5%">账号ID</th>
+										<th width="10%">用户名</th>
+										<th width="5%">心愿ID</th>
+										<th width="20%">心愿标题</th>
+										<th width="30%">心愿内容</th>
+										<th width="10%">收藏时间</th>
 									</tr>
 									</thead>
 									<tbody>
 									<tr th:each="Collection : ${collections}">
-										<td th:text="${Collection.getCollectionID()}"></td><!--#-->
-										<td th:text="${Collection.getAccountInfo().getAccountID()}"></td><!--账号ID-->
-										<td th:text="${Collection.getAccountInfo().getNikeName()}"></td><!--用户名-->
-										<td th:text="${Collection.getWish().getWishID()}"></td><!--	心愿ID-->
-										<td th:text="${Collection.getWish().getTitle()}"></td><!--心愿标题-->
-										<td th:text="${Collection.getWish().getContent()}"></td><!--心愿内容-->
-										<td th:text="${Collection.getCLTime()}"></td><!--收藏时间-->
+										<td th:text="${Collection.getCollectionID()}">1</td><!--#-->
+										<td th:text="${Collection.getAccountInfo().getAccountID()}">103</td><!--账号ID-->
+										<td th:text="${Collection.getAccountInfo().getNikeName()}">Steve</td><!--用户名-->
+										<td th:text="${Collection.getWish().getWishID()}">223.20.30.27</td><!--	心愿ID-->
+										<td class="mwrap"><div  class="mwrap" th:text="${Collection.getWish().getTitle()}" th:title="${Collection.getWish().getTitle()}"></div></td><!--心愿标题-->
+										<td class="mwrap"><div  class="mwrap" th:text="${Collection.getWish().getContent()}" th:title="${Collection.getWish().getContent()}">内容</div></td><!--心愿内容-->
+										<td th:text="${Collection.getCLTime()}">2018.6.24  10:32</td><!--收藏时间-->
 									</tr>
 									</tbody>
 								</table>

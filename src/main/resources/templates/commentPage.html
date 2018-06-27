@@ -20,6 +20,14 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}">
 	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
+
+	<style type="text/css">
+		.mwrap{
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+	</style>
 </head>
 
 <body>
@@ -87,11 +95,11 @@
 		<div class="sidebar-scroll">
 			<nav>
 				<ul class="nav">
-					<li><a th:href="@{/index}" class="active"><i class="lnr lnr-chart-bars"></i> <span>数据总览</span></a></li>
+					<li><a th:href="@{/index}" class=""><i class="lnr lnr-chart-bars"></i> <span>数据总览</span></a></li>
 					<li><a th:href="@{/logPage}" class=""><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
 					<li><a th:href="@{/accountPage}" class=""><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
 					<li><a th:href="@{/wishPage}" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
-					<li><a th:href="@{/commentPage}" class=""><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
+					<li><a th:href="@{/commentPage}" class="active"><i class="lnr lnr-bubble"></i> <span>评论管理</span></a></li>
 					<li><a th:href="@{/collectPage}" class=""><i class="lnr lnr-star"></i> <span>收藏管理</span></a></li>
 				</ul>
 			</nav>
@@ -111,18 +119,18 @@
 								<h3 class="panel-title">评论管理</h3>
 							</div>
 							<div class="panel-body">
-								<table class="table table-bordered">
+								<table class="table table-bordered" style="table-layout: fixed;">
 									<thead>
 									<tr>
-										<th>#</th>
-										<th width="80px">评论ID</th>
-										<th width="80px">心愿ID</th>
-										<th width="100px">评论者ID</th>
-										<th width="100px">评论者用户名</th>
-										<th width="500px">心愿内容</th>
-										<th width="500px">评论内容</th>
-										<th width="100px">发布时间</th>
-										<th width="100px">操作</th>
+										<th width="5%">#</th>
+										<th width="5%">评论ID</th>
+										<th width="5%">心愿ID</th>
+										<th width="5%">评论者ID</th>
+										<th width="10%">评论者用户名</th>
+										<th width="20%" class="mwrap"><div class="mwrap">心愿内容</div></th>
+										<th width="30%" class="mwrap"><div class="mwrap">评论内容</div></th>
+										<th width="10%">发布时间</th>
+										<th width="10%">操作</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -132,9 +140,9 @@
 										<td th:text="${Comments.getWish().getWishID()}">Steve</td><!--心愿ID-->
 										<td th:text="${Comments.getAccountInfo().getAccountID()}">Steve</td><!--评论者ID-->
 										<td th:text="${Comments.getAccountInfo().getNikeName()}">223.20.30.27</td><!--	评论者用户名-->
-										<td th:text="${Comments.getWish().getContent()}">湖北省武汉市</td><!--评论内容-->
-										<td th:text="${Comments.getCMContent()}">湖北省武汉市</td><!--评论内容-->
-										<td th:text="${Comments.getCMTime()}">2018.6.24  10:32</td><!--发布时间-->
+										<td class="mwrap"><div  class="mwrap" th:text="${Comments.getWish().getContent()}" th:title="${Comments.getWish().getContent()}"></div></td><!--心愿内容-->
+										<td class="mwrap"><div  class="mwrap" th:text="${Comments.getCMContent()}" th:title="${Comments.getCMContent()}"></div></td><!--评论内容-->
+										<td th:text="${Comments.getCMTime()}">2</td><!--发布时间-->
 										<td><a th:href="@{'deleteComment/'+${Comments.getCMID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
 									</tr>
 									</tbody>
