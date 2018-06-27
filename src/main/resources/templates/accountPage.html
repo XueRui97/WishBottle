@@ -44,10 +44,8 @@
 				</div>
 				<form class="navbar-form navbar-left"method="post" th:action="@{/searchAccount}" role="form">
 					<div class="input-group">
-						<form>
 							<input type="text" value="" class="form-control" th:placeholder="${searchString}">
 							<span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
-						</form>
 					</div>
 				</form>
 				<div id="navbar-menu">
@@ -137,8 +135,8 @@
 										</thead>
 										<tbody>
 											<tr th:each="AccountInfo : ${account}">
-												<td text="#">1</td><!--#-->
-												<td th:text="${AccountInfo.getAccountID()}">103</td><!--账号ID-->
+												<td th:text="${account.indexOf(AccountInfo)+1}">103</td><!--#-->
+												<td th:text="${AccountInfo.getAccountID()}">103</td><!--#-->
 												<td th:text="${AccountInfo.getNikeName()}">Steve</td><!--用户名-->
 												<td th:text="${AccountInfo.getEmail()}">wukr@enet.com</td><!--邮箱-->
 												<td th:text="${AccountInfo.getSelfIntro()}">自我介绍</td><!--自我介绍-->
