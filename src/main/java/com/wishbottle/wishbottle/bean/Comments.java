@@ -8,18 +8,18 @@ import java.util.Date;
 public class Comments {
     @Id
     @GeneratedValue
-    private Integer CMID;//评论ID
-    //private Integer WishID;//心愿ID
+    private Integer CMID;//评论ID，主键
      @ManyToOne
-     private Wish wish;
-    //private Integer AccoundID;//评论者ID
+     private Wish wish;//被评论的心愿的ID，外键——心愿管理
      @ManyToOne
-     private AccountInfo accountInfo;
+     private AccountInfo accountInfo;//评论者ID，外键——用户管理
     @Column(nullable = false,length = 240)
-   private String CMContent;//评论内容
+    private String CMContent;//评论内容
     @Column(nullable = false)
     private Date CMTime;//评论时间
 
+
+//get，set
     public Integer getCMID() {
         return CMID;
     }

@@ -1,3 +1,4 @@
+//账号管理服务类
 package com.wishbottle.wishbottle.serviceImpl;
 
 import com.wishbottle.wishbottle.bean.AccountInfo;
@@ -23,11 +24,11 @@ public class AccountInfoServiceImpl implements AccountInfoService {
    public List<AccountInfo> queryByAccountName(String name,String password){
         return accountInfoRepository.queryByName(name,password);
     }
-    @Override
+    @Override//查询全部账号
     public List<AccountInfo> getAllAccountInfo(){
         return accountInfoRepository.findAll();
     }
-    @Override
+    @Override//根据账号ID查询账号
     public Optional<AccountInfo> findByID(Integer id){
         return  accountInfoRepository.findById(id);
     }

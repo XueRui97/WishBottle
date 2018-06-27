@@ -14,7 +14,7 @@ import java.util.List;
 public class CollectionController {
     @Autowired
     private CollectionService collectionService;
-    @GetMapping("/collectPage")
+    @GetMapping("/collectPage")//跳转到收藏管理页面
     public String collection(Model model){
         List<Collection> list=collectionService.getAllCollection();
         model.addAttribute("collections",list);

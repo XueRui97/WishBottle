@@ -1,4 +1,4 @@
-//登录
+//登录日志类
 package com.wishbottle.wishbottle.bean;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,9 @@ import java.util.Date;
 public class Log {
     @Id
     @GeneratedValue
-    private Integer LogID;//日志ID
-    //private Integer AccountID;//账号ID
+    private Integer LogID;//登录日志ID,主键
     @ManyToOne
-    private AccountInfo accountInfo;
+    private AccountInfo accountInfo;//登录用户ID，外键——用户管理
     @Column(nullable = false,length = 30)
     private String IP;//客户端IP地址
     @Column(nullable = false)
@@ -22,6 +21,7 @@ public class Log {
     @Column(nullable=false,length = 100)
     private String Address;//客户端地址
 
+//get,set
     public Integer getLogID() {
         return LogID;
     }

@@ -7,20 +7,19 @@ import java.util.Date;
 public class Wish {
     @Id
     @GeneratedValue
-    private Integer WishID;//心愿ID
-    //private Integer AccoundID;
+    private Integer WishID;//心愿ID，主键
     @ManyToOne
-    private  AccountInfo accountInfo;//账号ID
+    private  AccountInfo accountInfo;//发布心愿的用户的ID，外键——用户管理
     @Column(nullable = false,length =80)
     private String Title;//心愿标题
     @Column(nullable = false,length =240)
     private String Content;//心愿内容
     @Column(nullable = false)
-    private boolean Permision=true;//心愿权限（仅自己可见:false,公开：true)
+    private boolean Permision=true;//心愿权限（仅自己可见:false,所有人可见：true)
     private int BrowseNum;//浏览量
     private int GoodNum;//点赞量
     private Date RelTime;//发布时间
-
+//get,set
     public Integer getWishID() {
         return WishID;
     }

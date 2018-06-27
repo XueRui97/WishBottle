@@ -1,3 +1,4 @@
+//评论管理服务类
 package com.wishbottle.wishbottle.serviceImpl;
 import com.wishbottle.wishbottle.bean.Comments;
 import com.wishbottle.wishbottle.repository.CommentsRepository;
@@ -12,17 +13,17 @@ import java.util.Optional;
 public class CommentsServiceImpl implements CommentsService {
     @Autowired
     private CommentsRepository commentsRepository;
-    @Override
+    @Override//查询全部评论
     public List<Comments> getAllComments() {
         return commentsRepository.findAll();
     }
 
-    @Override
+    @Override//根据评论ID查询评论
     public Optional<Comments> findByID(Integer id) {
         return commentsRepository.findById(id);
     }
 
-    @Override
+    @Override//删除评论
     public void deleteComment(Comments comments) {
         commentsRepository.delete(comments);
     }

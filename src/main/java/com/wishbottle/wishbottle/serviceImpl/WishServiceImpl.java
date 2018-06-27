@@ -1,3 +1,4 @@
+//心愿管理服务类
 package com.wishbottle.wishbottle.serviceImpl;
 import com.wishbottle.wishbottle.bean.Wish;
 import com.wishbottle.wishbottle.repository.WishRepository;

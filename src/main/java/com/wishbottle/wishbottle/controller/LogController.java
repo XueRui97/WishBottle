@@ -1,4 +1,4 @@
-//日志控制类
+//登录日志控制类
 package com.wishbottle.wishbottle.controller;
 
 import com.wishbottle.wishbottle.bean.Log;
@@ -15,7 +15,7 @@ import java.util.List;
 public class LogController {
     @Autowired
     private LogService logService;
-    @GetMapping("/logPage")
+    @GetMapping("/logPage")//跳转到登录日志界面
     public String log(Model model){
         List<Log> list=logService.getAllLog();
         model.addAttribute("logs",list);

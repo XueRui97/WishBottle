@@ -27,13 +27,13 @@ public class WishController {
     private CollectionService collectionService;
     @Autowired
     private CommentsService commentsService;
-    @GetMapping("/wishPage")
+    @GetMapping("/wishPage")//跳转到心愿管理页面
     public String log(Model model){
         List<Wish> list=wishService.getAllWish();
         model.addAttribute("wishes",list);
         return "wishPage";
     }
-    @GetMapping("/deleteWish/{WishID}")
+    @GetMapping("/deleteWish/{WishID}")//删除功能
     public String deletWish(@PathVariable("WishID") Integer id, Model model){
        Optional<Wish> wishs =wishService.findByID(id);
 

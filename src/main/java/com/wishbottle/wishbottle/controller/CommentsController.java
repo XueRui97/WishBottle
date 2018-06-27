@@ -16,13 +16,13 @@ import java.util.Optional;
 public class CommentsController {
     @Autowired
     private CommentsService commentsService;
-    @GetMapping("/commentPage")
+    @GetMapping("/commentPage")//跳转到评论管理页面
     public String comment(Model model){
         List<Comments> list=commentsService.getAllComments();
         model.addAttribute("comments",list);
         return "commentPage";
     }
-    @GetMapping("/deleteComment/{CommentsID}")
+    @GetMapping("/deleteComment/{CommentsID}")//删除功能
     public String deletAccount(@PathVariable("CommentsID") Integer id, Model model){
        Optional<Comments> comments = commentsService.findByID(id);
        commentsService.deleteComment(comments.get());

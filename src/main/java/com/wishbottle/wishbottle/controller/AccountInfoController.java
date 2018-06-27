@@ -22,63 +22,20 @@ import java.util.Optional;
 public class AccountInfoController {
     @Autowired
     private AccountInfoService accountInfoService;
-    @GetMapping()
+    @GetMapping()//初始页面——数据总览页面
     public String  first(){
-        //add
-       /* AccountInfo accountInfo=new AccountInfo();
-        accountInfo.setNikeName("13");
-        accountInfo.setAvatar("1asdas");
-        accountInfo.setEmail("1231@qq.com");
-        accountInfo.setPassword("123qweqwe");
-        accountInfo.setSelfIntro("1231aweqweqwe");
-        Date d = new Date();
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
-        accountInfo.setRegestTime(d);
-        accountInfoService.addAccountInfo(accountInfo);
-    */
-        //find
-        /*List<AccountInfo> accountInfoList=accountInfoService.queryByAccountName("12","12");
-        if(accountInfoList.isEmpty()){
-            System.out.print("查不到");
-        }
-        else {
-            AccountInfo accountInfo1 = accountInfoList.get(0);
-            System.out.print(accountInfo1.getAccountID());
-        }*/
         return "index";
     }
-    @GetMapping("/index")
+    @GetMapping("/index")//跳转到数据总览页面
     public String index(){
         return "index";
     }
 
-    @GetMapping("/accountPage")
+    @GetMapping("/accountPage")//跳转到用户管理页面
     public String account(Model model){
         List<AccountInfo> list=accountInfoService.getAllAccountInfo();
         model.addAttribute("account",list);
         return "accountPage";
     }
-    //删除学生信息
-   /* @GetMapping("/deleteAccount/{AccountID}")
-    public String deletAccount(@PathVariable("AccountID") Integer id,Model model){
-        Optional<AccountInfo> accountInfo = accountInfoService.findByID(id);
-        accountInfoService.deleteAccountInfo(accountInfo.get());
-        List<AccountInfo> list=accountInfoService.getAllAccountInfo();
-        model.addAttribute("account",list);
-        return "accountPage";
-    }
-*/
-    /*@GetMapping("/wishPage")
-    public String wish(){
-        return "wishPage";
-    }*/
-    /*@GetMapping("/commentPage")
-    public String comment(){
-        return "commentPage";
-    }*/
-   /* @GetMapping("/collectPage")
-    public String collect(){
-        return "collectPage";
-    }*/
 
 }

@@ -1,3 +1,4 @@
+//收藏管理服务类
 package com.wishbottle.wishbottle.serviceImpl;
 
 import com.wishbottle.wishbottle.bean.Collection;
@@ -11,7 +12,7 @@ import java.util.List;
 public class CollectionServiceImpl implements CollectionService {
     @Autowired
     private CollectionRepository collectionRepository;
-    @Override
+    @Override//查询全部收藏
     public  List<Collection>  getAllCollection() {
         return collectionRepository.findAll();
     }
@@ -20,7 +21,7 @@ public class CollectionServiceImpl implements CollectionService {
     public void deleteCollectionByWishID(Integer id) {
         collectionRepository.deleteCollectionByID(id);
     }*/
-    @Override
+    @Override//删除收藏
     public void deleteCollection(Collection collection){
         collectionRepository.delete(collection);
     }
