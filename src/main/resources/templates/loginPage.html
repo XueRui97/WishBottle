@@ -38,22 +38,21 @@
 										<div class="logo text-center"><img th:src="@{assets/img/logo-dark.png}" alt="Klorofil Logo"></div>
 										<p class="lead">Login to your account</p>
 									</div>
-									<form class="form-auth-small" action="index.php">
+									<form class="form-auth-small" method="post" th:action="@{/loginPost}" role="form">
 										<div class="form-group">
-											<label for="signin-email" class="control-label sr-only">Email</label>
-											<input type="email" class="form-control" id="signin-email" value="samuel.gold@domain.com" placeholder="Email">
+											<label for="login-email" class="control-label sr-only">Email</label>
+											<input type="email" class="form-control" id="login-email" value="" placeholder="Username/Email" autofocus>
 										</div>
 										<div class="form-group">
-											<label for="signin-password" class="control-label sr-only">Password</label>
-											<input type="password" class="form-control" id="signin-password" value="thisisthepassword" placeholder="Password">
+											<label for="login-password" class="control-label sr-only">Password</label>
+											<input type="password" class="form-control" id="login-password" value="" placeholder="Password">
 										</div>
 										<div class="form-group clearfix">
 											<label class="fancy-checkbox element-left">
-												<input type="checkbox">
-												<span>Remember me</span>
+												<input type="checkbox" id="remember">
+												<span>记住密码</span>
 											</label>
 										</div>
-										<!--<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button> -->
 										<div class="row">
 								          	<div class="col-sm-6">
 								            	<button class="btn btn-lg btn-default btn-block" type="submit">登录</button>
@@ -72,23 +71,22 @@
 										<div class="logo text-center"><img th:src="@{assets/img/logo-dark.png}" alt="Klorofil Logo"></div>
 										<p class="lead">Sign up your account</p>
 									</div>
-									<form class="form-auth-small" action="index.php">
+									<form class="form-auth-small" method="post" th:action="@{/signupPost}" role="form">
 										<div class="form-group">
 											<label for="signup-username" class="control-label sr-only">用户名</label>
-											<input type="email" class="form-control" id="signup-username" value="Username" placeholder="Username">
+											<input type="email" class="form-control" id="signup-username" value="" placeholder="Username">
 										</div>
 										<div class="form-group">
 											<label for="signup-email" class="control-label sr-only">Email</label>
-											<input type="email" class="form-control" id="signup-email" value="samuel.gold@domain.com" placeholder="Email">
+											<input type="email" class="form-control" id="signup-email" value="" placeholder="Email">
 										</div>
 										<div class="form-group">
 											<label for="signup-password" class="control-label sr-only">Password</label>
-											<input type="password" class="form-control" id="signup-password" value="thisisthepassword" placeholder="Password">
+											<input type="password" class="form-control" id="signup-password" value="" placeholder="Password">
 										</div>
 										<div class="form-group clearfix">
 											<label class="fancy-checkbox element-left">
-												<input type="checkbox">
-												<span>同意相关条款</span>
+												<span>点击注册表示你已阅读并同意<a href="#">服务条款</a></span>
 											</label>
 										</div>
 										<button type="submit" class="btn btn-primary btn-lg btn-block">注册</button>
