@@ -8,10 +8,9 @@ import java.util.Optional;
 
 public interface AccountInfoService {
    AccountInfo addAccountInfo(AccountInfo accountInfo);
-   List<AccountInfo> queryByAccountName(String name,String password);
+   List<AccountInfo> queryByEmailOrName(String EmailOrName);
    List<AccountInfo> getAllAccountInfo();
    Optional<AccountInfo> findByID(Integer id);
   // void deleteAccountInfo(AccountInfo accountInfo);
-
    List<AccountInfo> search(String search);
 }

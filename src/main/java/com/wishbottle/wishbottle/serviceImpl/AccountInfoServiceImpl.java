@@ -21,8 +21,8 @@ public class AccountInfoServiceImpl implements AccountInfoService {
         return accountInfoRepository.save(accountInfo);
     }
     @Override
-   public List<AccountInfo> queryByAccountName(String name,String password){
-        return accountInfoRepository.queryByName(name,password);
+   public List<AccountInfo> queryByEmailOrName(String EmailOrName){
+        return accountInfoRepository.queryByEmailOrName(EmailOrName);
     }
     @Override//查询全部账号
     public List<AccountInfo> getAllAccountInfo(){
@@ -32,11 +32,6 @@ public class AccountInfoServiceImpl implements AccountInfoService {
     public Optional<AccountInfo> findByID(Integer id){
         return  accountInfoRepository.findById(id);
     }
-    /*@Override
-    public void deleteAccountInfo(AccountInfo accountInfo){
-       accountInfoRepository.delete(accountInfo);
-
-    }*/
     @Override
     public List<AccountInfo> search(String search) {
         return  accountInfoRepository.queryBySearch(search);
