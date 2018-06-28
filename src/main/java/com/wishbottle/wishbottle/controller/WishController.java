@@ -62,9 +62,10 @@ public class WishController {
     //查询
     @PostMapping("/searchWish")
     public String searchWish(@RequestParam("searchBox") String searchBox, Model model){
-        this.searchString=searchBox;
+        if (!searchBox.isEmpty())
+            this.searchString=searchBox;
         System.out.println(searchBox);
-        List<Wish> wishList=wishService.search("%"+searchBox+"%");
+        List<Wish> wishList=wishService.search("%"+ this.searchString+"%");
         System.out.println(wishList.size());
         model.addAttribute("wishes",wishList);
         model.addAttribute("searchString",searchString);
