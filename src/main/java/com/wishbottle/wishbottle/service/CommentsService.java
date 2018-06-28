@@ -10,4 +10,5 @@ public interface CommentsService {
     List<Comments> getAllComments();
     Optional<Comments> findByID(Integer id);
     void deleteComment(Comments comments);
+    List<Comments> search(String search);
 }
