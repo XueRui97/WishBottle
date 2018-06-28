@@ -139,8 +139,31 @@
 										<td th:text="${Collection.getAccountInfo().getNikeName()}">Steve</td><!--用户名-->
 										<td th:text="${Collection.getWish().getWishID()}">223.20.30.27</td><!--	心愿ID-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Collection.getWish().getTitle()}" th:title="${Collection.getWish().getTitle()}"></div></td><!--心愿标题-->
-										<td class="mwrap"><div  class="mwrap" th:text="${Collection.getWish().getContent()}" th:title="${Collection.getWish().getContent()}">内容</div></td><!--心愿内容-->
+										<td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Collection.getWish().getWishID()}}"><div  class="mwrap" th:text="${Collection.getWish().getContent()}" th:title="${Collection.getWish().getContent()}">内容</div></a></td><!--心愿内容-->
 										<td th:text="${Collection.getCLTime().toString().substring(0,16)}">2018.6.24  10:32</td><!--收藏时间-->
+										<!-- 模态框（Modal） -->
+										<div class="modal fade" th:id="'dialog' + ${Collection.getWish().getWishID()}" tabindex="-1" role="dialog"  aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+																aria-hidden="true">×
+														</button>
+														<h4 class="modal-title" th:text="${Collection.getWish().getTitle()}">
+															模态框（Modal）标题
+														</h4>
+													</div>
+													<div class="modal-body" th:text="${Collection.getWish().getContent()}">
+														按下 ESC 按钮退出。
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+																data-dismiss="modal">关闭
+														</button>
+													</div>
+												</div><!-- /.modal-content -->
+											</div><!-- /.modal-dialog -->
+										</div><!-- /.modal -->
 									</tr>
 									</tbody>
 								</table>

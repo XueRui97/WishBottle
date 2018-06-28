@@ -141,9 +141,38 @@
 										<td th:text="${Comments.getAccountInfo().getAccountID()}">Steve</td><!--评论者ID-->
 										<td th:text="${Comments.getAccountInfo().getNikeName()}">223.20.30.27</td><!--	评论者用户名-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Comments.getWish().getContent()}" th:title="${Comments.getWish().getContent()}"></div></td><!--心愿内容-->
-										<td class="mwrap"><div  class="mwrap" th:text="${Comments.getCMContent()}" th:title="${Comments.getCMContent()}"></div></td><!--评论内容-->
+										<td class="mwrap"><a  href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Comments.getCMID()}}"><div  class="mwrap" th:text="${Comments.getCMContent()}" th:title="${Comments.getCMContent()}">内容</div></a></td>
 										<td th:text="${Comments.getCMTime().toString().substring(0,16)}">2</td><!--发布时间-->
 										<td><a th:href="@{'deleteComment/'+${Comments.getCMID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
+										<!-- 模态框（Modal） -->
+										<div class="modal fade" th:id="'dialog' + ${Comments.getCMID()}" tabindex="-1" role="dialog"  aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+																aria-hidden="true">×
+														</button>
+														<h4 class="modal-title" th:text="${Comments.getWish().getTitle()}">
+															模态框（Modal）标题
+														</h4>
+													</div>
+													<div class="modal-body">
+														<h4>心愿内容：</h4>
+														<p th:text="${Comments.getWish().getContent()}">心愿内容</p>
+													</div>
+													<hr />
+													<div class="modal-body">
+														<h4>评论内容：</h4>
+														<p th:text="${Comments.getCMContent()}">评论内容</p>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+																data-dismiss="modal">关闭
+														</button>
+													</div>
+												</div><!-- /.modal-content -->
+											</div><!-- /.modal-dialog -->
+										</div><!-- /.modal -->
 									</tr>
 									</tbody>
 								</table>
