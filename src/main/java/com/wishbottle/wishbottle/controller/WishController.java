@@ -16,6 +16,7 @@ import java.util.List;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/")
@@ -62,11 +63,22 @@ public class WishController {
     //查询
     @PostMapping("/searchWish")
     public String searchWish(@RequestParam("searchBox") String searchBox, Model model){
+        List<Wish> wishList=null;
         if (!searchBox.isEmpty())
             this.searchString=searchBox;
-        System.out.println(searchBox);
-        List<Wish> wishList=wishService.search("%"+ this.searchString+"%");
-        System.out.println(wishList.size());
+        Pattern pattern = Pattern.compile("[0-9]*");
+        //根据WishID进行查询
+        if(pattern.matcher(searchString).matches()){
+            Integer in=Integer.valueOf(searchString);
+            wishList = wishService.search(in);
+            //System.out.println(in);
+        }
+        //根据NikeName、Title、Content进行查询
+        else {
+            //System.out.println(searchBox);
+            wishList = wishService.search("%" + this.searchString + "%");
+            //System.out.println(wishList.size());
+        }
         model.addAttribute("wishes",wishList);
         model.addAttribute("searchString",searchString);
         return "wishPage";

@@ -31,4 +31,9 @@ public class WishServiceImpl implements WishService {
     public List<Wish> search(String search) {
         return  WishRepository.queryBySearch(search);
     }
+    //查找
+    @Override
+    public List<Wish> search(Integer search) {
+        return  WishRepository.queryBySearch(search);
+    }
 }

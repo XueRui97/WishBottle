@@ -18,5 +18,14 @@ public class LogServiceImpl implements LogService {
     public  List<Log>  getAllLog() {
         return logRepository.findAll();
     }
-
+    //查找
+    @Override
+    public List<Log> search(String search) {
+        return  logRepository.queryBySearch(search);
+    }
+    //查找
+    @Override
+    public List<Log> search(Integer search) {
+        return  logRepository.queryBySearch(search);
+    }
 }

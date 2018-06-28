@@ -27,4 +27,14 @@ public class CommentsServiceImpl implements CommentsService {
     public void deleteComment(Comments comments) {
         commentsRepository.delete(comments);
     }
+    //
+    @Override
+    public List<Comments> search(String search) {
+        return  commentsRepository.queryBySearch(search);
+    }
+    //
+    @Override
+    public List<Comments> search(Integer search) {
+        return  commentsRepository.queryBySearch(search);
+    }
 }

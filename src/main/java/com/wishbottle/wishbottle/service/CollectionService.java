@@ -8,4 +8,5 @@ public interface CollectionService {
     List<Collection>  getAllCollection();
     //void deleteCollectionByWishID(Integer id);
     void deleteCollection(Collection collection);
+    List<Collection> search(String search);
 }

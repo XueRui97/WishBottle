@@ -37,4 +37,8 @@ public class AccountInfoServiceImpl implements AccountInfoService {
        accountInfoRepository.delete(accountInfo);
 
     }*/
+    @Override
+    public List<AccountInfo> search(String search) {
+        return  accountInfoRepository.queryBySearch(search);
+    }
 }
