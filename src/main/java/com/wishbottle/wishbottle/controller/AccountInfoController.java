@@ -25,10 +25,16 @@ public class AccountInfoController {
     private AccountInfoService accountInfoService;
 
     private String searchString="Search...";
-    @GetMapping()//初始页面——数据总览页面
+    @GetMapping()//初始页面——登录
     public String  first(){
-        return "index";
+        return "loginPage";
     }
+
+    @GetMapping("/login")//登录页面——登录
+    public String  login(){
+        return "loginPage";
+    }
+
     @GetMapping("/index")//跳转到数据总览页面
     public String index(){
         return "index";
