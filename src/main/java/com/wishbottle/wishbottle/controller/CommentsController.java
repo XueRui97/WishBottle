@@ -53,6 +53,11 @@ public class CommentsController {
             commentsList = commentsService.search("%" + this.searchString + "%");
             //System.out.println(commentsList.size());
         }
+        if (!searchBox.isEmpty())
+            this.searchString=searchBox;
+        System.out.println(searchBox);
+       commentsList=commentsService.search("%"+ this.searchString+"%");
+        System.out.println(commentsList.size());
         model.addAttribute("comments",commentsList);
         model.addAttribute("searchString",searchString);
         return "commentPage";
