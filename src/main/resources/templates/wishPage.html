@@ -138,7 +138,7 @@
 									<tbody>
 									<tr th:each="Wish : ${wishes}">
 										<td th:text="${wishes.indexOf(Wish)+1}">101</td>
-										<td th:text="${Wish.getWishID()}">1001</td>
+										<td th:id="${Wish.getWishID()}" th:text="${Wish.getWishID()}">1001</td>
 										<td th:text="${Wish.getAccountInfo().getNikeName()}">1001</td>
 										<td class="mwrap"><div  class="mwrap" th:text="${Wish.getTitle()}" th:title="${Wish.getTitle()}">标题</div></td>
 										<td class="mwrap"><div  class="mwrap" th:text="${Wish.getContent()}" th:title="${Wish.getContent()}">内容</div></td>

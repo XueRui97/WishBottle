@@ -137,7 +137,7 @@
 									<tr th:each="Comments : ${comments}">
 										<td th:text="${comments.indexOf(Comments)+1}">1</td><!--#-->
 										<td th:text="${Comments.getCMID()}">1</td><!--评论ID-->
-										<td th:text="${Comments.getWish().getWishID()}">Steve</td><!--心愿ID-->
+										<td><a th:text="${Comments.getWish().getWishID()}" th:href="@{'wishPage#'+${Comments.getWish().getWishID()}}"></a></td><!--心愿ID-->
 										<td th:text="${Comments.getAccountInfo().getAccountID()}">Steve</td><!--评论者ID-->
 										<td th:text="${Comments.getAccountInfo().getNikeName()}">223.20.30.27</td><!--	评论者用户名-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Comments.getWish().getContent()}" th:title="${Comments.getWish().getContent()}"></div></td><!--心愿内容-->
