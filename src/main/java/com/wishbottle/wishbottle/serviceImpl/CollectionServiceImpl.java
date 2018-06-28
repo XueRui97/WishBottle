@@ -25,4 +25,8 @@ public class CollectionServiceImpl implements CollectionService {
     public void deleteCollection(Collection collection){
         collectionRepository.delete(collection);
     }
+    @Override
+    public List<Collection> search(String search) {
+        return  collectionRepository.queryBySearch(search);
+    }
 }
