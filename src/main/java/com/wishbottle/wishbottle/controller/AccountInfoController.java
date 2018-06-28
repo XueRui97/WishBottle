@@ -27,14 +27,6 @@ public class AccountInfoController {
     //初始页面——登录
     @GetMapping()
     public String  first(){
-        List<AccountInfo> accountInfoList=accountInfoService.queryByEmailOrName("藐视一切");
-        if(accountInfoList.isEmpty()){
-            System.out.println("无该用户");
-        }
-        else{
-            System.out.println(accountInfoList.size());
-            System.out.println(accountInfoList.get(0).getPassword());
-        }
         return "loginPage";
     }
     //登录页面——登录
@@ -67,5 +59,43 @@ public class AccountInfoController {
         model.addAttribute("searchString",searchString);
         return "accountPage";
     }
-
+    //登录验证
+    @PostMapping("/loginPost")
+    public String login(@RequestParam("login-email") String EmailOrName,
+                         @RequestParam("login-password") String PassWord,
+                         Model model){
+        List<AccountInfo> accountInfoList=accountInfoService.queryByEmailOrName(EmailOrName);
+        if(accountInfoList.isEmpty()){
+            System.out.println("无该用户");
+            return "loginPage";
+        }
+        else{
+            if(accountInfoList.get(0).getPassword().equals(PassWord)){
+                System.out.println("welcom to computer");
+                return "index";
+            }
+            else {
+                System.out.println("账号与密码不匹配！");
+                return "loginPage";
+            }
+        }
+    }
+    //注册验证
+    @PostMapping("/signupPost")
+    public String  signup(@RequestParam("signup-username") String Name,
+                         @RequestParam("signup-email") String Email,
+                         @RequestParam("signup-password") String PassWord,
+                         Model model){
+        List<AccountInfo> accountInfoList1=accountInfoService.queryByEmailOrName(Name);
+        List<AccountInfo> accountInfoList2=accountInfoService.queryByEmailOrName(Email);
+        if(accountInfoList1.isEmpty()&&accountInfoList2.isEmpty()){
+           // System.out.println("无该用户");
+            AccountInfo account=new AccountInfo(Name,Email,PassWord);
+            accountInfoService.addAccountInfo(account);
+            return "index";
+        }
+        else{
+            return  "loginPage";
+        }
+    }
 }

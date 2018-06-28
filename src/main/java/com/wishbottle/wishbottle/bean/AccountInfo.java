@@ -11,16 +11,20 @@ public class AccountInfo {
     @Id//设置主键
     @GeneratedValue//设定增长
     private Integer AccountID;//账号ID
+
     @Column(unique = true,nullable=false,length = 32)//唯一值
     private String NikeName;//昵称，唯一值，长度为32，不允许为空
     @Column(unique = true,nullable=false,length = 20)
     private String Email;//邮箱，唯一值，长度为20，不允许为空
-    @Column(length = 20,nullable=true)
+    @Column(length = 20,nullable=false)
     private String Password;//密码，不允许为空，长度为20
+
     @Column(length = 100)
     private String SelfIntro;//自我介绍，长度为100
+
     @Column(length = 32,nullable=false)
     private String Avatar;//头像照片路径\src\main\resources\static\assets\img
+
     private Date RegestTime;//注册时间
     private Date Birthday; //出生日期
     public Integer getAccountID() {
@@ -82,4 +86,15 @@ public class AccountInfo {
     public Date getBirthday() { return Birthday; } //得到出生日期
 
     public void setBirthday(Date birthday) { Birthday = birthday; } //设置出生日期
+
+
+    public AccountInfo(String nikeName, String email, String password) {
+        NikeName = nikeName;
+        Email = email;
+        Password = password;
+        Avatar="./assets/img/user1.png";
+        RegestTime=new Date();
+        SelfIntro = "这个人很懒 什么都没有留下";
+        Birthday =new Date();
+    }
 }
