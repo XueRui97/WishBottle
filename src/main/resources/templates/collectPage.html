@@ -122,22 +122,16 @@
 									<thead>
 									<tr>
 										<th width="5%">#</th>
-										<th width="5%">收藏ID</th>
-										<th width="5%">账号ID</th>
 										<th width="10%">用户名</th>
-										<th width="5%">心愿ID</th>
-										<th width="15%">心愿标题</th>
-										<th width="30%">心愿内容</th>
+										<th width="20%">心愿标题</th>
+										<th width="55%">心愿内容</th>
 										<th width="10%">收藏时间</th>
 									</tr>
 									</thead>
 									<tbody>
 									<tr th:each="Collection : ${collections}">
 										<td th:text="${collections.indexOf(Collection)+1}">1</td><!--#-->
-										<td th:text="${Collection.getCollectionID()}">1</td><!--#-->
-										<td th:text="${Collection.getAccountInfo().getAccountID()}">103</td><!--账号ID-->
 										<td th:text="${Collection.getAccountInfo().getNikeName()}">Steve</td><!--用户名-->
-										<td th:text="${Collection.getWish().getWishID()}">223.20.30.27</td><!--	心愿ID-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Collection.getWish().getTitle()}" th:title="${Collection.getWish().getTitle()}"></div></td><!--心愿标题-->
 										<td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Collection.getWish().getWishID()}}"><div  class="mwrap" th:text="${Collection.getWish().getContent()}" th:title="${Collection.getWish().getContent()}">内容</div></a></td><!--心愿内容-->
 										<td th:text="${Collection.getCLTime().toString().substring(0,16)}">2018.6.24  10:32</td><!--收藏时间-->

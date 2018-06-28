@@ -95,7 +95,7 @@
 		<div class="sidebar-scroll">
 			<nav>
 				<ul class="nav">
-					<li><a th:href="@{/index}" class=""><i class="lnr lnr-chart-bars"></i> <span>数据总览</span></a></li>
+					<li><a th:href="@{/index}" class=""><i class="lnr lnr-chart-bars"></i> <span>数据概览</span></a></li>
 					<li><a th:href="@{/logPage}" class=""><i class="lnr lnr-code"></i> <span>登录日志</span></a></li>
 					<li><a th:href="@{/accountPage}" class=""><i class="lnr lnr-user"></i> <span>用户管理</span></a></li>
 					<li><a th:href="@{/wishPage}" class=""><i class="lnr lnr-heart"></i> <span>心愿管理</span></a></li>
@@ -123,12 +123,10 @@
 									<thead>
 									<tr>
 										<th width="5%">#</th>
-										<th width="5%">评论ID</th>
-										<th width="5%">心愿ID</th>
-										<th width="5%">评论者ID</th>
 										<th width="10%">评论者用户名</th>
+										<th width="10%">心愿标题</th>
 										<th width="20%" class="mwrap"><div class="mwrap">心愿内容</div></th>
-										<th width="30%" class="mwrap"><div class="mwrap">评论内容</div></th>
+										<th width="35%" class="mwrap"><div class="mwrap">评论内容</div></th>
 										<th width="10%">发布时间</th>
 										<th width="10%">操作</th>
 									</tr>
@@ -136,10 +134,8 @@
 									<tbody>
 									<tr th:each="Comments : ${comments}">
 										<td th:text="${comments.indexOf(Comments)+1}">1</td><!--#-->
-										<td th:text="${Comments.getCMID()}">1</td><!--评论ID-->
-										<td><a th:text="${Comments.getWish().getWishID()}" th:href="@{'wishPage#'+${Comments.getWish().getWishID()}}"></a></td><!--心愿ID-->
-										<td th:text="${Comments.getAccountInfo().getAccountID()}">Steve</td><!--评论者ID-->
 										<td th:text="${Comments.getAccountInfo().getNikeName()}">223.20.30.27</td><!--	评论者用户名-->
+										<td th:text="${Comments.getWish().getTitle()}">223.20.30.27</td><!--心愿标题-->
 										<td class="mwrap"><div  class="mwrap" th:text="${Comments.getWish().getContent()}" th:title="${Comments.getWish().getContent()}"></div></td><!--心愿内容-->
 										<td class="mwrap"><a  href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Comments.getCMID()}}"><div  class="mwrap" th:text="${Comments.getCMContent()}" th:title="${Comments.getCMContent()}">内容</div></a></td>
 										<td th:text="${Comments.getCMTime().toString().substring(0,16)}">2</td><!--发布时间-->

@@ -114,7 +114,6 @@
 										<thead>
 											<tr>
 												<th>#</th>
-												<th>账号ID</th>
 												<th>用户名</th>
 												<th>IP</th>
 												<th>地址</th>
@@ -124,7 +123,6 @@
 										<tbody>
 										    <tr th:each="Log : ${logs}">
 												<td th:text="${logs.indexOf(Log)+1}">1</td><!--#-->
-												<td th:text="${Log.getAccountInfo().getAccountID()}">103</td><!--账号ID-->
 												<td th:text="${Log.getAccountInfo().getNikeName()}">Steve</td><!--用户名-->
 												<td th:text="${Log.getIP()}">223.20.30.27</td><!--	IP-->
 												<td th:text="${Log.getAddress()}">湖北省武汉市</td><!--地址-->
