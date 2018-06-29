@@ -12,4 +12,5 @@ public interface WishService {
     List<Wish> search(String search);
     List<Wish> search(Integer search);
     Wish addWish(Wish wish);
+    List<Wish> getByPermision(boolean permisiom);
 }

@@ -37,11 +37,7 @@ public class AccountInfoController {
         presentAccount=new AccountInfo();
         return "loginPage";
     }
-    //心愿海
-    @GetMapping("/wishSea")
-    public String  wishSea(){
-        return "wishSeaPage";
-    }
+
 
     //账号设置
     @GetMapping("/setting")
