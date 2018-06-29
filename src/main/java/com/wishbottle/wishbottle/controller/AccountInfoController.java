@@ -37,6 +37,18 @@ public class AccountInfoController {
         presentAccount=new AccountInfo();
         return "loginPage";
     }
+    //心愿海
+    @GetMapping("/wishSea")
+    public String  wishSea(){
+        return "wishSeaPage";
+    }
+
+    //账号设置
+    @GetMapping("/setting")
+    public String  setting(){
+        return "settingPage";
+    }
+
     //跳转到数据总览页面
     @GetMapping("/index")
     public String index(Model model){
