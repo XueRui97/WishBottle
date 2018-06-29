@@ -91,13 +91,13 @@ public class Wish {
         RelTime = relTime;
     }
 
-    public Wish(AccountInfo accountInfo, String title, String content, boolean permision, int browseNum, int goodNum, Date relTime) {
+    public Wish(AccountInfo accountInfo, String title, String content, boolean permision) {
         this.accountInfo = accountInfo;
         Title = title;
         Content = content;
         Permision = permision;
-        BrowseNum = browseNum;
-        GoodNum = goodNum;
-        RelTime = relTime;
+        BrowseNum = 0;
+        GoodNum = 0;
+        RelTime = new Date();
     }
 }

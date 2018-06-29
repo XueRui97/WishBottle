@@ -2,7 +2,9 @@
 package com.wishbottle.wishbottle.controller;
 
 import com.wishbottle.wishbottle.bean.Wish;
+import com.wishbottle.wishbottle.repository.WishRepository;
 import com.wishbottle.wishbottle.service.AccountInfoService;
+import com.wishbottle.wishbottle.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PersonController {
     @Autowired
     private AccountInfoService accountInfoService;
+    @Autowired
+    private WishService wishService;
     //树洞
     @GetMapping("/tree")
     public String tree(Model model){
@@ -33,7 +37,9 @@ public class PersonController {
                           @RequestParam("visibility") String visibility,
                           Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null){
-            //Wish awish=new Wish();
+            boolean  Permision=visibility.equals("all");
+            Wish awish=new Wish(AccountInfoController.presentAccount,wishTitle,wishContent,Permision);
+            wishService.addWish(awish);
             System.out.println(wishTitle+"\n"+wishContent+"\n"+visibility);
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
             return "treePage";

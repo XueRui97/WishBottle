@@ -11,4 +11,5 @@ public interface WishService {
     void deleteWish(Wish wish);
     List<Wish> search(String search);
     List<Wish> search(Integer search);
+    Wish addWish(Wish wish);
 }

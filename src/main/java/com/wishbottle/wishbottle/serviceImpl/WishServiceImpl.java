@@ -36,4 +36,8 @@ public class WishServiceImpl implements WishService {
     public List<Wish> search(Integer search) {
         return  WishRepository.queryBySearch(search);
     }
+    @Override
+    public Wish addWish(Wish wish){
+        return WishRepository.save(wish);
+    }
 }
