@@ -107,8 +107,8 @@
                             <div class="profile-header">
                                 <div class="overlay"></div>
                                 <div class="profile-main">
-                                    <img src="assets/img/user-medium.png" class="img-circle" alt="Avatar">
-                                    <h3 class="name">Samuel Gold</h3>
+                                    <img th:src="${presentAccount.getAvatar()}" class="img-circle" alt="Avatar">
+                                    <h3 class="name" th:text="${presentAccount.getNikeName()}">Samuel Gold</h3>
                                     <span class="online-status status-available">Available</span>
                                 </div>
                                 <div class="profile-stat">
@@ -161,9 +161,9 @@
                             <!-- INPUT -->
                             <div class="panel-body">
                                 <form method="post" th:action="@{/addWish}" role="form">
-                                    <input name="wishTitle" type="text" class="form-control" placeholder="标题">
+                                    <input name="wishTitle" type="text" class="form-control" placeholder="标题" required>
                                     <br>
-                                    <textarea name="wishContent" class="form-control" placeholder="内容" rows="4"></textarea>
+                                    <textarea name="wishContent" class="form-control" placeholder="内容" rows="4" required></textarea>
                                     <br>
                                         <span>可见性：</span>
                                         <input name="visibility" value="self" type="radio">
