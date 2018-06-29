@@ -169,10 +169,11 @@
                                     <textarea name="wishContent" class="form-control" placeholder="内容" rows="4"></textarea>
                                     <br>
                                         <span>可见性：</span>
-                                        <input name="visibility" value="male" type="radio">
-                                        <span><i></i>所有人</span>
-                                        <input name="visibility" value="female" type="radio">
+                                        <input name="visibility" value="self" type="radio">
                                         <span><i></i>仅自己</span>
+                                        <input name="visibility" value="all" type="radio">
+                                        <span><i></i>所有人</span>
+                                        <script>document.getElementsByName("visibility")[0].checked="checked";</script>
                                     <button style="float:right;" type="submit" class="btn btn-primary">发布</button>
                                 </form>
                             </div>
