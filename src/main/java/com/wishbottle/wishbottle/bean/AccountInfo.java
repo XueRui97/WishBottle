@@ -87,6 +87,8 @@ public class AccountInfo {
 
     public void setBirthday(Date birthday) { Birthday = birthday; } //设置出生日期
 
+    public AccountInfo() {
+    }
 
     public AccountInfo(String nikeName, String email, String password) {
         NikeName = nikeName;

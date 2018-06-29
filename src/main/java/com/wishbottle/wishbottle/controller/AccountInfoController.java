@@ -24,9 +24,11 @@ public class AccountInfoController {
     @Autowired
     private AccountInfoService accountInfoService;
     private String searchString="Search...";
+    static String url;
     //初始页面——登录
     @GetMapping()
     public String  first(){
+      ///  url=" ";
         return "loginPage";
     }
     //登录页面——登录
@@ -45,7 +47,10 @@ public class AccountInfoController {
         List<AccountInfo> list=accountInfoService.getAllAccountInfo();
         model.addAttribute("account",list);
         model.addAttribute("searchString",searchString);
+       // if(url!=" ")
         return "accountPage";
+       // else
+       //     return "loginPage";
     }
     //查询
     @PostMapping("/searchAccount")
@@ -57,7 +62,10 @@ public class AccountInfoController {
         System.out.println(accountInfoList.size());
         model.addAttribute("account",accountInfoList);
         model.addAttribute("searchString",searchString);
+        if(url!=" ")
         return "accountPage";
+        else
+            return "loginPage";
     }
     //登录验证
     @PostMapping("/loginPost")
@@ -72,6 +80,7 @@ public class AccountInfoController {
         else{
             if(accountInfoList.get(0).getPassword().equals(PassWord)){
                 System.out.println("welcom to computer");
+                //url="AccountID="+accountInfoList.get(0).getAccountID().toString();
                 return "index";
             }
             else {
@@ -89,9 +98,10 @@ public class AccountInfoController {
         List<AccountInfo> accountInfoList1=accountInfoService.queryByEmailOrName(Name);
         List<AccountInfo> accountInfoList2=accountInfoService.queryByEmailOrName(Email);
         if(accountInfoList1.isEmpty()&&accountInfoList2.isEmpty()){
-           // System.out.println("无该用户");
             AccountInfo account=new AccountInfo(Name,Email,PassWord);
             accountInfoService.addAccountInfo(account);
+            //url="AccountID="+
+           //         accountInfoService.queryByEmailOrName(Name).get(0).getAccountID().toString();
             return "index";
         }
         else{
