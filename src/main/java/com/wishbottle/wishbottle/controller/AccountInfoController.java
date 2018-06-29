@@ -24,46 +24,56 @@ public class AccountInfoController {
     @Autowired
     private AccountInfoService accountInfoService;
     private String searchString="Search...";
-    static String url;
+    static  AccountInfo presentAccount=new AccountInfo();
     //初始页面——登录
     @GetMapping()
     public String  first(){
-      ///  url=" ";
+        presentAccount=new AccountInfo();
         return "loginPage";
     }
     //登录页面——登录
     @GetMapping("/login")
     public String  login(){
+        presentAccount=new AccountInfo();
         return "loginPage";
     }
     //跳转到数据总览页面
     @GetMapping("/index")
-    public String index(){
-        return "index";
+    public String index(Model model){
+        if(presentAccount.getEmail()!=null) {
+            model.addAttribute("presentAccount",presentAccount);
+            return "index";
+        }
+        else
+            return "loginPage";
     }
     //跳转到用户管理页面
     @GetMapping("/accountPage")
     public String account(Model model){
-        List<AccountInfo> list=accountInfoService.getAllAccountInfo();
-        model.addAttribute("account",list);
-        model.addAttribute("searchString",searchString);
-       // if(url!=" ")
-        return "accountPage";
-       // else
-       //     return "loginPage";
+        if(presentAccount.getEmail()!=null){
+            List<AccountInfo> list=accountInfoService.getAllAccountInfo();
+            model.addAttribute("account",list);
+            model.addAttribute("searchString",searchString);
+            model.addAttribute("presentAccount",presentAccount);
+            return "accountPage";
+        }
+       else
+           return "loginPage";
     }
     //查询
     @PostMapping("/searchAccount")
     public String searchAccount(@RequestParam("searchBox") String searchBox, Model model){
-        if (!searchBox.isEmpty())
-            this.searchString=searchBox;
-        System.out.println(searchBox);
-        List<AccountInfo> accountInfoList=accountInfoService.search("%"+ this.searchString+"%");
-        System.out.println(accountInfoList.size());
-        model.addAttribute("account",accountInfoList);
-        model.addAttribute("searchString",searchString);
-        if(url!=" ")
-        return "accountPage";
+        if(presentAccount.getEmail()!=null){
+            if (!searchBox.isEmpty())
+                this.searchString=searchBox;
+            //System.out.println(searchBox);
+            List<AccountInfo> accountInfoList=accountInfoService.search("%"+ this.searchString+"%");
+            //System.out.println(accountInfoList.size());
+            model.addAttribute("account",accountInfoList);
+            model.addAttribute("searchString",searchString);
+            model.addAttribute("presentAccount",presentAccount);
+            return "accountPage";
+        }
         else
             return "loginPage";
     }
@@ -80,8 +90,9 @@ public class AccountInfoController {
         else{
             if(accountInfoList.get(0).getPassword().equals(PassWord)){
                 System.out.println("welcom to computer");
-                //url="AccountID="+accountInfoList.get(0).getAccountID().toString();
-                return "index";
+                presentAccount=accountInfoList.get(0);
+                model.addAttribute("presentAccount",presentAccount);
+                return "treePage";
             }
             else {
                 System.out.println("账号与密码不匹配！");
@@ -100,9 +111,9 @@ public class AccountInfoController {
         if(accountInfoList1.isEmpty()&&accountInfoList2.isEmpty()){
             AccountInfo account=new AccountInfo(Name,Email,PassWord);
             accountInfoService.addAccountInfo(account);
-            //url="AccountID="+
-           //         accountInfoService.queryByEmailOrName(Name).get(0).getAccountID().toString();
-            return "index";
+            presentAccount=account;
+            model.addAttribute("presentAccount",presentAccount);
+            return "treePage";
         }
         else{
             return  "loginPage";

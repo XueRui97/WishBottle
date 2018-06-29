@@ -20,21 +20,31 @@ public class CollectionController {
     String searchString="Search...";
     @GetMapping("/collectPage")//跳转到收藏管理页面
     public String collection(Model model){
-        List<Collection> list=collectionService.getAllCollection();
-        model.addAttribute("collections",list);
-        model.addAttribute("searchString",searchString);
-        return "collectPage";
+        if(AccountInfoController.presentAccount.getEmail()!=null) {
+            List<Collection> list=collectionService.getAllCollection();
+            model.addAttribute("collections",list);
+            model.addAttribute("searchString",searchString);
+            model.addAttribute("presentAccount",AccountInfoController.presentAccount);
+            return "collectPage";
+        }
+        else
+             return "loginPage";
     }
     //查询
     @PostMapping("/searchCollection")
     public String searchWish(@RequestParam("searchBox") String searchBox, Model model){
-        if (!searchBox.isEmpty())
-            this.searchString=searchBox;
-        System.out.println(searchBox);
-        List<Collection> collectionList=collectionService.search("%"+ this.searchString+"%");
-        System.out.println(collectionList.size());
-        model.addAttribute("collections",collectionList);
-        model.addAttribute("searchString",searchString);
-        return "collectPage";
+       if(AccountInfoController.presentAccount.getEmail()!=null) {
+           if (!searchBox.isEmpty())
+               this.searchString=searchBox;
+           System.out.println(searchBox);
+           List<Collection> collectionList=collectionService.search("%"+ this.searchString+"%");
+           System.out.println(collectionList.size());
+           model.addAttribute("collections",collectionList);
+           model.addAttribute("searchString",searchString);
+           model.addAttribute("presentAccount",AccountInfoController.presentAccount);
+           return "collectPage";
+       }
+        else
+            return "loginPage";
     }
 }

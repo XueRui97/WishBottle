@@ -22,32 +22,39 @@ public class LogController {
     String searchString="Search...";
     @GetMapping("/logPage")//跳转到登录日志界面
     public String log(Model model){
-        List<Log> list=logService.getAllLog();
-        model.addAttribute("logs",list);
-        model.addAttribute("searchString",searchString);
-        return "logPage";
+        if(AccountInfoController.presentAccount.getEmail()!=null) {
+            List<Log> list=logService.getAllLog();
+            model.addAttribute("logs",list);
+            model.addAttribute("searchString",searchString);
+            model.addAttribute("presentAccount",AccountInfoController.presentAccount);
+            return "logPage";
+        }
+        else
+            return "loginPage";
     }
     //查询
     @PostMapping("/searchLog")
     public String searchLog(@RequestParam("searchBox") String searchBox, Model model){
-        List<Log> logList = null;
-        if (!searchBox.isEmpty())
-            this.searchString=searchBox;
-        //根据AccountID进行查询
-        Pattern pattern = Pattern.compile("[0-9]*");
-        if(pattern.matcher(searchString).matches()){
-            Integer in=Integer.valueOf(searchString);
-            logList = logService.search(in);
-            //System.out.println(in);
+        if(AccountInfoController.presentAccount.getEmail()!=null) {
+            List<Log> logList = null;
+            if (!searchBox.isEmpty())
+                this.searchString=searchBox;
+            //根据AccountID进行查询
+            Pattern pattern = Pattern.compile("[0-9]*");
+            if(pattern.matcher(searchString).matches()){
+                Integer in=Integer.valueOf(searchString);
+                logList = logService.search(in);
             }
-        //根据NikeName进行查询
-        else {
-            //System.out.println(searchBox);
-            logList = logService.search("%" + this.searchString + "%");
-           // System.out.println(logList.size());
+            //根据NikeName进行查询
+            else {
+                logList = logService.search("%" + this.searchString + "%");
+            }
+            model.addAttribute("logs",logList);
+            model.addAttribute("searchString",searchString);
+            model.addAttribute("presentAccount",AccountInfoController.presentAccount);
+            return "logPage";
         }
-        model.addAttribute("logs",logList);
-        model.addAttribute("searchString",searchString);
-        return "logPage";
+        else
+            return "loginPage";
     }
 }

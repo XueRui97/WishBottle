@@ -19,47 +19,57 @@ public class CommentsController {
     String searchString="Search...";
     @GetMapping("/commentPage")//跳转到评论管理页面
     public String comment(Model model){
-        searchString="Search...";
-        List<Comments> list=commentsService.getAllComments();
-        model.addAttribute("comments",list);
-        model.addAttribute("searchString",searchString);
-        return "commentPage";
+        if(AccountInfoController.presentAccount!=null) {
+            searchString="Search...";
+            List<Comments> list=commentsService.getAllComments();
+            model.addAttribute("comments",list);
+            model.addAttribute("searchString",searchString);
+            model.addAttribute("presentAccount",AccountInfoController.presentAccount);
+            return "commentPage";
+        }
+        else
+            return "loginPage";
     }
     @GetMapping("/deleteComment/{CommentsID}")//删除功能
     public String deletAccount(@PathVariable("CommentsID") Integer id, Model model){
-        searchString="Search...";
-        Optional<Comments> comments = commentsService.findByID(id);
-        commentsService.deleteComment(comments.get());
-        List<Comments> list=commentsService.getAllComments();
-        model.addAttribute("comments",list);
-        model.addAttribute("searchString",searchString);
-        return "redirect:/commentPage";
+        if(AccountInfoController.presentAccount.getEmail()!=null){
+            searchString="Search...";
+            Optional<Comments> comments = commentsService.findByID(id);
+            commentsService.deleteComment(comments.get());
+            List<Comments> list=commentsService.getAllComments();
+            model.addAttribute("comments",list);
+            model.addAttribute("searchString",searchString);
+            model.addAttribute("presentAccount",AccountInfoController.presentAccount);
+            return "redirect:/commentPage";
+        }
+        else
+            return "loginPage";
     }
     //查询
     @PostMapping("/searchComment")
     public String searchWish(@RequestParam("searchBox") String searchBox, Model model){
-        List<Comments> commentsList=null;
-        if (!searchBox.isEmpty())
-            this.searchString=searchBox;
-        Pattern pattern = Pattern.compile("[0-9]*");
-        //根据WishID进行查询
-        if(pattern.matcher(searchString).matches()){
-            Integer in=Integer.valueOf(searchString);
-            commentsList = commentsService.search(in);
-            //System.out.println(in);
+        if(AccountInfoController.presentAccount.getEmail()!=null){
+            List<Comments> commentsList=null;
+            if (!searchBox.isEmpty())
+                this.searchString=searchBox;
+            Pattern pattern = Pattern.compile("[0-9]*");
+            //根据WishID进行查询
+            if(pattern.matcher(searchString).matches()){
+                Integer in=Integer.valueOf(searchString);
+                commentsList = commentsService.search(in);
+            }
+            else {
+                commentsList = commentsService.search("%" + this.searchString + "%");
+            }
+            if (!searchBox.isEmpty())
+                this.searchString=searchBox;
+            commentsList=commentsService.search("%"+ this.searchString+"%");
+            model.addAttribute("comments",commentsList);
+            model.addAttribute("searchString",searchString);
+            model.addAttribute("presentAccount",AccountInfoController.presentAccount);
+            return "commentPage";
         }
-        else {
-           // System.out.println(searchBox);
-            commentsList = commentsService.search("%" + this.searchString + "%");
-            //System.out.println(commentsList.size());
-        }
-        if (!searchBox.isEmpty())
-            this.searchString=searchBox;
-        System.out.println(searchBox);
-       commentsList=commentsService.search("%"+ this.searchString+"%");
-        System.out.println(commentsList.size());
-        model.addAttribute("comments",commentsList);
-        model.addAttribute("searchString",searchString);
-        return "commentPage";
+        else
+            return "loginPage";
     }
 }

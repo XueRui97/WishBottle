@@ -90,4 +90,14 @@ public class Wish {
     public void setRelTime(Date relTime) {
         RelTime = relTime;
     }
+
+    public Wish(AccountInfo accountInfo, String title, String content, boolean permision, int browseNum, int goodNum, Date relTime) {
+        this.accountInfo = accountInfo;
+        Title = title;
+        Content = content;
+        Permision = permision;
+        BrowseNum = browseNum;
+        GoodNum = goodNum;
+        RelTime = relTime;
+    }
 }
