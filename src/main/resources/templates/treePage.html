@@ -161,45 +161,22 @@
                         <!-- RIGHT COLUMN -->
                         <div class="profile-right">
                             <h4 class="heading">写一个心愿</h4>
-                            <!-- AWARDS -->
-                            <div class="awards">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="award-item">
-                                            <div class="hexagon">
-                                                <span class="lnr lnr-sun award-icon"></span>
-                                            </div>
-                                            <span>Most Bright Idea</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="award-item">
-                                            <div class="hexagon">
-                                                <span class="lnr lnr-clock award-icon"></span>
-                                            </div>
-                                            <span>Most On-Time</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="award-item">
-                                            <div class="hexagon">
-                                                <span class="lnr lnr-magic-wand award-icon"></span>
-                                            </div>
-                                            <span>Problem Solver</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                        <div class="award-item">
-                                            <div class="hexagon">
-                                                <span class="lnr lnr-heart award-icon"></span>
-                                            </div>
-                                            <span>Most Loved</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center"><a href="#" class="btn btn-default">See all awards</a></div>
+                            <!-- INPUT -->
+                            <div class="panel-body">
+                                <form method="post" th:action="@{/addWish}" role="form">
+                                    <input name="wishTitle" type="text" class="form-control" placeholder="标题">
+                                    <br>
+                                    <textarea name="wishContent" class="form-control" placeholder="内容" rows="4"></textarea>
+                                    <br>
+                                        <span>可见性：</span>
+                                        <input name="visibility" value="male" type="radio">
+                                        <span><i></i>所有人</span>
+                                        <input name="visibility" value="female" type="radio">
+                                        <span><i></i>仅自己</span>
+                                    <button style="float:right;" type="button" class="btn btn-primary">发布</button>
+                                </form>
                             </div>
-                            <!-- END AWARDS -->
+                            <!-- END INPUT -->
 
                             <!-- TABBED CONTENT -->
                             <div class="custom-tabs-line tabs-line-bottom left-aligned">
