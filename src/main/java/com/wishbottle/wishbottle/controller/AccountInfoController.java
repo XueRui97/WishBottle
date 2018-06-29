@@ -36,6 +36,11 @@ public class AccountInfoController {
     public String  login(){
         return "loginPage";
     }
+    //树洞页面——树洞
+    @GetMapping("/tree")
+    public String  tree(){
+        return "treePage";
+    }
     //跳转到数据总览页面
     @GetMapping("/index")
     public String index(){
