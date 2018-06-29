@@ -40,4 +40,9 @@ public class WishServiceImpl implements WishService {
     public Wish addWish(Wish wish){
         return WishRepository.save(wish);
     }
+
+    @Override
+    public List<Wish> getByPermision(boolean permisiom) {
+        return WishRepository.queryByPermision(permisiom);
+    }
 }
