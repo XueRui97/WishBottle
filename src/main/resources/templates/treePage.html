@@ -186,134 +186,194 @@
                             </div>
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="tab-bottom-left1">
-                                    <ul class="list-unstyled activity-timeline">
-                                        <li>
-                                            <i class="fa fa-comment activity-icon"></i>
-                                            <p>Commented on post <a href="#">Prototyping</a> <span class="timestamp">2 minutes ago</span></p>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-cloud-upload activity-icon"></i>
-                                            <p>Uploaded new file <a href="#">Proposal.docx</a> to project <a href="#">New Year Campaign</a> <span class="timestamp">7 hours ago</span></p>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-plus activity-icon"></i>
-                                            <p>Added <a href="#">Martin</a> and <a href="#">3 others colleagues</a> to project repository <span class="timestamp">Yesterday</span></p>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-check activity-icon"></i>
-                                            <p>Finished 80% of all <a href="#">assigned tasks</a> <span class="timestamp">1 day ago</span></p>
-                                        </li>
-                                    </ul>
-                                    <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">See all activity</a></div>
+                                    <div class="table-responsive">
+                                        <table class="table project-table">
+                                            <thead>
+                                            <tr>
+                                                <th>心愿标题</th>
+                                                <th>评论数</th>
+                                                <th>点赞数</th>
+                                                <th>发布时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td><a href="#" data-toggle="modal" data-target="#myWish">我的第一条心愿标题</a></td>
+                                                <td>55</td>
+                                                <td>4</td>
+                                                <td>2018-6-25 10:28</td>
+                                            </tr>
+                                            <!-- 模态框（Modal） -->
+                                            <div class="modal fade" id="myWish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                &times;
+                                                            </button>
+                                                            <h4 class="modal-title">
+                                                                心愿标题     by:作者XXX
+                                                            </h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>心愿内容：</h4>
+                                                            <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
+                                                            <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="modal-body">
+                                                            <h4>评论内容：</h4>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal -->
+                                            </div>
+                                            <tr>
+                                                <td><a href="#">我的第一条心愿标题</a></td>
+                                                <td>515</td>
+                                                <td>2</td>
+                                                <td>2018-6-25 10:28</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">我的第一条心愿标题</a></td>
+                                                <td>35</td>
+                                                <td>44</td>
+                                                <td>2018-6-23 1128</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">我的第一条心愿标题</a></td>
+                                                <td>75</td>
+                                                <td>45</td>
+                                                <td>2018-6-22 00:15</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">我的第一条心愿标题</a></td>
+                                                <td>575</td>
+                                                <td>100</td>
+                                                <td>2018-6-21 10:20</td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="#">我的第一条心愿标题</a></td>
+                                                <td>55</td>
+                                                <td>4</td>
+                                                <td>2018-6-25 10:28</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">查看更多</a></div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-bottom-left2">
                                     <div class="table-responsive">
                                         <table class="table project-table">
                                             <thead>
                                             <tr>
-                                                <th>Title</th>
-                                                <th>Progress</th>
-                                                <th>Leader</th>
-                                                <th>Status</th>
+                                                <th>评论者</th>
+                                                <th>评论内容</th>
+                                                <th>评论时间</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td><a href="#">Spot Media</a></td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                            <span>60% Complete</span>
+                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                                                <td><a href="#" data-toggle="modal" data-target="#myComment">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
+                                                <td>2018-6-25 10:28</td>
+                                            </tr>
+                                            <!-- 模态框（Modal） -->
+                                            <div class="modal fade" id="myComment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                &times;
+                                                            </button>
+                                                            <h4 class="modal-title">
+                                                                心愿标题     by:作者XXX
+                                                            </h4>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td><img src="assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                                <td><span class="label label-success">ACTIVE</span></td>
+                                                        <div class="modal-body">
+                                                            <h4>心愿内容：</h4>
+                                                            <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
+                                                            <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="modal-body">
+                                                            <h4>评论内容：</h4>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal -->
+                                            </div>
+                                            <tr>
+                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
+                                                <td>2018-6-25 10:28</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#">E-Commerce Site</a></td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width: 33%;">
-                                                            <span>33% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><img src="assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
-                                                <td><span class="label label-warning">PENDING</span></td>
+                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
+                                                <td>2018-6-25 10:28</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#">Project 123GO</a></td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%;">
-                                                            <span>68% Complete</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><img src="assets/img/user1.png" alt="Avatar" class="avatar img-circle"> <a href="#">Antonius</a></td>
-                                                <td><span class="label label-success">ACTIVE</span></td>
+                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
+                                                <td>2018-6-25 10:28</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#">Wordpress Theme</a></td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;">
-                                                            <span>75%</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><img src="assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                                <td><span class="label label-success">ACTIVE</span></td>
+                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
+                                                <td>2018-6-25 10:28</td>
                                             </tr>
                                             <tr>
-                                                <td><a href="#">Project 123GO</a></td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                                            <span>100%</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><img src="assets/img/user1.png" alt="Avatar" class="avatar img-circle" /> <a href="#">Antonius</a></td>
-                                                <td><span class="label label-default">CLOSED</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">Redesign Landing Page</a></td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                                            <span>100%</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><img src="assets/img/user5.png" alt="Avatar" class="avatar img-circle" /> <a href="#">Jason</a></td>
-                                                <td><span class="label label-default">CLOSED</span></td>
+                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
+                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
+                                                <td>2018-6-25 10:28</td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">查看更多</a></div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-bottom-left3">
                                     <ul class="list-unstyled activity-timeline">
                                         <li>
-                                            <i class="fa fa-comment activity-icon"></i>
-                                            <p>Commented on post <a href="#">Prototyping</a> <span class="timestamp">2 minutes ago</span></p>
+                                            <img src="assets/img/user1.png" width="34px" alt="Avatar" class="avatar img-circle" />&nbsp;&nbsp;&nbsp;<a href="#">Michael</a>
+                                            评论了你的心愿：<a href="#">“我发表过的心愿标题”</a> <p><span class="timestamp">2 minutes ago</span></p>
                                         </li>
                                         <li>
-                                            <i class="fa fa-cloud-upload activity-icon"></i>
-                                            <p>Uploaded new file <a href="#">Proposal.docx</a> to project <a href="#">New Year Campaign</a> <span class="timestamp">7 hours ago</span></p>
+                                            <img src="assets/img/user1.png" width="34px" alt="Avatar" class="avatar img-circle" />&nbsp;&nbsp;&nbsp;<a href="#">Michael</a>
+                                            点赞了你的心愿：<a href="#">“我发表过的心愿标题”</a> <p><span class="timestamp">4 hours ago</span></p>
                                         </li>
                                         <li>
-                                            <i class="fa fa-plus activity-icon"></i>
-                                            <p>Added <a href="#">Martin</a> and <a href="#">3 others colleagues</a> to project repository <span class="timestamp">Yesterday</span></p>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-check activity-icon"></i>
-                                            <p>Finished 80% of all <a href="#">assigned tasks</a> <span class="timestamp">1 day ago</span></p>
+                                            <img src="assets/img/user1.png" width="34px" alt="Avatar" class="avatar img-circle" />&nbsp;&nbsp;&nbsp;<a href="#">Michael</a>
+                                            评论了你的心愿：<a href="#">“我发表过的心愿标题”</a> <p><span class="timestamp">1 days ago</span></p>
                                         </li>
                                     </ul>
-                                    <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">See all activity</a></div>
+                                    <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">查看更多</a></div>
                                 </div>
                             </div>
                             <!-- END TABBED CONTENT -->
@@ -335,10 +395,10 @@
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="assets/scripts/klorofil-common.js"></script>
+<script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{assets/scripts/klorofil-common.js}"></script>
 </body>
 
 </html>
