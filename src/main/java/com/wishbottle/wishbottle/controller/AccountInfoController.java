@@ -56,7 +56,19 @@ public class AccountInfoController {
     @GetMapping("/login")
     public String  login(Model model){
         if(presentAccount.getEmail()!=null)
-            return returnTree(model);
+        {
+            //我的心愿
+            List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
+            model.addAttribute("myWish",wishList);
+            //我的评论
+            List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
+            model.addAttribute("myComments",myList);
+            //对我的评论
+            List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
+            model.addAttribute("otherComments",otherList);
+            model.addAttribute("presentAccount",presentAccount);
+            return "treePage";
+        }
         presentAccount=new AccountInfo();
         return "loginPage";
     }
@@ -119,8 +131,22 @@ public class AccountInfoController {
             return "loginPage";
         }
         else{
-            if(accountInfoList.get(0).getPassword().equals(PassWord))
-                return returnTree( model);
+            //登录成功
+            if(accountInfoList.get(0).getPassword().equals(PassWord)){
+                //添加日志
+                //我的心愿
+                List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
+                model.addAttribute("myWish",wishList);
+                //我的评论
+                List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
+                model.addAttribute("myComments",myList);
+                //对我的评论
+                List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
+                model.addAttribute("otherComments",otherList);
+                presentAccount=accountInfoList.get(0);
+                model.addAttribute("presentAccount",presentAccount);
+                return "treePage";
+            }
             else {
                 System.out.println("账号与密码不匹配！");
                 return "loginPage";

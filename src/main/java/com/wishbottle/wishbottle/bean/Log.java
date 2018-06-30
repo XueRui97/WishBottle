@@ -21,7 +21,14 @@ public class Log {
     @Column(nullable=false,length = 100)
     private String Address;//客户端地址
 
-//get,set
+    public Log(AccountInfo accountInfo, String IP, Date logTime, String address) {
+        this.accountInfo = accountInfo;
+        this.IP = IP;
+        LogTime = logTime;
+        Address = address;
+    }
+
+    //get,set
     public Integer getLogID() {
         return LogID;
     }
