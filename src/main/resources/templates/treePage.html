@@ -173,7 +173,7 @@
                                                 <h4 class="heading">个人介绍</h4>
                                                 <textarea name="wishContent" class="form-control" placeholder="个人介绍" rows="4" required=""></textarea>
                                             </div>
-                                            <div class="text-center"><a href="#profile" data-toggle="tab" class="btn btn-default">返回</a>&nbsp;<a href="#editProfile" data-toggle="tab" class="btn btn-primary">保存修改</a></div>
+                                            <div class="text-center"><a href="#profile" data-toggle="tab" class="btn btn-default">返回</a>&nbsp;<a href="#profile" data-toggle="tab" class="btn btn-primary">保存修改</a></div>
                                         </form>
                                     </div>
                                     <!-- END PROFILE edit -->
@@ -454,7 +454,7 @@
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td><a href="#" data-toggle="modal" data-target="#myWish">我的第一条心愿标题</a></td>
+                                                <td><a href="#" data-toggle="modal" data-target="#mysWish">我的第一条心愿标题</a></td>
                                                 <td>55</td>
                                                 <td>4</td>
                                                 <td>2018-6-25 10:28</td>
@@ -542,7 +542,7 @@
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td><a href="#" data-toggle="modal" data-target="#myComment">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
+                                                <td><a href="#" data-toggle="modal" data-target="#myPComment">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
                                                 <td>2018-6-25 10:28</td>
                                             </tr>
                                             <!-- 模态框（Modal） -->
@@ -625,11 +625,13 @@
         </div>
     </footer>
 </div>
+
 <!-- END WRAPPER -->
 <!-- Javascript -->
 <script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{assets/vendor/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{assets/vendor/toastr/toastr.min.js}"></script>
 <script th:src="@{assets/scripts/klorofil-common.js}"></script>
 </body>
 

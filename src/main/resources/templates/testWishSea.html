@@ -100,27 +100,29 @@
             <div class="container-fluid">
                 <h3 class="page-title">心愿海</h3>
                 <div class="row">
-                    <div class="col-lg-8">
-                        <div th:each="Wish : ${wishes}">
-                            <div class="col-lg-4 col-md-6 col-xs-12">
-                                <!-- PANEL DEFAULT -->
+                    <div class="col-lg-12">
+                            <div class="col-lg-8 col-md-8 col-xs-12">
+                                <!-- PANEL -->
                                 <div class="panel">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title" th:text="${Wish.getTitle()}">Panel Default</h3>
+                                        <h3 class="panel-title">Panel With Footer</h3>
                                         <div class="right">
                                             <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
                                             <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
                                         </div>
                                     </div>
                                     <div class="panel-body">
-                                        <p th:text="${Wish.getContent()}">Objectively netanded array of infomebled communities rather than process-centric.</p>
+                                        <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadevely network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forvely network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forrship skills before an expanded array.</p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <h5>Panel Footer</h5>
                                     </div>
                                 </div>
-                                <!-- END PANEL DEFAULT -->
+                                <!-- END PANEL  -->
                             </div>
-                        </div>
+
+                            <div class="col-lg-4 col-md-4 col-xs-12">asdas</div>
                     </div>
-                    <div class="col-lg-4">asd</div>
                 </div>
             </div>
         </div>
