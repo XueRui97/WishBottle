@@ -34,21 +34,6 @@ public class PersonController {
     @GetMapping("/tree")
     public String tree(Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null){
-            /*
-            //我的心愿
-            List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("myWish",wishList);
-           //我的评论
-            List<Comments> myList=commentsService.queryByAccountID(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("myComments",myList);
-            //对我的评论
-            List<Comments> otherList=commentsService.queryOtherComment(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("otherComments",otherList);
-           model.addAttribute("presentAccount",AccountInfoController.presentAccount);
-            //我的收藏
-            List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("myCollection",myCollection);
-            return "treePage";*/
             return returnTree(model);
         }
         else
@@ -64,14 +49,13 @@ public class PersonController {
             boolean  Permision=visibility.equals("all");
             Wish awish=new Wish(AccountInfoController.presentAccount,wishTitle,wishContent,Permision);
             wishService.addWish(awish);
-            //model.addAttribute("presentAccount",AccountInfoController.presentAccount);
-            //return "treePage";
             return returnTree(model);
         }
         else
             return "loginPage";
 
     }
+    //返回心愿、评论、被评论和收藏的list方法
     private String returnTree(Model model){
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());

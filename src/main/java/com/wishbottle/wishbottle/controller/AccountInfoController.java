@@ -38,23 +38,9 @@ public class AccountInfoController {
     public String  first(Model model){
         if(presentAccount.getEmail()!=null)
         {
-            //我的心愿
-            List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
-            model.addAttribute("myWish",wishList);
-            //我的评论
-            List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
-            model.addAttribute("myComments",myList);
-            //对我的评论
-            List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
-            model.addAttribute("otherComments",otherList);
-            model.addAttribute("presentAccount",presentAccount);
-            //我的收藏
-            List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
-            model.addAttribute("myCollection",myCollection);
-            return "treePage";
+           return  returnTree(model);
         }
         presentAccount=new AccountInfo();
-        //System.out.print(presentAccount.getWishNum());
         return "loginPage";
     }
     //登录页面——登录
@@ -62,25 +48,11 @@ public class AccountInfoController {
     public String  login(Model model){
         if(presentAccount.getEmail()!=null)
         {
-            //我的心愿
-            List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
-            model.addAttribute("myWish",wishList);
-            //我的评论
-            List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
-            model.addAttribute("myComments",myList);
-            //对我的评论
-            List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
-            model.addAttribute("otherComments",otherList);
-            model.addAttribute("presentAccount",presentAccount);
-            //我的收藏
-            List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
-            model.addAttribute("myCollection",myCollection);
-            return "treePage";
+            return  returnTree(model);
         }
         presentAccount=new AccountInfo();
         return "loginPage";
     }
-
 
     //账号设置
     @GetMapping("/setting")
@@ -128,11 +100,8 @@ public class AccountInfoController {
     }
     //登录验证
     @PostMapping("/loginPost")
-    public String login(@RequestParam("login-email") String EmailOrName,
-                         @RequestParam("login-password") String PassWord,
-                        @RequestParam("ipStr") String ipStr,
-                        @RequestParam("addressStr") String addressStr,
-                         Model model){
+    public String login(@RequestParam("login-email") String EmailOrName,@RequestParam("login-password") String PassWord,
+                        @RequestParam("ipStr") String ipStr,@RequestParam("addressStr") String addressStr,Model model){
         List<AccountInfo> accountInfoList=accountInfoService.queryByEmailOrName(EmailOrName);
         if(accountInfoList.isEmpty()){
             System.out.println("无该用户");
@@ -142,25 +111,11 @@ public class AccountInfoController {
             //登录成功
             if(accountInfoList.get(0).getPassword().equals(PassWord)){
                 presentAccount=accountInfoList.get(0);
-                /*model.addAttribute("presentAccount",presentAccount);
-                //我的心愿
-                List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
-                model.addAttribute("myWish",wishList);
-                //我的评论
-                List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
-                model.addAttribute("myComments",myList);
-                //对我的评论
-                List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
-                model.addAttribute("otherComments",otherList);
-                //我的收藏
-                List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
-                model.addAttribute("myCollection",myCollection);*/
                 //添加日志
                 Date date=new Date();
                 Log alog=new Log(presentAccount,ipStr,date,addressStr);
                 logService.save(alog);
-                //return "treePage";
-                return returnTree(model);
+                 return returnTree(model);
             }
             else {
                 System.out.println("账号与密码不匹配！");
@@ -170,29 +125,32 @@ public class AccountInfoController {
     }
     //注册验证
     @PostMapping("/signupPost")
-    public String  signup(@RequestParam("signup-username") String Name,
-                         @RequestParam("signup-email") String Email,
-                         @RequestParam("signup-password") String PassWord,
-                         Model model){
+    public String  signup(@RequestParam("signup-username") String Name,@RequestParam("signup-email") String Email,
+                         @RequestParam("signup-password") String PassWord,Model model){
         List<AccountInfo> accountInfoList1=accountInfoService.queryByEmailOrName(Name);
         List<AccountInfo> accountInfoList2=accountInfoService.queryByEmailOrName(Email);
         if(accountInfoList1.isEmpty()&&accountInfoList2.isEmpty()){
             AccountInfo account=new AccountInfo(Name,Email,PassWord);
             accountInfoService.addAccountInfo(account);
             presentAccount=account;
-           // model.addAttribute("presentAccount",presentAccount);
-           // return "treePage";
             return  returnTree(model);
         }
         else{
             return  "loginPage";
         }
     }
+    //返回心愿、评论、被评论和收藏的list方法
     private String returnTree(Model model){
         model.addAttribute("presentAccount",presentAccount);
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
         model.addAttribute("myWish",wishList);
+        //点赞树
+        int goodNum=0;
+        for(Wish awish:wishList){
+            goodNum+=awish.getGoodNum();
+        }
+        model.addAttribute("goodNum",goodNum);
         //我的评论
         List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
         model.addAttribute("myComments",myList);
