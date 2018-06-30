@@ -25,6 +25,7 @@ public class AccountInfo {
 
     private Date RegestTime;//注册时间
     private Date Birthday; //出生日期
+    private Integer Level=3;//用户等级，默为3，即普通用户，2位管理员用户，1位超级用户
 
     public Integer getAccountID() {
         return AccountID;
@@ -85,6 +86,14 @@ public class AccountInfo {
     public Date getBirthday() { return Birthday; } //得到出生日期
 
     public void setBirthday(Date birthday) { Birthday = birthday; } //设置出生日期
+
+    public Integer getLevel() {
+        return Level;
+    }
+
+    public void setLevel(Integer level) {
+        Level = level;
+    }
 
     public AccountInfo() {
     }

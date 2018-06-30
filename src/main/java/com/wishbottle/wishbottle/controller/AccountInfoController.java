@@ -7,18 +7,20 @@ import com.wishbottle.wishbottle.bean.Comments;
 import com.wishbottle.wishbottle.bean.Log;
 import com.wishbottle.wishbottle.bean.Wish;
 import com.wishbottle.wishbottle.service.AccountInfoService;
-import com.wishbottle.wishbottle.service.CollectionService;
 import com.wishbottle.wishbottle.service.CommentsService;
+import com.wishbottle.wishbottle.service.LogService;
 import com.wishbottle.wishbottle.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -29,6 +31,10 @@ public class AccountInfoController {
     private WishService wishService;
     @Autowired
     private CommentsService commentsService;
+    @Autowired
+    private LogService logService;
+    @Autowired
+    private HttpServletRequest request;
     private String searchString="Search...";
     static  AccountInfo presentAccount=new AccountInfo();
     //初始页面——登录
@@ -124,6 +130,8 @@ public class AccountInfoController {
     @PostMapping("/loginPost")
     public String login(@RequestParam("login-email") String EmailOrName,
                          @RequestParam("login-password") String PassWord,
+                        @RequestParam("ipStr") String ipStr,
+                        @RequestParam("addressStr") String addressStr,
                          Model model){
         List<AccountInfo> accountInfoList=accountInfoService.queryByEmailOrName(EmailOrName);
         if(accountInfoList.isEmpty()){
@@ -133,7 +141,7 @@ public class AccountInfoController {
         else{
             //登录成功
             if(accountInfoList.get(0).getPassword().equals(PassWord)){
-                //添加日志
+
                 //我的心愿
                 List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
                 model.addAttribute("myWish",wishList);
@@ -145,6 +153,10 @@ public class AccountInfoController {
                 model.addAttribute("otherComments",otherList);
                 presentAccount=accountInfoList.get(0);
                 model.addAttribute("presentAccount",presentAccount);
+                //添加日志
+                Date date=new Date();
+                Log alog=new Log(presentAccount,ipStr,date,addressStr);
+                logService.save(alog);
                 return "treePage";
             }
             else {
@@ -173,18 +185,5 @@ public class AccountInfoController {
         }
     }
 
-    public String returnTree(Model model){
-        //我的心愿
-        List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
-        model.addAttribute("myWish",wishList);
-        //我的评论
-        List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
-        model.addAttribute("myComments",myList);
-        //对我的评论
-        List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
-        model.addAttribute("otherComments",otherList);
-        model.addAttribute("presentAccount",presentAccount);
-        return "treePage";
-    }
 
 }

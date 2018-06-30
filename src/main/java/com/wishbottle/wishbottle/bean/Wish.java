@@ -100,7 +100,6 @@ public class Wish {
         GoodNum = 0;
         RelTime = new Date();
     }
-
     public Wish() {
     }
 }

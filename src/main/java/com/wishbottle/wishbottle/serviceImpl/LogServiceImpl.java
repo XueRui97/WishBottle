@@ -28,4 +28,9 @@ public class LogServiceImpl implements LogService {
     public List<Log> search(Integer search) {
         return  logRepository.queryBySearch(search);
     }
+
+    @Override
+    public void save(Log log) {
+        logRepository.save(log);
+    }
 }

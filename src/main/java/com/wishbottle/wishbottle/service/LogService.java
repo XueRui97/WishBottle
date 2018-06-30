@@ -9,4 +9,5 @@ public interface LogService {
     List<Log>  getAllLog();
     List<Log> search(String search);
     List<Log> search(Integer search);
+    void save(Log log);
  }
