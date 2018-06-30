@@ -15,4 +15,6 @@ public interface WishRepository extends JpaRepository<Wish,Integer> {
     public List<Wish> queryBySearch(Integer search);
     @Query("select a from Wish a where a.Permision= ?1")
     public List<Wish> queryByPermision(boolean permision);
+    @Query("select a from Wish a where a.accountInfo.AccountID= ?1")
+     public List<Wish> queryByAccountID(Integer accountID);
 }

@@ -45,4 +45,9 @@ public class WishServiceImpl implements WishService {
     public List<Wish> getByPermision(boolean permisiom) {
         return WishRepository.queryByPermision(permisiom);
     }
+
+    @Override
+    public List<Wish> getByAccountID(Integer accountID) {
+        return WishRepository.queryByAccountID(accountID);
+    }
 }

@@ -3,7 +3,9 @@ package com.wishbottle.wishbottle.controller;
 
 
 import com.wishbottle.wishbottle.bean.AccountInfo;
+import com.wishbottle.wishbottle.bean.Comments;
 import com.wishbottle.wishbottle.bean.Log;
+import com.wishbottle.wishbottle.bean.Wish;
 import com.wishbottle.wishbottle.service.AccountInfoService;
 import com.wishbottle.wishbottle.service.CollectionService;
 import com.wishbottle.wishbottle.service.CommentsService;
@@ -23,17 +25,38 @@ import java.util.Optional;
 public class AccountInfoController {
     @Autowired
     private AccountInfoService accountInfoService;
+    @Autowired
+    private WishService wishService;
+    @Autowired
+    private CommentsService commentsService;
     private String searchString="Search...";
     static  AccountInfo presentAccount=new AccountInfo();
     //初始页面——登录
     @GetMapping()
-    public String  first(){
+    public String  first(Model model){
+        if(presentAccount.getEmail()!=null)
+        {
+            //我的心愿
+            List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
+            model.addAttribute("myWish",wishList);
+            //我的评论
+            List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
+            model.addAttribute("myComments",myList);
+            //对我的评论
+            List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
+            model.addAttribute("otherComments",otherList);
+            model.addAttribute("presentAccount",presentAccount);
+            return "treePage";
+        }
         presentAccount=new AccountInfo();
+        //System.out.print(presentAccount.getWishNum());
         return "loginPage";
     }
     //登录页面——登录
     @GetMapping("/login")
-    public String  login(){
+    public String  login(Model model){
+        if(presentAccount.getEmail()!=null)
+            return returnTree(model);
         presentAccount=new AccountInfo();
         return "loginPage";
     }
@@ -96,12 +119,8 @@ public class AccountInfoController {
             return "loginPage";
         }
         else{
-            if(accountInfoList.get(0).getPassword().equals(PassWord)){
-                System.out.println("welcom to computer");
-                presentAccount=accountInfoList.get(0);
-                model.addAttribute("presentAccount",presentAccount);
-                return "treePage";
-            }
+            if(accountInfoList.get(0).getPassword().equals(PassWord))
+                return returnTree( model);
             else {
                 System.out.println("账号与密码不匹配！");
                 return "loginPage";
@@ -127,4 +146,19 @@ public class AccountInfoController {
             return  "loginPage";
         }
     }
+
+    public String returnTree(Model model){
+        //我的心愿
+        List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
+        model.addAttribute("myWish",wishList);
+        //我的评论
+        List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
+        model.addAttribute("myComments",myList);
+        //对我的评论
+        List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
+        model.addAttribute("otherComments",otherList);
+        model.addAttribute("presentAccount",presentAccount);
+        return "treePage";
+    }
+
 }

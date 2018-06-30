@@ -41,4 +41,14 @@ public class CommentsServiceImpl implements CommentsService {
         return  commentsRepository.queryBySearch(search);
     }
 
+    @Override
+    public List<Comments> queryByAccountID(Integer accountID) {
+        return commentsRepository.queryByAccountID(accountID);
+    }
+
+    @Override
+    public List<Comments> queryOtherComment(Integer accountID) {
+        return commentsRepository.queryOtherComment(accountID);
+    }
+
 }

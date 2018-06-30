@@ -12,4 +12,9 @@ public interface CommentsRepository extends JpaRepository<Comments,Integer> {
     public List<Comments> queryBySearch(String search);
     @Query("select a from Comments a where a.wish.WishID=?1")
     public List<Comments> queryBySearch(Integer search);
+    @Query("select a from Comments a where a.accountInfo.AccountID=?1")
+    public List<Comments> queryByAccountID(Integer accountID);
+    @Query("select a from Comments a,Wish b where  b.accountInfo.AccountID=?1 and" +
+            " a.wish.WishID=b.WishID")
+    public List<Comments> queryOtherComment(Integer accountID);
 }

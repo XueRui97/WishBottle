@@ -3,9 +3,7 @@ package com.wishbottle.wishbottle.bean;
 
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 @Entity
 public class AccountInfo {
     @Id//设置主键
@@ -27,6 +25,7 @@ public class AccountInfo {
 
     private Date RegestTime;//注册时间
     private Date Birthday; //出生日期
+
     public Integer getAccountID() {
         return AccountID;
     }//得到账号ID

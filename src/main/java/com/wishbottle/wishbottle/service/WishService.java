@@ -13,4 +13,5 @@ public interface WishService {
     List<Wish> search(Integer search);
     Wish addWish(Wish wish);
     List<Wish> getByPermision(boolean permisiom);
+    List<Wish> getByAccountID(Integer accountID);
 }

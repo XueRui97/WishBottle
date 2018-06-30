@@ -12,5 +12,6 @@ public interface CommentsService {
     void deleteComment(Comments comments);
     List<Comments> search(String search);
     List<Comments> search(Integer search);
-
+    List<Comments> queryByAccountID(Integer accountID);
+    List<Comments> queryOtherComment(Integer accountID);
 }
