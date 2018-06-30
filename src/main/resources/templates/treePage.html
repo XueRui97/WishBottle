@@ -115,13 +115,13 @@
                                 <div class="profile-stat">
                                     <div class="row">
                                         <div class="col-md-4 stat-item">
-                                            45 <span>心愿</span>
+                                            <span th:text="${myWish.size()}"></span><span>心愿</span>
                                         </div>
                                         <div class="col-md-4 stat-item">
-                                            15 <span>评论</span>
+                                            <span th:text="${myComments.size()}"></span></spa> <span>评论</span>
                                         </div>
                                         <div class="col-md-4 stat-item">
-                                            42 <span>赞</span>
+                                            <span th:text="${goodNum}"></span>42 <span>赞</span>
                                         </div>
                                     </div>
                                 </div>
