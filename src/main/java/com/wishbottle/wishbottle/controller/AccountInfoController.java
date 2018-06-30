@@ -145,7 +145,7 @@ public class AccountInfoController {
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
         model.addAttribute("myWish",wishList);
-        //点赞树
+        //点赞数
         int goodNum=0;
         for(Wish awish:wishList){
             goodNum+=awish.getGoodNum();

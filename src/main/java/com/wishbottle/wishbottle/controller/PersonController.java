@@ -60,6 +60,12 @@ public class PersonController {
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myWish",wishList);
+        //点赞数
+        int goodNum=0;
+        for(Wish awish:wishList){
+            goodNum+=awish.getGoodNum();
+        }
+        model.addAttribute("goodNum",goodNum);
         //我的评论
         List<Comments> myList=commentsService.queryByAccountID(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myComments",myList);
