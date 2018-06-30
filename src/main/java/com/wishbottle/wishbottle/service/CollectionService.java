@@ -9,4 +9,5 @@ public interface CollectionService {
     //void deleteCollectionByWishID(Integer id);
     void deleteCollection(Collection collection);
     List<Collection> search(String search);
+    List<Collection> queryMyCollection(Integer accountID);
 }

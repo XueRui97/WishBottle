@@ -29,4 +29,9 @@ public class CollectionServiceImpl implements CollectionService {
     public List<Collection> search(String search) {
         return  collectionRepository.queryBySearch(search);
     }
+
+    @Override
+    public List<Collection> queryMyCollection(Integer accountID) {
+        return collectionRepository.queryMyCollection(accountID);
+    }
 }

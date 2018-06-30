@@ -2,14 +2,8 @@
 package com.wishbottle.wishbottle.controller;
 
 
-import com.wishbottle.wishbottle.bean.AccountInfo;
-import com.wishbottle.wishbottle.bean.Comments;
-import com.wishbottle.wishbottle.bean.Log;
-import com.wishbottle.wishbottle.bean.Wish;
-import com.wishbottle.wishbottle.service.AccountInfoService;
-import com.wishbottle.wishbottle.service.CommentsService;
-import com.wishbottle.wishbottle.service.LogService;
-import com.wishbottle.wishbottle.service.WishService;
+import com.wishbottle.wishbottle.bean.*;
+import com.wishbottle.wishbottle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +28,8 @@ public class AccountInfoController {
     @Autowired
     private LogService logService;
     @Autowired
+    private CollectionService collectionService;
+    @Autowired
     private HttpServletRequest request;
     private String searchString="Search...";
     static  AccountInfo presentAccount=new AccountInfo();
@@ -52,6 +48,9 @@ public class AccountInfoController {
             List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
             model.addAttribute("otherComments",otherList);
             model.addAttribute("presentAccount",presentAccount);
+            //我的收藏
+            List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
+            model.addAttribute("myCollection",myCollection);
             return "treePage";
         }
         presentAccount=new AccountInfo();
@@ -73,6 +72,9 @@ public class AccountInfoController {
             List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
             model.addAttribute("otherComments",otherList);
             model.addAttribute("presentAccount",presentAccount);
+            //我的收藏
+            List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
+            model.addAttribute("myCollection",myCollection);
             return "treePage";
         }
         presentAccount=new AccountInfo();
@@ -115,9 +117,7 @@ public class AccountInfoController {
         if(presentAccount.getEmail()!=null){
             if (!searchBox.isEmpty())
                 this.searchString=searchBox;
-            //System.out.println(searchBox);
             List<AccountInfo> accountInfoList=accountInfoService.search("%"+ this.searchString+"%");
-            //System.out.println(accountInfoList.size());
             model.addAttribute("account",accountInfoList);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",presentAccount);
@@ -141,7 +141,8 @@ public class AccountInfoController {
         else{
             //登录成功
             if(accountInfoList.get(0).getPassword().equals(PassWord)){
-
+                presentAccount=accountInfoList.get(0);
+                /*model.addAttribute("presentAccount",presentAccount);
                 //我的心愿
                 List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
                 model.addAttribute("myWish",wishList);
@@ -151,13 +152,15 @@ public class AccountInfoController {
                 //对我的评论
                 List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
                 model.addAttribute("otherComments",otherList);
-                presentAccount=accountInfoList.get(0);
-                model.addAttribute("presentAccount",presentAccount);
+                //我的收藏
+                List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
+                model.addAttribute("myCollection",myCollection);*/
                 //添加日志
                 Date date=new Date();
                 Log alog=new Log(presentAccount,ipStr,date,addressStr);
                 logService.save(alog);
-                return "treePage";
+                //return "treePage";
+                return returnTree(model);
             }
             else {
                 System.out.println("账号与密码不匹配！");
@@ -177,13 +180,29 @@ public class AccountInfoController {
             AccountInfo account=new AccountInfo(Name,Email,PassWord);
             accountInfoService.addAccountInfo(account);
             presentAccount=account;
-            model.addAttribute("presentAccount",presentAccount);
-            return "treePage";
+           // model.addAttribute("presentAccount",presentAccount);
+           // return "treePage";
+            return  returnTree(model);
         }
         else{
             return  "loginPage";
         }
     }
-
+    private String returnTree(Model model){
+        model.addAttribute("presentAccount",presentAccount);
+        //我的心愿
+        List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
+        model.addAttribute("myWish",wishList);
+        //我的评论
+        List<Comments> myList=commentsService.queryByAccountID(presentAccount.getAccountID());
+        model.addAttribute("myComments",myList);
+        //对我的评论
+        List<Comments> otherList=commentsService.queryOtherComment(presentAccount.getAccountID());
+        model.addAttribute("otherComments",otherList);
+        //我的收藏
+        List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
+        model.addAttribute("myCollection",myCollection);
+        return "treePage";
+    }
 
 }
