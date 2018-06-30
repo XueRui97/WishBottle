@@ -192,12 +192,12 @@
                                     <br>
                                     <textarea name="wishContent" class="form-control" placeholder="内容" rows="4" required></textarea>
                                     <br>
-                                        <span>可见性：</span>
-                                        <input name="visibility" value="self" type="radio">
-                                        <span><i></i>仅自己</span>
-                                        <input name="visibility" value="all" type="radio">
-                                        <span><i></i>所有人</span>
-                                        <script>document.getElementsByName("visibility")[0].checked="checked";</script>
+                                    <span>可见性：</span>
+                                    <input name="visibility" value="self" type="radio" id="self">
+                                    <label for="self">仅自己</label>
+                                    <input name="visibility" value="all" type="radio" id="all">
+                                    <label for="all">所有人</label>
+                                    <script>document.getElementsByName("visibility")[0].checked="checked";</script>
                                     <button style="float:right;" type="submit" class="btn btn-primary">发布</button>
                                 </form>
                             </div>
