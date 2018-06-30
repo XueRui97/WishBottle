@@ -88,7 +88,6 @@
                 <ul class="nav">
                     <li><a th:href="@{/tree}" class=""><i class="lnr lnr-chart-bars"></i> <span>树洞</span></a></li>
                     <li><a th:href="@{/wishSea}" class="active"><i class="lnr lnr-code"></i> <span>心愿海</span></a></li>
-                    <li><a th:href="@{/setting}" class=""><i class="lnr lnr-user"></i> <span>账号设置</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -99,7 +98,7 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
-                <h3 class="page-title">Panels</h3>
+                <h3 class="page-title">心愿海</h3>
                 <div class="row">
                     <div class="col-lg-12">
                         <div th:each="Wish : ${wishes}">
