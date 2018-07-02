@@ -407,7 +407,7 @@
                                                 <td th:text="${myCo.getWish().getBrowseNum()}">45</td>
                                                 <td th:text="${myCo.getWish().getGoodNum()}">2</td>
                                                 <td th:text="${myCo.getCLTime().toString().substring(0,16)}"></td>
-                                                <td><a  th:href="@{'deleteWish/'+${myCo.getCollectionID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
+                                                <td><a  th:href="@{'deleteMyCollection/'+${myCo.getCollectionID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
                                                 <!-- 模态框（Modal） -->
                                                 <div class="modal fade" th:id="'myCo' + ${myCo.getWish().getWishID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -465,7 +465,7 @@
                                             <tr th:each="myCm : ${myComments}">
                                                 <td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#myCm'+${myCm.getCMID()}}"><div  class="mwrap" th:text="${myCm.getCMContent()}" th:title="${myCm.getCMContent()}">内容</div></a></td>
                                                 <td th:text="${myCm.getCMTime().toString().substring(0,16)}"></td>
-                                                <td><a  th:href="@{'deleteWish/'+${myCm.getCMID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
+                                                <td><a  th:href="@{'deleteMyComment/'+${myCm.getCMID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
                                                 <!-- 模态框（Modal） -->
                                                 <div class="modal fade" th:id="'myCm' + ${myCm.getCMID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
