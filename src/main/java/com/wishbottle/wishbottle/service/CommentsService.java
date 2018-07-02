@@ -14,4 +14,5 @@ public interface CommentsService {
     List<Comments> search(Integer search);
     List<Comments> queryByAccountID(Integer accountID);
     List<Comments> queryOtherComment(Integer accountID);
+
 }

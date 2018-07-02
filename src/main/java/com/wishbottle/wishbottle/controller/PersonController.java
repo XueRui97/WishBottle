@@ -2,6 +2,7 @@
 package com.wishbottle.wishbottle.controller;
 
 import com.wishbottle.wishbottle.bean.*;
+import com.wishbottle.wishbottle.bean.Collection;
 import com.wishbottle.wishbottle.service.AccountInfoService;
 import com.wishbottle.wishbottle.service.CollectionService;
 import com.wishbottle.wishbottle.service.CommentsService;
@@ -12,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -135,6 +134,15 @@ public class PersonController {
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myWish",wishList);
+        //
+        WishToComments aWishToComment=//初始化，不能为空null
+                new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
+        for(Wish wish:wishList)
+            aWishToComment.wishToCommentsList.add(
+                    new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
+        model.addAttribute("aWishToComment",aWishToComment);
+        //System.out.println(aWishToComment.getByWishID(10001));
+
         //点赞数
         int goodNum=0;
         for(Wish awish:wishList){
@@ -153,4 +161,9 @@ public class PersonController {
         model.addAttribute("myCollection",myCollection);
         return returnStr;
     }
+   /* static class WishToComment{
+        static public List<Comments> getCommentsByWishID(Integer WishID){
+            return commentsService.getCommentsByWishID(WishID);
+        }
+    }*/
 }
