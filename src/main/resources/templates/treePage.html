@@ -219,7 +219,7 @@
                                     <div class="table-responsive">
                                         <table class="table table project-table" style="table-layout: fixed;">
                                             <thead>
-                                            <tr>、
+                                            <tr>
                                                 <th class="mwrap" ><div class="mwrap">标题</div></th>
                                                 <th>评论数</th>
                                                 <th>点赞数</th>
@@ -233,7 +233,7 @@
                                                 <td th:text="${Wish.getBrowseNum()}">45</td>
                                                 <td th:text="${Wish.getGoodNum()}">2</td>
                                                 <td th:text="${Wish.getRelTime().toString().substring(0,16)}"></td>
-                                                <td><a  th:href="@{'deleteWish/'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
+                                                <td><a  th:href="@{'deleteMyWish/'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
                                                 <!-- 模态框（Modal） -->
                                                 <div class="modal fade" th:id="'dialog' + ${Wish.getWishID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -288,72 +288,47 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                                <td><a href="#" data-toggle="modal" data-target="#myComment">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <!-- 模态框（Modal） -->
-                                            <div class="modal fade" id="myComment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                &times;
-                                                            </button>
-                                                            <h4 class="modal-title">
-                                                                心愿标题     by:作者XXX
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4>心愿内容：</h4>
-                                                            <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
-                                                            <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="modal-body">
-                                                            <h4>评论内容：</h4>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
+                                            <tr th:each="otherCm : ${otherComments}">
+                                                <td><img  th:src="${otherCm.getAccountInfo().getAvatar()}" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#" th:text="${otherCm.getAccountInfo().getNikeName()}">Michael</a></td>
+                                                <td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#otherCm'+${otherCm.getCMID()}}"><div  class="mwrap" th:text="${otherCm.getCMContent()}" th:title="${otherCm.getCMContent()}">标题</div></a></td>
+                                                <td th:text="${otherCm.getCMTime().toString().substring(0,16)}"></td>
+                                                <!-- 模态框（Modal） -->
+                                                <div class="modal fade" th:id="'otherCm' + ${otherCm.getCMID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                    &times;
+                                                                </button>
+                                                                <h4 class="modal-title">
+                                                                    心愿标题     by:作者XXX
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>心愿内容：</h4>
+                                                                <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
+                                                                <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="modal-body">
+                                                                <h4>评论内容：</h4>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                            </div>
+                                                        </div><!-- /.modal-content -->
+                                                    </div>
                                                 </div><!-- /.modal -->
-                                            </div>
-                                            <tr>
-                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/img/user2.png" width="22px" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -423,81 +398,53 @@
                                                 <th>评论数</th>
                                                 <th>点赞数</th>
                                                 <th>收藏时间</th>
+                                                <th>操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td><a href="#" data-toggle="modal" data-target="#mysWish">我的第一条心愿标题</a></td>
-                                                <td>55</td>
-                                                <td>4</td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <!-- 模态框（Modal） -->
-                                            <div class="modal fade" id="mysWish" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                &times;
-                                                            </button>
-                                                            <h4 class="modal-title">
-                                                                心愿标题     by:作者XXX
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4>心愿内容：</h4>
-                                                            <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
-                                                            <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="modal-body">
-                                                            <h4>评论内容：</h4>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
+                                            <tr th:each="myCo : ${myCollection}">
+                                                <td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#myCo'+${myCo.getWish().getWishID()}}"><div  class="mwrap" th:text="${myCo.getWish().getTitle()}" th:title="${myCo.getWish().getTitle()}">标题</div></a></td>
+                                                <td th:text="${myCo.getWish().getBrowseNum()}">45</td>
+                                                <td th:text="${myCo.getWish().getGoodNum()}">2</td>
+                                                <td th:text="${myCo.getCLTime().toString().substring(0,16)}"></td>
+                                                <td><a  th:href="@{'deleteWish/'+${myCo.getCollectionID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
+                                                <!-- 模态框（Modal） -->
+                                                <div class="modal fade" th:id="'myCo' + ${myCo.getWish().getWishID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                    &times;
+                                                                </button>
+                                                                <h4 class="modal-title">
+                                                                    心愿标题     by:作者XXX
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>心愿内容：</h4>
+                                                                <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
+                                                                <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="modal-body">
+                                                                <h4>评论内容：</h4>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                            </div>
+                                                        </div><!-- /.modal-content -->
+                                                    </div>
                                                 </div><!-- /.modal -->
-                                            </div>
-                                            <tr>
-                                                <td><a href="#">我的第一条心愿标题</a></td>
-                                                <td>515</td>
-                                                <td>2</td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">我的第一条心愿标题</a></td>
-                                                <td>35</td>
-                                                <td>44</td>
-                                                <td>2018-6-23 1128</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">我的第一条心愿标题</a></td>
-                                                <td>75</td>
-                                                <td>45</td>
-                                                <td>2018-6-22 00:15</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">我的第一条心愿标题</a></td>
-                                                <td>575</td>
-                                                <td>100</td>
-                                                <td>2018-6-21 10:20</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">我的第一条心愿标题</a></td>
-                                                <td>55</td>
-                                                <td>4</td>
-                                                <td>2018-6-25 10:28</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -511,69 +458,51 @@
                                             <tr>
                                                 <th>评论内容</th>
                                                 <th>评论时间</th>
+                                                <th>操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td><a href="#" data-toggle="modal" data-target="#myPComment">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <!-- 模态框（Modal） -->
-                                            <div class="modal fade" id="myPComment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                &times;
-                                                            </button>
-                                                            <h4 class="modal-title">
-                                                                心愿标题     by:作者XXX
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4>心愿内容：</h4>
-                                                            <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
-                                                            <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="modal-body">
-                                                            <h4>评论内容：</h4>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                        </div>
-                                                    </div><!-- /.modal-content -->
+                                            <tr th:each="myCm : ${myComments}">
+                                                <td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#myCm'+${myCm.getCMID()}}"><div  class="mwrap" th:text="${myCm.getCMContent()}" th:title="${myCm.getCMContent()}">内容</div></a></td>
+                                                <td th:text="${myCm.getCMTime().toString().substring(0,16)}"></td>
+                                                <td><a  th:href="@{'deleteWish/'+${myCm.getCMID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
+                                                <!-- 模态框（Modal） -->
+                                                <div class="modal fade" th:id="'myCm' + ${myCm.getCMID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                    &times;
+                                                                </button>
+                                                                <h4 class="modal-title">
+                                                                    心愿标题     by:作者XXX
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h4>心愿内容：</h4>
+                                                                <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
+                                                                <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="modal-body">
+                                                                <h4>评论内容：</h4>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                            </div>
+                                                        </div><!-- /.modal-content -->
+                                                    </div>
                                                 </div><!-- /.modal -->
-                                            </div>
-                                            <tr>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="#">评论者的评论内容，过长只显示一行，然后省略号...</a></td>
-                                                <td>2018-6-25 10:28</td>
                                             </tr>
                                             </tbody>
                                         </table>

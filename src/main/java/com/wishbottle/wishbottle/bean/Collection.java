@@ -49,4 +49,7 @@ public class Collection {
     public void setCLTime(Date CLTime) {
         this.CLTime = CLTime;
     }//设置收藏时间
+
+    public Collection() {
+    }
 }

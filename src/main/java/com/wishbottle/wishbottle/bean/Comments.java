@@ -59,4 +59,7 @@ public class Comments {
     public void setCMTime(Date CMTime) {
         this.CMTime = CMTime;
     }
+
+    public Comments() {
+    }
 }
