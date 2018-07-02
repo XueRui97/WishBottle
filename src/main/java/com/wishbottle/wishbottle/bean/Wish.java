@@ -16,7 +16,8 @@ public class Wish {
     private String Content;//心愿内容
     @Column(nullable = false)
     private boolean Permision=true;//心愿权限（仅自己可见:false,所有人可见：true)
-    private int BrowseNum;//浏览量
+    private int CollectionNum;//收藏量
+    private  int CommentNum=0;//评论数
     private int GoodNum;//点赞量
     private Date RelTime;//发布时间
 //get,set
@@ -67,12 +68,12 @@ public class Wish {
         Permision = permision;
     }
 
-    public int getBrowseNum() {
-        return BrowseNum;
+    public int getCollectionNum() {
+        return CollectionNum;
     }
 
-    public void setBrowseNum(int browseNum) {
-        BrowseNum = browseNum;
+    public void setCollectionNum(int collectionNum) {
+        CollectionNum = collectionNum;
     }
 
     public int getGoodNum() {
@@ -91,12 +92,19 @@ public class Wish {
         RelTime = relTime;
     }
 
+    public int getCommentNum() {
+        return CommentNum;
+    }
+
+    public void setCommentNum(int commentNum) {
+        CommentNum = commentNum;
+    }
     public Wish(AccountInfo accountInfo, String title, String content, boolean permision) {
         this.accountInfo = accountInfo;
         Title = title;
         Content = content;
         Permision = permision;
-        BrowseNum = 0;
+        CollectionNum = 0;
         GoodNum = 0;
         RelTime = new Date();
     }
