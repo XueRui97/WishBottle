@@ -168,9 +168,7 @@
                                                         <input type="date" id="birthdayEdit" name="birthdayEdit">
                                                         <script th:inline="javascript">
                                                             var birth = [[${presentAccount.getBirthday()}]];
-                                                            alert(birth.toString().substring(0,10));
                                                             document.getElementById('birthdayEdit').value= birth.toString().substring(0,10);
-                                                            alert(document.getElementById('birthdayEdit').value);
                                                         </script>
                                                     </li>
                                                 </ul>
