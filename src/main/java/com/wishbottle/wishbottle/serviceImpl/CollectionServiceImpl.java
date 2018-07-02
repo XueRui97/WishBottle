@@ -7,6 +7,7 @@ import com.wishbottle.wishbottle.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CollectionServiceImpl implements CollectionService {
@@ -33,5 +34,10 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public List<Collection> queryMyCollection(Integer accountID) {
         return collectionRepository.queryMyCollection(accountID);
+    }
+
+    @Override
+    public Optional<Collection> findByID(Integer id) {
+        return collectionRepository.findById(id);
     }
 }

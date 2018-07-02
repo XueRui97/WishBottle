@@ -32,7 +32,7 @@ public class PersonController {
     @GetMapping("/tree")
     public String tree(Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null){
-            return returnTree(model);
+            return returnTree(model,"treePage");
         }
         else
             return "loginPage";
@@ -47,7 +47,7 @@ public class PersonController {
             boolean  Permision=visibility.equals("all");
             Wish awish=new Wish(AccountInfoController.presentAccount,wishTitle,wishContent,Permision);
             wishService.addWish(awish);
-            return returnTree(model);
+            return returnTree(model,"treePage");
         }
         else
             return "loginPage";
@@ -79,13 +79,14 @@ public class PersonController {
             }
                 accountInfoService.updateAccountInfo(AccountInfoController.presentAccount);
                // System.out.println(AccountInfoController.presentAccount.getAccountID() + "  " + accountInfo.getAccountID());
-                return returnTree(model);
+                return returnTree(model,"treePage");
         }
         else
             return "loginPage";
     }
+    //删除个人心愿
     @GetMapping("/deleteMyWish/{WishID}")
-    public String deletWish(@PathVariable("WishID") Integer id, Model model){
+    public String deletMyWish(@PathVariable("WishID") Integer id, Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null){
             Optional<Wish> wishs =wishService.findByID(id);
 
@@ -101,14 +102,36 @@ public class PersonController {
                 if(acomment.getWish().getWishID()==id)
                     commentsService.deleteComment(acomment);
             wishService.deleteWish(wishs.get());
-            return returnTree(model);
+            return  returnTree(model,"redirect:/tree#tab-bottom-left1");
         }
 
         else
             return "loginPage";
     }
+    //删除发布的评论
+    @GetMapping("/deleteMyComment/{CommentID}")
+    public String deletMyComment(@PathVariable("CommentID") Integer id, Model model){
+        if(AccountInfoController.presentAccount.getEmail()!=null){
+            Optional<Comments> comments =commentsService.findByID(id);
+            commentsService.deleteComment(comments.get());
+            return  returnTree(model,"redirect:/tree#tab-bottom-left5");
+        }
+        else
+            return "loginPage";
+    }
+    //删除收藏心愿
+    @GetMapping("/deleteMyCollection/{CollectionID}")
+    public String deletMyCollection(@PathVariable("CollectionID") Integer id, Model model){
+        if(AccountInfoController.presentAccount.getEmail()!=null){
+            Optional<Collection> collection =collectionService.findByID(id);
+            collectionService.deleteCollection(collection.get());
+            return  returnTree(model,"redirect:/tree#tab-bottom-left4");
+        }
+        else
+            return "loginPage";
+    }
     //返回心愿、评论、被评论和收藏的list方法
-    private String returnTree(Model model){
+    private String returnTree(Model model,String returnStr){
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myWish",wishList);
@@ -128,6 +151,6 @@ public class PersonController {
         //我的收藏
         List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myCollection",myCollection);
-        return "treePage";
+        return returnStr;
     }
 }

@@ -3,6 +3,7 @@ package com.wishbottle.wishbottle.service;
 
 import com.wishbottle.wishbottle.bean.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface CollectionService {
     List<Collection>  getAllCollection();
@@ -10,4 +11,5 @@ public interface CollectionService {
     void deleteCollection(Collection collection);
     List<Collection> search(String search);
     List<Collection> queryMyCollection(Integer accountID);
+    Optional<Collection> findByID(Integer id);
 }
