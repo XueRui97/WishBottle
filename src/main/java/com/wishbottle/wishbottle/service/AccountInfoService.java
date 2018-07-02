@@ -12,5 +12,7 @@ public interface AccountInfoService {
    List<AccountInfo> getAllAccountInfo();
    Optional<AccountInfo> findByID(Integer id);
   // void deleteAccountInfo(AccountInfo accountInfo);
+  //修改用户信息
+    AccountInfo updateAccountInfo(AccountInfo accountInfo);
    List<AccountInfo> search(String search);
 }

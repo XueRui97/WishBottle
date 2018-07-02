@@ -7,7 +7,6 @@ import com.wishbottle.wishbottle.service.AccountInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.OneToOne;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +31,13 @@ public class AccountInfoServiceImpl implements AccountInfoService {
     public Optional<AccountInfo> findByID(Integer id){
         return  accountInfoRepository.findById(id);
     }
+
+    //修改用户信息
+    @Override
+    public AccountInfo updateAccountInfo(AccountInfo accountInfo) {
+       return accountInfoRepository.save(accountInfo);
+    }
+
     @Override
     public List<AccountInfo> search(String search) {
         return  accountInfoRepository.queryBySearch(search);

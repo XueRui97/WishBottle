@@ -165,13 +165,7 @@
                                                     <li><input name="userNameEdit" type="text" th:value="${presentAccount.getNikeName()}" class="form-control" placeholder="用户名" required=""></li>
                                                     <li><input name="emailEdit" type="email" th:value="${presentAccount.getEmail()}" class="form-control" placeholder="邮箱" required=""></li>
                                                     <li>
-                                                            <div class="form-group">
-                                                                <div class="input-group date form_date" data-date="1979-09-16T05:25:07Z" data-link-field="dtp_input2" data-date-format="yyyy-MM-dd" data-link-format="yyyy-MM-dd">
-                                                                    <input class="form-control"  type="text" th:value="${presentAccount.getBirthday()}" name="birthdayEdit" readonly>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                                                </div>
-                                                                <input type="hidden" id="dtp_input2" value="" /><br/>
-                                                            </div>
+                                                        <input type="date" id="birthdayEdit" name="birthdayEdit">
                                                     </li>
                                                 </ul>
                                             </div>
