@@ -247,13 +247,19 @@
                                                                     &times;
                                                                 </button>
                                                                 <h4 class="modal-title">
-                                                                    心愿标题     by:作者XXX
+                                                                    <span th:text="${Wish.getTitle()}">心愿标题</span><span> 作者: </span>
+                                                                    <span th:text="${Wish.getAccountInfo().getNikeName()}">作者</span>
                                                                 </h4>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <h4>心愿内容：</h4>
-                                                                <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
-                                                                <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                                <p th:text="${Wish.getContent()}">心愿内容</p>
+                                                                <p>
+                                                                    <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
+                                                                    <span th:text="${Wish.getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
+                                                                    <a href="#"><span class="lnr lnr-heart"></span>收藏
+                                                                    <span th:text="${Wish.getGoodNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
+                                                                    <span th:text="${Wish.getRelTime().toString().substring(0,10)}">发布时间</span></p>
                                                             </div>
                                                             <hr>
                                                             <div class="modal-body">
@@ -265,13 +271,15 @@
                                                                 <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
                                                                 <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                            </div>
+                                                            <form method="post" th:action="@{/addComment}" role="form">
+                                                                <div class="modal-body">
+                                                                    <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary">发表评论</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                                </div>
+                                                            </form>
                                                         </div><!-- /.modal-content -->
                                                     </div>
                                                 </div><!-- /.modal -->
@@ -305,13 +313,19 @@
                                                                     &times;
                                                                 </button>
                                                                 <h4 class="modal-title">
-                                                                    心愿标题     by:作者XXX
+                                                                    <span th:text="${otherCm.getWish().getTitle()}">心愿标题</span><span> 作者: </span>
+                                                                    <span th:text="${otherCm.getWish().getAccountInfo().getNikeName()}">作者</span>
                                                                 </h4>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <h4>心愿内容：</h4>
-                                                                <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
-                                                                <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                                <p th:text="${otherCm.getWish().getContent()}">心愿内容</p>
+                                                                <p>
+                                                                    <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
+                                                                        <span th:text="${otherCm.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
+                                                                    <a href="#"><span class="lnr lnr-heart"></span>收藏
+                                                                        <span th:text="${otherCm.getWish().getGoodNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
+                                                                    <span th:text="${otherCm.getCMTime().toString().substring(0,16)}">发布时间</span></p>
                                                             </div>
                                                             <hr>
                                                             <div class="modal-body">
@@ -421,13 +435,19 @@
                                                                     &times;
                                                                 </button>
                                                                 <h4 class="modal-title">
-                                                                    心愿标题     by:作者XXX
+                                                                    <span th:text="${myCo.getWish().getTitle()}">心愿标题</span><span> 作者: </span>
+                                                                    <span th:text="${myCo.getWish().getAccountInfo().getNikeName()}">作者</span>
                                                                 </h4>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <h4>心愿内容：</h4>
-                                                                <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
-                                                                <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                                <p th:text="${myCo.getWish().getContent()}">心愿内容</p>
+                                                                <p>
+                                                                    <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
+                                                                        <span th:text="${myCo.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
+                                                                    <a href="#"><span class="lnr lnr-heart"></span>收藏
+                                                                        <span th:text="${myCo.getWish().getGoodNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
+                                                                    <span th:text="${myCo.getCLTime().toString().substring(0,16)}">发布时间</span></p>
                                                             </div>
                                                             <hr>
                                                             <div class="modal-body">
@@ -479,13 +499,19 @@
                                                                     &times;
                                                                 </button>
                                                                 <h4 class="modal-title">
-                                                                    心愿标题     by:作者XXX
+                                                                    <span th:text="${myCm.getWish().getTitle()}">心愿标题</span><span> 作者: </span>
+                                                                    <span th:text="${myCm.getWish().getAccountInfo().getNikeName()}">作者</span>
                                                                 </h4>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <h4>心愿内容：</h4>
-                                                                <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
-                                                                <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
+                                                                <p th:text="${myCm.getWish().getContent()}">心愿内容</p>
+                                                                <p>
+                                                                    <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
+                                                                        <span th:text="${myCm.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
+                                                                    <a href="#"><span class="lnr lnr-heart"></span>收藏
+                                                                        <span th:text="${myCm.getWish().getGoodNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
+                                                                    <span th:text="${myCm.getWish().getRelTime().toString().substring(0,16)}">发布时间</span></p>
                                                             </div>
                                                             <hr>
                                                             <div class="modal-body">
