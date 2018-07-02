@@ -9,14 +9,12 @@ import com.wishbottle.wishbottle.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -83,6 +81,29 @@ public class PersonController {
                // System.out.println(AccountInfoController.presentAccount.getAccountID() + "  " + accountInfo.getAccountID());
                 return returnTree(model);
         }
+        else
+            return "loginPage";
+    }
+    @GetMapping("/deleteMyWish/{WishID}")
+    public String deletWish(@PathVariable("WishID") Integer id, Model model){
+        if(AccountInfoController.presentAccount.getEmail()!=null){
+            Optional<Wish> wishs =wishService.findByID(id);
+
+            //delete collection
+            List<Collection> collectionList=collectionService.getAllCollection();
+            for(Collection acollection :collectionList)
+                if(acollection.getWish().getWishID()==id)
+                    collectionService.deleteCollection(acollection);
+
+            //delete comment
+            List<Comments> commentsList=commentsService.getAllComments();
+            for(Comments acomment:commentsList)
+                if(acomment.getWish().getWishID()==id)
+                    commentsService.deleteComment(acomment);
+            wishService.deleteWish(wishs.get());
+            return returnTree(model);
+        }
+
         else
             return "loginPage";
     }

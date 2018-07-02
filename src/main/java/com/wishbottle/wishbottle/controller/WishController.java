@@ -28,7 +28,8 @@ public class WishController {
     @Autowired
     private CommentsService commentsService;
     String searchString="Search...";
-    @GetMapping("/wishPage")//跳转到心愿管理页面
+    //跳转到心愿管理页面
+    @GetMapping("/wishPage")
     public String log(Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null) {
             searchString="Search...";
@@ -41,7 +42,8 @@ public class WishController {
         else
             return "loginPage";
     }
-    @GetMapping("/deleteWish/{WishID}")//删除功能
+    //删除功能
+    @GetMapping("/deleteWish/{WishID}")
     public String deletWish(@PathVariable("WishID") Integer id, Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null){
             searchString="Search...";
