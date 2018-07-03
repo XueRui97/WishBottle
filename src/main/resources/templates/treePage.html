@@ -262,12 +262,13 @@
                                                             <hr>
                                                             <div class="modal-body">
                                                                 <h4>评论内容：</h4>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
+                                                                <table>
+                                                                    <tr th:each="myWishCm : ${aWishToComment.getByWishID(2)}">
+                                                                        <td><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span></td>
+                                                                        <td th:text="${myWishCm.getCMContent()}"></td>
+                                                                        <td th:text="${myWishCm.getCMTime()}"></td>
+                                                                    </tr>
+                                                                </table>
                                                             </div>
                                                             <form method="post" th:action="@{/addComment}" role="form">
                                                                 <div class="modal-body">

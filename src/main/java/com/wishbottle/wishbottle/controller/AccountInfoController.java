@@ -145,6 +145,14 @@ public class AccountInfoController {
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(presentAccount.getAccountID());
         model.addAttribute("myWish",wishList);
+        //
+        WishToComments aWishToComment=//初始化，不能为空null
+                new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
+        for(Wish wish:wishList)
+            aWishToComment.wishToCommentsList.add(
+                    new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
+        model.addAttribute("aWishToComment",aWishToComment);
+
         //点赞数
         int goodNum=0;
         for(Wish awish:wishList){
