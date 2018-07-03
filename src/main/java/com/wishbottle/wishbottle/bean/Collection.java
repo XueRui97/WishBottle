@@ -49,7 +49,14 @@ public class Collection {
     public void setCLTime(Date CLTime) {
         this.CLTime = CLTime;
     }//设置收藏时间
-
+    //构造方法
     public Collection() {
+    }
+    //构造方法
+
+    public Collection(AccountInfo accountInfo, Wish wish) {
+        this.CLTime = new Date();
+        this.accountInfo = accountInfo;
+        this.wish = wish;
     }
 }

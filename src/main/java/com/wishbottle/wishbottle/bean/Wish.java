@@ -16,9 +16,9 @@ public class Wish {
     private String Content;//心愿内容
     @Column(nullable = false)
     private boolean Permision=true;//心愿权限（仅自己可见:false,所有人可见：true)
-    private int CollectionNum;//收藏量
+    private int CollectionNum= 0;//收藏量
     private  int CommentNum=0;//评论数
-    private int GoodNum;//点赞量
+    private int GoodNum= 0;//点赞量
     private Date RelTime;//发布时间
 //get,set
     public Integer getWishID() {
@@ -104,8 +104,6 @@ public class Wish {
         Title = title;
         Content = content;
         Permision = permision;
-        CollectionNum = 0;
-        GoodNum = 0;
         RelTime = new Date();
     }
     public Wish() {

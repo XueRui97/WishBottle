@@ -13,22 +13,22 @@ import java.util.List;
 public class LogServiceImpl implements LogService {
     @Autowired
     private LogRepository logRepository;
-
-    @Override//查询全部登录记录
+    //查询全部登录记录
+    @Override
     public  List<Log>  getAllLog() {
         return logRepository.findAll();
     }
-    //查找
+    //根据用户名查找登录日志
     @Override
     public List<Log> search(String search) {
         return  logRepository.queryBySearch(search);
     }
-    //查找
+    //根据用户ID  AccountID查找登录日志
     @Override
     public List<Log> search(Integer search) {
         return  logRepository.queryBySearch(search);
     }
-
+    //添加日志，保存日志
     @Override
     public void save(Log log) {
         logRepository.save(log);

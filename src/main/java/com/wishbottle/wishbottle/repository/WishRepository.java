@@ -7,14 +7,18 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface WishRepository extends JpaRepository<Wish,Integer> {
-    //
-    @Query("select a from Wish a where a.accountInfo.NikeName like ?1 " +
-            "or a.Title like ?1 or a.Content like ?1")
+    //模糊查询
+    //根据心愿发布者的用户名、心愿标题、心愿内容查询心愿
+   @Query("select a from Wish a where a.accountInfo.NikeName like ?1 " +
+        "or a.Title like ?1 or a.Content like ?1")
     public List<Wish> queryBySearch(String search);
+   //根据心愿id WishID查询心愿
     @Query("select a from Wish a where a.WishID= ?1")
     public List<Wish> queryBySearch(Integer search);
+    //根据可见性进行查找（可见性：仅自己可见、公开）
     @Query("select a from Wish a where a.Permision= ?1")
     public List<Wish> queryByPermision(boolean permision);
+    //根据心愿发布者的账号id　　AccountID进行查询
     @Query("select a from Wish a where a.accountInfo.AccountID= ?1")
      public List<Wish> queryByAccountID(Integer accountID);
 }

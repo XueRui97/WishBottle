@@ -129,10 +129,7 @@ public class PersonController {
         else
             return "loginPage";
     }
-
-    /**
-     *    发表评论
-     */
+    //发表评论
     @PostMapping("/addComment")
     public String adddComment(@RequestParam("cmEdit") String cmEdit,
                               @RequestParam("wishID") Integer wishID,
@@ -148,9 +145,30 @@ public class PersonController {
         else
             return "loginPage";
     }
-    /**
-     * 返回心愿、心愿找评论、评论、被评论和收藏的list方法
-     */
+    //添加或删除收藏
+    @PostMapping("/collect")
+    public String addCollection(@RequestParam("collectWishID") Integer WishID,Model model){
+        if(AccountInfoController.presentAccount.getEmail()!=null){
+            List<Collection> collectionList=collectionService.searchByAccountIDAndWishID(AccountInfoController.presentAccount.getAccountID(),WishID);
+            Wish awish=wishService.findByID(WishID).get();
+            if(collectionList.isEmpty())
+            {
+                Collection acollection=new Collection(AccountInfoController.presentAccount,awish);
+                collectionService.add(acollection);
+                awish.setCollectionNum(awish.getCollectionNum()+1);
+                wishService.updateWish(awish);
+            }
+            else {
+                collectionService.deleteCollection(collectionList.get(0));
+                awish.setCollectionNum(awish.getCollectionNum()-1);
+                wishService.updateWish(awish);
+            }
+            return returnTree(model,"treePage");
+        }
+        else
+            return "loginPage";
+    }
+    //返回心愿、心愿找评论、评论、被评论和收藏的list方法
     private String returnTree(Model model,String returnStr){
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
@@ -162,7 +180,6 @@ public class PersonController {
             aWishToComment.wishToCommentsList.add(
                     new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
         model.addAttribute("aWishToComment",aWishToComment);
-        //System.out.println(aWishToComment.getByWishID(10001));
 
         //点赞数
         int goodNum=0;

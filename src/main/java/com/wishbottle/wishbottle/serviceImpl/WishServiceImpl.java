@@ -26,31 +26,33 @@ public class WishServiceImpl implements WishService {
     public void deleteWish(Wish wish) {
         WishRepository.delete(wish);
     }
-    //查找
+    //模糊查询
+    //根据心愿发布者的用户名、心愿标题、心愿内容查询心愿
     @Override
     public List<Wish> search(String search) {
         return  WishRepository.queryBySearch(search);
     }
-    //查找
+    //根据心愿id WishID查询心愿
     @Override
     public List<Wish> search(Integer search) {
         return  WishRepository.queryBySearch(search);
     }
+    //添加心愿
     @Override
     public Wish addWish(Wish wish){
         return WishRepository.save(wish);
     }
-
+    //根据可见性进行查找（可见性：仅自己可见、公开）
     @Override
     public List<Wish> getByPermision(boolean permisiom) {
         return WishRepository.queryByPermision(permisiom);
     }
-
+    //根据心愿发布者的账号id　　AccountID进行查询
     @Override
     public List<Wish> getByAccountID(Integer accountID) {
         return WishRepository.queryByAccountID(accountID);
     }
-
+    //更新心愿,修改心愿
     @Override
     public Wish updateWish(Wish awish) {
         return WishRepository.save(awish);
