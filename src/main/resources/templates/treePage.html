@@ -139,19 +139,17 @@
                                             </ul>
                                         </div>
                                         <div class="profile-info">
-                                            <h4 class="heading">Social</h4>
-                                            <ul class="list-inline social-icons">
-                                                <li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#" class="twitter-bg"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#" class="google-plus-bg"><i class="fa fa-google-plus"></i></a></li>
-                                                <li><a href="#" class="github-bg"><i class="fa fa-github"></i></a></li>
+                                            <h4 class="heading">其他信息</h4>
+                                            <ul class="list-unstyled list-justify">
+                                                <li>1</li>
+                                                <li>2</li>
                                             </ul>
                                         </div>
                                         <div class="profile-info">
                                             <h4 class="heading">个人介绍</h4>
                                             <p th:text="${presentAccount.getSelfIntro()}">Interactively fashion excellent information after distinctive outsourcing.</p>
                                         </div>
-                                        <div class="text-center"><a href="#editProfile" data-toggle="tab" class="btn btn-primary">编辑资料</a></div>
+                                        <div class="text-center"><a href="#editProfile" data-toggle="tab" class="btn btn-primary" style="position:relative;top:400px;">编辑资料</a></div>
                                     </div>
                                     <!-- END PROFILE DETAIL -->
                                 </div>
@@ -164,8 +162,8 @@
                                                 <ul class="list-unstyled list-justify">
                                                     <li><input name="userNameEdit" type="text" th:value="${presentAccount.getNikeName()}" class="form-control" placeholder="用户名" required=""></li>
                                                     <li><input name="emailEdit" type="email" th:value="${presentAccount.getEmail()}" class="form-control" placeholder="邮箱" required=""></li>
-                                                    <li>
-                                                        <input type="date" id="birthdayEdit" name="birthdayEdit">
+                                                    <li>出生日期：
+                                                        <input class="form-control" type="date" id="birthdayEdit" name="birthdayEdit" required>
                                                         <script th:inline="javascript">
                                                             var birth = [[${presentAccount.getBirthday()}]];
                                                             document.getElementById('birthdayEdit').value= birth.toString().substring(0,10);
@@ -234,7 +232,7 @@
                                             <tbody>
                                             <tr th:each="Wish : ${myWish}">
                                                 <td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Wish.getWishID()}}"><div  class="mwrap" th:text="${Wish.getTitle()}" th:title="${Wish.getTitle()}">标题</div></a></td>
-                                                <td th:text="${Wish.getBrowseNum()}">45</td>
+                                                <td th:text="${Wish.getCommentNum()}">45</td>
                                                 <td th:text="${Wish.getGoodNum()}">2</td>
                                                 <td th:text="${Wish.getRelTime().toString().substring(0,16)}"></td>
                                                 <td><a  th:href="@{'deleteMyWish/'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
@@ -258,7 +256,7 @@
                                                                     <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
                                                                     <span th:text="${Wish.getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
                                                                     <a href="#"><span class="lnr lnr-heart"></span>收藏
-                                                                    <span th:text="${Wish.getGoodNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
+                                                                    <span th:text="${Wish.getCollectionNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
                                                                     <span th:text="${Wish.getRelTime().toString().substring(0,10)}">发布时间</span></p>
                                                             </div>
                                                             <hr>
@@ -279,6 +277,7 @@
                                                                     <button type="submit" class="btn btn-primary">发表评论</button>
                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                                                                 </div>
+                                                                <input type="hidden" name="wishID"  th:value="${Wish.getWishID()}">
                                                             </form>
                                                         </div><!-- /.modal-content -->
                                                     </div>
@@ -324,7 +323,7 @@
                                                                     <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
                                                                         <span th:text="${otherCm.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
                                                                     <a href="#"><span class="lnr lnr-heart"></span>收藏
-                                                                        <span th:text="${otherCm.getWish().getGoodNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
+                                                                        <span th:text="${otherCm.getWish().getCollectionNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
                                                                     <span th:text="${otherCm.getCMTime().toString().substring(0,16)}">发布时间</span></p>
                                                             </div>
                                                             <hr>
@@ -353,7 +352,7 @@
                                     </div>
                                     <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">查看更多</a></div>
                                 </div>
-                                <div class="tab-pane fade" id="tab-bottom-left3">
+                                <div class="tab-pane fade" id="tab-bottom-left3">   <!--待做-->
                                     <ul class="list-unstyled activity-timeline">
                                         <li>
                                             <img src="assets/img/user1.png" width="34px" alt="Avatar" class="avatar img-circle" />&nbsp;&nbsp;&nbsp;<a href="#">Michael</a>
@@ -422,7 +421,7 @@
                                             <tbody>
                                             <tr th:each="myCo : ${myCollection}">
                                                 <td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#myCo'+${myCo.getWish().getWishID()}}"><div  class="mwrap" th:text="${myCo.getWish().getTitle()}" th:title="${myCo.getWish().getTitle()}">标题</div></a></td>
-                                                <td th:text="${myCo.getWish().getBrowseNum()}">45</td>
+                                                <td th:text="${myCo.getWish().getCommentNum()}">45</td>
                                                 <td th:text="${myCo.getWish().getGoodNum()}">2</td>
                                                 <td th:text="${myCo.getCLTime().toString().substring(0,16)}"></td>
                                                 <td><a  th:href="@{'deleteMyCollection/'+${myCo.getCollectionID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
@@ -446,7 +445,7 @@
                                                                     <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
                                                                         <span th:text="${myCo.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
                                                                     <a href="#"><span class="lnr lnr-heart"></span>收藏
-                                                                        <span th:text="${myCo.getWish().getGoodNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
+                                                                        <span th:text="${myCo.getWish().getCollectionNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
                                                                     <span th:text="${myCo.getCLTime().toString().substring(0,16)}">发布时间</span></p>
                                                             </div>
                                                             <hr>
@@ -510,7 +509,7 @@
                                                                     <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
                                                                         <span th:text="${myCm.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
                                                                     <a href="#"><span class="lnr lnr-heart"></span>收藏
-                                                                        <span th:text="${myCm.getWish().getGoodNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
+                                                                        <span th:text="${myCm.getWish().getCollectionNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
                                                                     <span th:text="${myCm.getWish().getRelTime().toString().substring(0,16)}">发布时间</span></p>
                                                             </div>
                                                             <hr>
