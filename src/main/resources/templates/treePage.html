@@ -21,6 +21,11 @@
     <link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
     <!-- 日期输入 -->
     <link th:href="@{assets/vendor/bootstrap/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="screen">
+    <style>
+        li{
+            list-style: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -262,15 +267,15 @@
                                                             <hr>
                                                             <div class="modal-body">
                                                                 <h4>评论内容：</h4>
-                                                                <table>
-                                                                    <tr th:each="myWishCm : ${aWishToComment.getByWishID(2)}">
-                                                                        <td><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span></td>
-                                                                        <td th:text="${myWishCm.getCMContent()}"></td>
-                                                                        <td th:text="${myWishCm.getCMTime()}"></td>
-                                                                    </tr>
-                                                                </table>
+                                                                <ul th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
+                                                                    <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                                        <span th:text="${myWishCm.getCMContent()}">内容</span>
+                                                                        <br>
+                                                                        <span style="float: right" th:text="${myWishCm.getCMTime()}"></span>
+                                                                    </li>
+                                                                </ul>
                                                             </div>
-                                                            <form method="post" th:action="@{/addComment}" role="form">
+                                                            <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
                                                                 <div class="modal-body">
                                                                     <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
                                                                 </div>
