@@ -260,10 +260,26 @@
                                                                 <p>
                                                                     <a  href="#"><span class="lnr lnr-thumbs-up"></span>点赞
                                                                     <span th:text="${Wish.getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
-                                                                    <form method="post" th:action="@{/collect}" role="form" target="#hidden_frame">
+                                                                    <form method="post" th:action="@{/collect}" role="form" target="hidden_frame">
                                                                         <input type="hidden" th:value="${Wish.getWishID()}" th:name="collectWishID">
-                                                                    <button type="submit" class="btn btn-default btn-xs" href="#"><span class="lnr lnr-heart"></span>收藏
-                                                                    <span th:text="${Wish.getCollectionNum()}">收藏数</span></button>
+                                                                    <button type="submit" class="btn btn-default btn-xs" href="#" onclick="toggleCollect()">
+                                                                        <span class="lnr lnr-heart" id="collectIcon"></span>收藏
+                                                                        <span th:text="${Wish.getCollectionNum()}" id="collectNum">收藏数</span>
+                                                                    </button>
+                                                                    <script>
+                                                                            var isCollected = new Boolean([[${aWishToComment.hasCollection(Wish, personAccount)}]]);
+                                                                            alert(isCollected);
+                                                                            var a = document.getElementById("collectNum");
+                                                                            var num = new Number(a.innerHTML);
+                                                                            if (isCollected) {
+                                                                                num = num - 1;
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                num = num + 1;
+                                                                            }
+                                                                            a.innerHTML = num;
+                                                                    </script>
                                                                     </form>
                                                                     &nbsp;&nbsp;&nbsp;发布时间：
                                                                     <span th:text="${Wish.getRelTime().toString().substring(0,10)}">发布时间</span>
