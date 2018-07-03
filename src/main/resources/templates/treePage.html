@@ -260,8 +260,8 @@
                                                                 <p>
                                                                     <a  href="#"><span class="lnr lnr-thumbs-up"></span>点赞
                                                                     <span th:text="${Wish.getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
-                                                                    <form method="post" th:action="@{'/good'+${Wish.getWishID()}}" role="form" target="#hidden_frame">
-                                                                        <input type="hidden" th:value="${Wish.getWishID()}" th:name="'good'+${Wish.getWishID()}">
+                                                                    <form method="post" th:action="@{'/collect'+${Wish.getWishID()}}" role="form" target="#hidden_frame">
+                                                                        <input type="hidden" th:value="${Wish.getWishID()}" th:name="'collect'+${Wish.getWishID()}">
                                                                     <button type="submit" class="btn btn-default btn-xs" href="#"><span class="lnr lnr-heart"></span>收藏
                                                                     <span th:text="${Wish.getCollectionNum()}">收藏数</span></button>
                                                                     </form>
