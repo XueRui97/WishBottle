@@ -53,7 +53,6 @@ public class Collection {
     public Collection() {
     }
     //构造方法
-
     public Collection(AccountInfo accountInfo, Wish wish) {
         this.CLTime = new Date();
         this.accountInfo = accountInfo;

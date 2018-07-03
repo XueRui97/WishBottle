@@ -179,7 +179,7 @@ public class PersonController {
         for(Wish wish:wishList)
             aWishToComment.wishToCommentsList.add(
                     new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
-        model.addAttribute("aWishToComment",aWishToComment);
+
 
         //点赞数
         int goodNum=0;
@@ -197,6 +197,8 @@ public class PersonController {
         //我的收藏
         List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myCollection",myCollection);
+        aWishToComment.setCollectionList(myCollection);
+        model.addAttribute("aWishToComment",aWishToComment);
         return returnStr;
     }
 

@@ -12,6 +12,17 @@ public class WishToComments {
     private List<Comments> commentsList;
     //存放WishToComments对象列表，用于显示心愿的评论
     public ArrayList<WishToComments> wishToCommentsList=new ArrayList<>();
+    //存放collection对象列表，用于查询是否已经收藏
+    public List<Collection> collectionList=new ArrayList<>();
+
+    public List<Collection> getCollectionList() {
+        return collectionList;
+    }
+
+    public void setCollectionList(List<Collection> collectionList) {
+        this.collectionList = collectionList;
+    }
+
     public Integer getWishID() {
         return WishID;
     }
@@ -28,19 +39,19 @@ public class WishToComments {
         this.commentsList = commentsList;
     }
 
-    /**
-     * 构造方法
-     * @param wishID
-     * @param commentsList
-     */
+    public boolean hasCollection(Wish wish,AccountInfo accountInfo){
+        for(Collection collection:collectionList)
+            if(collection.getWish().equals(wish)&&collection.getAccountInfo().equals(accountInfo))
+                return true;
+        return false;
+    }
+    // 构造方法
     public WishToComments(Integer wishID, List<Comments> commentsList) {
         WishID = wishID;
         this.commentsList = commentsList;
     }
 
-    /**
-     * 构造方法
-     */
+   //构造方法
     public WishToComments() {
     }
 
