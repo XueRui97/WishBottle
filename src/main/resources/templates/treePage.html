@@ -154,7 +154,7 @@
                                             <h4 class="heading">个人介绍</h4>
                                             <p th:text="${presentAccount.getSelfIntro()}">Interactively fashion excellent information after distinctive outsourcing.</p>
                                         </div>
-                                        <div class="text-center"><a href="#editProfile" data-toggle="tab" class="btn btn-primary" style="position:relative;top:400px;">编辑资料</a></div>
+                                        <div class="text-center"><a href="#editProfile" data-toggle="tab" class="btn btn-primary" >编辑资料</a></div>
                                     </div>
                                     <!-- END PROFILE DETAIL -->
                                 </div>
@@ -271,13 +271,21 @@
                                                                     <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
                                                                         <span th:text="${myWishCm.getCMContent()}">内容</span>
                                                                         <br>
-                                                                        <span style="float: right" th:text="${myWishCm.getCMTime()}"></span>
+                                                                        <span style="float: right" th:text="${myWishCm.getCMTime()}"></span><hr>
                                                                     </li>
                                                                 </ul>
                                                             </div>
                                                             <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
                                                                 <div class="modal-body">
-                                                                    <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
+                                                                    <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" maxlength="140" onkeyup="changeLength(this)" required=""></textarea>
+                                                                    字数：<span id="leftWordNum">0</span>/140
+                                                                    <script>
+                                                                        function changeLength(obj) {
+                                                                            var lg = obj.value.length;
+                                                                            var a = document.getElementById("leftWordNum");
+                                                                            a.innerHTML = lg;
+                                                                        }
+                                                                    </script>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="submit" class="btn btn-primary">发表评论</button>
