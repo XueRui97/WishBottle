@@ -39,9 +39,10 @@ public class WishToComments {
         this.commentsList = commentsList;
     }
 
-    public boolean hasCollection(Wish wish,AccountInfo accountInfo){
+    public boolean hasCollection(Integer wishID,Integer accountInfoID){
         for(Collection collection:collectionList)
-            if(collection.getWish().equals(wish)&&collection.getAccountInfo().equals(accountInfo))
+            if((collection.getWish().getWishID()==wishID)
+                    &&(collection.getAccountInfo().getAccountID()==accountInfoID))
                 return true;
         return false;
     }

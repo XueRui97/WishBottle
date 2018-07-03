@@ -267,7 +267,9 @@
                                                                         <span th:text="${Wish.getCollectionNum()}" id="collectNum">收藏数</span>
                                                                     </button>
                                                                     <script>
-                                                                        var isCollected = new Boolean([[${aWishToComment.hasCollection(Wish.getWishID(),personAccount.getAccountID())}]]);
+                                                                        var wishID=[[${Wish.getWishID()}]];
+                                                                        var accountID=[[${presentAccount.getAccountID()}]];
+                                                                        var isCollected = new Boolean([[${aWishToComment.hasCollection(wishID,accountID)}]]);
                                                                         function toggleCollect(){
                                                                             var a = document.getElementById("collectNum");
                                                                             var num = new Number(a.innerHTML);
