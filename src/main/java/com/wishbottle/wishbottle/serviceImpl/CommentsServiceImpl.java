@@ -51,5 +51,15 @@ public class CommentsServiceImpl implements CommentsService {
         return commentsRepository.queryOtherComment(accountID);
     }
 
+    /**
+     *
+     * @param acomment
+     * @return保存一个评论，返回一个评论
+     */
+    @Override
+    public Comments addComment(Comments acomment) {
+        return commentsRepository.save(acomment);
+    }
+
 
 }

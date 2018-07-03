@@ -50,4 +50,9 @@ public class WishServiceImpl implements WishService {
     public List<Wish> getByAccountID(Integer accountID) {
         return WishRepository.queryByAccountID(accountID);
     }
+
+    @Override
+    public Wish updateWish(Wish awish) {
+        return WishRepository.save(awish);
+    }
 }

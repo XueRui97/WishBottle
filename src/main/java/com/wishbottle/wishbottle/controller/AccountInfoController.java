@@ -123,7 +123,9 @@ public class AccountInfoController {
             }
         }
     }
-    //注册验证
+    /**
+     * 注册验证
+     */
     @PostMapping("/signupPost")
     public String  signup(@RequestParam("signup-username") String Name,@RequestParam("signup-email") String Email,
                          @RequestParam("signup-password") String PassWord,Model model){

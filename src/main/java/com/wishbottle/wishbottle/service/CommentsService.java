@@ -15,4 +15,10 @@ public interface CommentsService {
     List<Comments> queryByAccountID(Integer accountID);
     List<Comments> queryOtherComment(Integer accountID);
 
+    /**
+     *
+     * @param acomment
+     * @return保存一个评论，返回一个评论
+     */
+    Comments addComment(Comments acomment);
 }

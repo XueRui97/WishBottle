@@ -129,7 +129,28 @@ public class PersonController {
         else
             return "loginPage";
     }
-    //返回心愿、评论、被评论和收藏的list方法
+
+    /**
+     *    发表评论
+     */
+    @PostMapping("/addComment")
+    public String adddComment(@RequestParam("cmEdit") String cmEdit,
+                              @RequestParam("wishID") Integer wishID,
+                              Model model){
+        if(AccountInfoController.presentAccount.getEmail()!=null){
+            Wish awish=wishService.findByID(wishID).get();
+            Comments acomment=new Comments(awish,AccountInfoController.presentAccount,cmEdit);
+            commentsService.addComment(acomment);//保存评论
+            awish.setCommentNum(awish.getCommentNum()+1);//wish的评论数加1
+            wishService.updateWish(awish);
+            return returnTree(model,"treePage");
+        }
+        else
+            return "loginPage";
+    }
+    /**
+     * 返回心愿、心愿找评论、评论、被评论和收藏的list方法
+     */
     private String returnTree(Model model,String returnStr){
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
@@ -161,9 +182,5 @@ public class PersonController {
         model.addAttribute("myCollection",myCollection);
         return returnStr;
     }
-   /* static class WishToComment{
-        static public List<Comments> getCommentsByWishID(Integer WishID){
-            return commentsService.getCommentsByWishID(WishID);
-        }
-    }*/
+
 }

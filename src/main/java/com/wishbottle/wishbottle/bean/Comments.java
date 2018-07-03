@@ -62,4 +62,11 @@ public class Comments {
 
     public Comments() {
     }
+
+    public Comments(Wish wish, AccountInfo accountInfo, String CMContent) {
+        this.wish = wish;
+        this.accountInfo = accountInfo;
+        this.CMContent = CMContent;
+        this.CMTime = new Date();
+    }
 }
