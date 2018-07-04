@@ -20,15 +20,16 @@ public class CollectionController {
     String searchString="Search...";
     @GetMapping("/collectPage")//跳转到收藏管理页面
     public String collection(Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null) {
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()<=2) {
             List<Collection> list=collectionService.getAllCollection();
             model.addAttribute("collections",list);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
             return "collectPage";
         }
-        else
-             return "loginPage";
+        else if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3)
+            return "redirect:/tree";
+        else return "loginPage";
     }
     //查询
     @PostMapping("/searchCollection")

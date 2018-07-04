@@ -19,7 +19,7 @@ public class CommentsController {
     String searchString="Search...";
     @GetMapping("/commentPage")//跳转到评论管理页面
     public String comment(Model model){
-        if(AccountInfoController.presentAccount!=null) {
+        if(AccountInfoController.presentAccount!=null&&AccountInfoController.presentAccount.getLevel()<=2) {
             searchString="Search...";
             List<Comments> list=commentsService.getAllComments();
             model.addAttribute("comments",list);
@@ -27,12 +27,13 @@ public class CommentsController {
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
             return "commentPage";
         }
-        else
-            return "loginPage";
+        else if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3)
+            return "redirect:/tree";
+        else return "loginPage";
     }
     @GetMapping("/deleteComment/{CommentsID}")//删除功能
     public String deletAccount(@PathVariable("CommentsID") Integer id, Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null){
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()<=2){
             searchString="Search...";
             Optional<Comments> comments = commentsService.findByID(id);
             commentsService.deleteComment(comments.get());
@@ -42,8 +43,9 @@ public class CommentsController {
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
             return "redirect:/commentPage";
         }
-        else
-            return "loginPage";
+        else if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3)
+            return "redirect:/tree";
+        else return "loginPage";
     }
     //查询
     @PostMapping("/searchComment")

@@ -29,7 +29,7 @@ public class PersonController {
     //树洞
     @GetMapping("/tree")
     public String tree(Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null){
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3){
             return returnTree(model,"treePage");
         }
         else
@@ -84,7 +84,7 @@ public class PersonController {
     //删除个人心愿
     @GetMapping("/deleteMyWish/{WishID}")
     public String deletMyWish(@PathVariable("WishID") Integer id, Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null){
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3){
            // System.out.println("id"+id);
             Optional<Wish> wishs =wishService.findByID(id);
 
@@ -120,7 +120,7 @@ public class PersonController {
     //删除发布的评论
     @GetMapping("/deleteMyComment/{CommentID}")
     public String deletMyComment(@PathVariable("CommentID") Integer id, Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null){
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3){
             Optional<Comments> comments =commentsService.findByID(id);
             commentsService.deleteComment(comments.get());
             return "redirect:/tree";
@@ -131,7 +131,7 @@ public class PersonController {
     //删除收藏心愿
     @GetMapping("/deleteMyCollection/{CollectionID}")
     public String deletMyCollection(@PathVariable("CollectionID") Integer id, Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null){
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3){
             Optional<Collection> collection =collectionService.findByID(id);
             collectionService.deleteCollection(collection.get());
             return "redirect:/tree";

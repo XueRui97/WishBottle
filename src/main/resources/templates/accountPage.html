@@ -78,7 +78,7 @@
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+								<li><a th:href="@{/logout}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
 						<!-- <li>
@@ -113,7 +113,14 @@
 					<div class="row">
 						<div class="col-md-12">
 							<!-- BORDERED TABLE -->
-							<button data-toggle="modal" data-target="#addAdminAccount" class="btn btn-primary">添加管理员账号</button>
+							<button data-toggle="modal" data-target="#addAdminAccount" id="addAdmin" class="btn btn-primary" style="display:none;">添加管理员账号</button>
+							</button>
+									<script language="javascript">
+                                        //none表示不显示按钮
+										var num=[[${presentAccount.getLevel()}]];
+										if(num==1)
+                                            document.getElementById("addAdmin").style.display = "";
+                                        </script>
 							<br>
 							<div class="panel">
 								<div class="panel-heading">
@@ -178,7 +185,17 @@
 												<td th:text="${AccountInfo.getNikeName()}">Steve</td><!--用户名-->
 												<td th:text="${AccountInfo.getEmail()}">wukr@enet.com</td><!--邮箱-->
 												<td th:text="${AccountInfo.getSelfIntro()}">自我介绍</td><!--自我介绍-->
-												<td>普通</td>
+												<td ><script type="text/javascript">
+                                                    var num = [[${AccountInfo.getLevel()}]];
+                                                    //alert(num) ;
+                                                    if (num==1)
+                                                        document.write("超级");
+                                                    if(num==2)
+                                                        document.write("管 理 员");
+                                                    if(num==3)
+                                                        document.write("普通");
+												</script>
+												</td>
 												<td ><img th:src="${AccountInfo.getAvatar()}"> <a th:text="${AccountInfo.getAvatar()}" ></a></td><!--账号头像-->
 												<td th:text="${AccountInfo.getBirthday().toString().substring(0,10)}">2018.6.20</td><!--出生日期-->
 												<td th:text="${AccountInfo.getRegestTime().toString().substring(0,16)}"></td>

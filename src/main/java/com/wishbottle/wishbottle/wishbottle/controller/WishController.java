@@ -31,7 +31,7 @@ public class WishController {
     //跳转到心愿管理页面
     @GetMapping("/wishPage")
     public String log(Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null) {
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()<=2) {
             searchString="Search...";
             List<Wish> list=wishService.getAllWish();
             model.addAttribute("wishes",list);
@@ -39,13 +39,14 @@ public class WishController {
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
             return "wishPage";
         }
-        else
-            return "loginPage";
+        else if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3)
+            return "redirect:/tree";
+        else return "loginPage";
     }
     //删除功能
     @GetMapping("/deleteWish/{WishID}")
     public String deletWish(@PathVariable("WishID") Integer id, Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null){
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()<=2){
             searchString="Search...";
             Optional<Wish> wishs =wishService.findByID(id);
 
@@ -68,9 +69,9 @@ public class WishController {
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
             return "redirect:/wishPage";
         }
-
-        else
-            return "loginPage";
+        else if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3)
+            return "redirect:/tree";
+        else return "loginPage";
     }
     //查询
     @PostMapping("/searchWish")

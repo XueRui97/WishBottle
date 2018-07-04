@@ -7,12 +7,13 @@ import com.wishbottle.wishbottle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
@@ -40,20 +41,15 @@ public class AccountInfoController {
     public String  first(Model model){
         return  "redirect:/login";
     }
-
-    //账号设置
-    @GetMapping("/wishBottle")
-    public String  wishBottle(){
-        return "wishBottlePage";
-    }
-
     //登录页面——登录
     @GetMapping("/login")
     public String  login(Model model){
-        if(presentAccount.getEmail()!=null)
+        if(presentAccount.getEmail()!=null&&presentAccount.getLevel()==3)
         {
             return "redirect:/tree";
         }
+        else if(presentAccount.getEmail()!=null&&presentAccount.getLevel()<=2)
+            return "redirect:/index";
         presentAccount=new AccountInfo();
         return "loginPage";
     }
@@ -77,7 +73,7 @@ public class AccountInfoController {
     //跳转到用户管理页面
     @GetMapping("/accountPage")
     public String account(Model model){
-        if(presentAccount.getEmail()!=null){
+        if(presentAccount.getEmail()!=null&&presentAccount.getLevel()<=2){
             List<AccountInfo> list=accountInfoService.getAllAccountInfo();
             model.addAttribute("account",list);
             model.addAttribute("searchString",searchString);
@@ -122,7 +118,7 @@ public class AccountInfoController {
                 if(presentAccount.getLevel()==3)
                     return "redirect:/tree";
                 else
-                    return "redirect:/accountPage";
+                    return "redirect:/index";
             }
             else {
                 System.out.println("账号与密码不匹配！");
@@ -164,6 +160,13 @@ public class AccountInfoController {
         return "redirect:/accountPage";
 
     }
+    //退出登录
+    @GetMapping("/logout")
+    public String logout(){
+        presentAccount=new AccountInfo();
+        //System.out.println(presentAccount.getEmail()+"  "+presentAccount.getLevel());
+        return "redirect:/login";
+    }
     //返回心愿、评论、被评论和收藏的list方法
     private String returnTree(Model model){
         model.addAttribute("presentAccount",presentAccount);
@@ -203,4 +206,42 @@ public class AccountInfoController {
         return "treePage";
     }
 
+    //跳转到上传文件的页面
+    @RequestMapping(value="/gouploadimg", method = RequestMethod.GET)
+    public String goUploadImg() {
+        //跳转到 templates 目录下的 uploadimg.html
+        return "uploadimg";
+    }
+
+    //处理文件上传
+    @RequestMapping(value="/testuploadimg", method = RequestMethod.POST)
+    public @ResponseBody String uploadImg(@RequestParam("file") MultipartFile file,
+                                          HttpServletRequest request) {
+        String contentType = file.getContentType();
+        String fileName = file.getOriginalFilename();
+        System.out.println("fileName-->" + fileName);
+        System.out.println("getContentType-->" + contentType);
+        //获取跟目录
+        File path = null;
+        try {
+            path = new File(ResourceUtils.getURL("classpath:").getPath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(!path.exists()) path = new File("");
+        System.out.println("path:"+path.getAbsolutePath());
+
+        //如果上传目录为/static/images/upload/，则可以如下获取：
+        File upload = new File(path.getAbsolutePath(),"/src/main/resources/static/assets/img/ /");
+        if(!upload.exists()) upload.mkdirs();
+        System.out.println("upload url:"+upload.getAbsolutePath());
+        String filePath =upload.getAbsolutePath();
+        try {
+            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        //返回json
+        return "uploadimg success";
+    }
 }

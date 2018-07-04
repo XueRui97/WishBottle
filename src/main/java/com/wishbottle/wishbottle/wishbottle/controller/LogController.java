@@ -22,15 +22,16 @@ public class LogController {
     String searchString="Search...";
     @GetMapping("/logPage")//跳转到登录日志界面
     public String log(Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null) {
+        if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()<=2) {
             List<Log> list=logService.getAllLog();
             model.addAttribute("logs",list);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
             return "logPage";
         }
-        else
-            return "loginPage";
+        else if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3)
+            return "redirect:/tree";
+        else return "loginPage";
     }
     //查询
     @PostMapping("/searchLog")
