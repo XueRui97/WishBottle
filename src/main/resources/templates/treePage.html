@@ -46,15 +46,6 @@
                 </li>
                 <li><h1><a href="#">心愿瓶</a>&nbsp;&nbsp;&nbsp;&nbsp;</h1></li>
             </ul>
-            <div class="navbar-btn">
-                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-            </div>
-            <form class="navbar-form navbar-left"method="post" th:action="@{/searchAccount}" role="form">
-                <div class="input-group">
-                    <input type="text" name="searchBox" class="form-control" th:placeholder="${searchString}">
-                    <span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
-                </div>
-            </form>
             <div id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -105,7 +96,7 @@
                 <div class="panel panel-profile">
                     <div class="clearfix">
                         <!-- LEFT COLUMN -->
-                        <div class="profile-left">
+                        <div class="profile-left" width="30%">
                             <!-- PROFILE HEADER -->
                             <div class="profile-header">
                                 <div class="overlay"></div>
