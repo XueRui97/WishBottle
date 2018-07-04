@@ -241,8 +241,35 @@
                                                                 <h4>心愿内容：</h4>
                                                                 <p th:text="${Wish.getContent()}">心愿内容</p>
                                                                 <p>
-                                                                    <a  href="#"><span class="lnr lnr-thumbs-up"></span>点赞
-                                                                        <span th:text="${Wish.getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
+                                                                    <!--a  href="#"><span class="lnr lnr-thumbs-up"></span>点赞
+                                                                        <span th:text="${Wish.getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;-->
+                                                                <form method="post" th:action="@{/good}" role="form" target="hidden_frame">
+                                                                    <input type="hidden" th:value="${Wish.getWishID()}" th:name="goodWishID">
+                                                                    <button type="submit" class="btn btn-default btn-xs" href="#" onclick="toggleGood()">
+                                                                        <span class="lnr lnr-thumbs-up" id="goodIcon"></span>点赞
+                                                                        <span th:text="${Wish.getGoodNum()}" id="goodNum">点赞数</span>
+                                                                        <span th:text="${aWishToComment.hasGood(Wish.getWishID())}" id="isGooded"  style="display:none">点赞与否</span>
+                                                                    </button>
+                                                                    <script>
+                                                                        function toggleGood(){
+                                                                            var b=document.getElementById("isGooded");
+                                                                            var a = document.getElementById("goodNum");
+                                                                            var num = new Number(a.innerHTML);
+                                                                            var isCollected=new Number(b.innerHTML);
+                                                                            if (isCollected == 1) {
+                                                                                num = num - 1;
+                                                                                isCollected = 0 ;
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                num = num + 1;
+                                                                                isCollected = 1 ;
+                                                                            }
+                                                                            a.innerHTML = num;
+                                                                            b.innerHTML = isCollected;
+                                                                        }
+                                                                    </script>
+                                                                </form>
                                                                 <form method="post" th:action="@{/collect}" role="form" target="hidden_frame">
                                                                     <input type="hidden" th:value="${Wish.getWishID()}" th:name="collectWishID">
                                                                     <button type="submit" class="btn btn-default btn-xs" href="#" onclick="toggleCollect()">

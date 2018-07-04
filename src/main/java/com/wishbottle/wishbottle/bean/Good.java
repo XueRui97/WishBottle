@@ -21,6 +21,9 @@ public class Good {
         this.wish = wish;
     }
 
+    public Good() {
+    }
+
     public Integer getGoodID() {
         return GoodID;
     }

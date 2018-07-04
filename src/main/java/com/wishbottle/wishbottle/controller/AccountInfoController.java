@@ -31,6 +31,8 @@ public class AccountInfoController {
     private CollectionService collectionService;
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    private GoodService goodService;
     private String searchString="Search...";
     static  AccountInfo presentAccount=new AccountInfo();
     //初始页面——登录
@@ -186,6 +188,9 @@ public class AccountInfoController {
         List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
         model.addAttribute("myCollection",myCollection);
         aWishToComment.setCollectionList(myCollection);
+        //我的赞
+        List<Good> myGood=goodService.queryMyGood(presentAccount.getAccountID());
+        aWishToComment.setGoodList(myGood);
         aWishToComment.setAccountInfoID(presentAccount.getAccountID());
         model.addAttribute("aWishToComment",aWishToComment);
         return "treePage";

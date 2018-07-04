@@ -18,6 +18,45 @@ public class WishToComments {
     public  List<Good> goodList=new ArrayList<>();
     private Integer collectionNum;
     private Integer accountInfoID;
+
+    //判断是否已经收藏，１为已经收藏，０为未收藏
+    public Integer hasCollection(Integer wishID){
+        if(!collectionList.isEmpty())
+            for(Collection collection:collectionList) {
+                if (collection.getWish().getWishID().equals(wishID)
+                        && collection.getAccountInfo().getAccountID().equals( accountInfoID)){
+                    ///System.out.println(1);
+                         return 1;}
+        }
+        return 0;
+    }
+    //判断是否已经点赞，１为已经点赞，０为未点赞
+    public Integer hasGood(Integer wishID){
+        if(!goodList.isEmpty())
+            for(Good good:goodList) {
+                if (good.getWish().getWishID().equals(wishID)
+                        && good.getAccountInfo().getAccountID().equals( accountInfoID)){
+                            //System.out.println(1);
+                             return 1;}
+        }
+        return 0;
+    }
+    // 构造方法
+    public WishToComments(Integer wishID, List<Comments> commentsList) {
+        WishID = wishID;
+        this.commentsList = commentsList;
+    }
+
+   //构造方法
+    public WishToComments() {
+    }
+
+    public List<Comments> getByWishID(int WishID){
+        for(WishToComments wishToComments:wishToCommentsList)
+            if(wishToComments.getWishID()==WishID)
+                return wishToComments.getCommentsList();
+        return null;
+    }
     public Integer getAccountInfoID() {
         return accountInfoID;
     }
@@ -57,42 +96,12 @@ public class WishToComments {
     public void setCommentsList(List<Comments> commentsList) {
         this.commentsList = commentsList;
     }
-    //判断是否已经收藏，１为已经收藏，０为未收藏
-    public Integer hasCollection(Integer wishID){
-        for(Collection collection:collectionList) {
-            if (collection.getWish().getWishID().equals(wishID)
-                    && collection.getAccountInfo().getAccountID().equals( accountInfoID)){
-                System.out.println(1);
-                return 1;}
-        }
-        return 0;
-    }
-    //判断是否已经点赞，１为已经点赞，０为未点赞
-    public Integer hasGood(Integer wishID){
-        for(Good good:goodList) {
-            if (good.getWish().getWishID().equals(wishID)
-                    && good.getAccountInfo().getAccountID().equals( accountInfoID)){
-                System.out.println(1);
-                return 1;}
-        }
-        return 0;
-    }
-    // 构造方法
-    public WishToComments(Integer wishID, List<Comments> commentsList) {
-        WishID = wishID;
-        this.commentsList = commentsList;
+
+    public List<Good> getGoodList() {
+        return goodList;
     }
 
-   //构造方法
-    public WishToComments() {
+    public void setGoodList(List<Good> goodList) {
+        this.goodList = goodList;
     }
-
-    public List<Comments> getByWishID(int WishID){
-        for(WishToComments wishToComments:wishToCommentsList)
-            if(wishToComments.getWishID()==WishID)
-                return wishToComments.getCommentsList();
-        return null;
-    }
-
-
 }

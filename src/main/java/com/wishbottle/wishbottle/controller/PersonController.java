@@ -2,18 +2,15 @@
 package com.wishbottle.wishbottle.controller;
 
 import com.wishbottle.wishbottle.bean.*;
-import com.wishbottle.wishbottle.bean.Collection;
-import com.wishbottle.wishbottle.service.AccountInfoService;
-import com.wishbottle.wishbottle.service.CollectionService;
-import com.wishbottle.wishbottle.service.CommentsService;
-import com.wishbottle.wishbottle.service.WishService;
+import com.wishbottle.wishbottle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -27,6 +24,8 @@ public class PersonController {
     private CommentsService commentsService;
     @Autowired
     private CollectionService collectionService;
+    @Autowired
+    private GoodService goodService;
     //树洞
     @GetMapping("/tree")
     public String tree(Model model){
@@ -153,8 +152,9 @@ public class PersonController {
     //添加或删除收藏
     @PostMapping("/collect")
     public String addCollection(@RequestParam("collectWishID") Integer WishID,Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null){
-            List<Collection> collectionList=collectionService.searchByAccountIDAndWishID(AccountInfoController.presentAccount.getAccountID(),WishID);
+        //if(AccountInfoController.presentAccount.getEmail()!=null){
+            List<Collection> collectionList=collectionService.searchByAccountIDAndWishID(
+                    AccountInfoController.presentAccount.getAccountID(),WishID);
             Wish awish=wishService.findByID(WishID).get();
             if(collectionList.isEmpty())
             {
@@ -168,6 +168,7 @@ public class PersonController {
                 awish.setCollectionNum(awish.getCollectionNum()-1);
                 wishService.updateWish(awish);
             }
+            /*
             //我的心愿
             List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
             model.addAttribute("myWish",wishList);
@@ -197,11 +198,33 @@ public class PersonController {
             aWishToComment.setCollectionList(myCollection);
             aWishToComment.setCollectionNum(awish.getCollectionNum());
             aWishToComment.setAccountInfoID(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("aWishToComment",aWishToComment);
+            model.addAttribute("aWishToComment",aWishToComment);*/
             return "redirect:/tree";
+        //}
+        //else
+         //   return  "redirect:/login";
+    }
+    //添加或删除点赞
+    @PostMapping("/good")
+    public String addGood(@RequestParam("goodWishID") Integer WishID,Model model){
+        //if(AccountInfoController.presentAccount.getEmail()!=null){
+        List<Good> goodList=goodService.searchByAccountIDAndWishID(
+                AccountInfoController.presentAccount.getAccountID(),WishID);
+        Wish awish=wishService.findByID(WishID).get();
+        if(goodList.isEmpty())
+        {
+            Good agood=new Good(AccountInfoController.presentAccount,awish);
+            goodService.add(agood);
+            awish.setGoodNum(awish.getGoodNum()+1);
+            wishService.updateWish(awish);
+
         }
-        else
-            return  "redirect:/login";
+        else {
+            goodService.deleteGood(goodList.get(0));
+            awish.setGoodNum(awish.getGoodNum()-1);
+            wishService.updateWish(awish);
+        }
+        return "redirect:/tree";
     }
     //返回心愿、心愿找评论、评论、被评论和收藏的list方法
     private String returnTree(Model model,String returnStr){
@@ -217,7 +240,7 @@ public class PersonController {
                 aWishToComment.wishToCommentsList.add(
                     new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
 
-        //点赞数
+        //点赞总数
         int goodNum=0;
         for(Wish awish:wishList){
             goodNum+=awish.getGoodNum();
@@ -233,6 +256,9 @@ public class PersonController {
         //我的收藏
         List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myCollection",myCollection);
+        //我的赞
+        List<Good> myGood=goodService.queryMyGood(AccountInfoController.presentAccount.getAccountID());
+        aWishToComment.setGoodList(myGood);
         aWishToComment.setCollectionList(myCollection);
         aWishToComment.setAccountInfoID(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("aWishToComment",aWishToComment);
