@@ -46,7 +46,7 @@ public class PersonController {
             boolean  Permision=visibility.equals("all");
             Wish awish=new Wish(AccountInfoController.presentAccount,wishTitle,wishContent,Permision);
             wishService.addWish(awish);
-            return returnTree(model,"treePage");
+           return "redirect:/tree";
         }
         else
             return "loginPage";
@@ -78,7 +78,7 @@ public class PersonController {
             }
                 accountInfoService.updateAccountInfo(AccountInfoController.presentAccount);
                // System.out.println(AccountInfoController.presentAccount.getAccountID() + "  " + accountInfo.getAccountID());
-                return returnTree(model,"treePage");
+            return "redirect:/tree";
         }
         else
             return "loginPage";
@@ -106,7 +106,7 @@ public class PersonController {
                 if(acomment.getWish().getWishID()==id)
                     commentsService.deleteComment(acomment);}
             wishService.deleteWish(wishs.get());
-            return  returnTree(model,"redirect:/tree#tab-bottom-left1");
+            return "redirect:/tree";
         }
 
         else
@@ -118,7 +118,7 @@ public class PersonController {
         if(AccountInfoController.presentAccount.getEmail()!=null){
             Optional<Comments> comments =commentsService.findByID(id);
             commentsService.deleteComment(comments.get());
-            return  returnTree(model,"redirect:/tree#tab-bottom-left5");
+            return "redirect:/tree";
         }
         else
             return "loginPage";
@@ -129,7 +129,7 @@ public class PersonController {
         if(AccountInfoController.presentAccount.getEmail()!=null){
             Optional<Collection> collection =collectionService.findByID(id);
             collectionService.deleteCollection(collection.get());
-            return  returnTree(model,"redirect:/tree#tab-bottom-left4");
+            return "redirect:/tree";
         }
         else
             return "loginPage";
@@ -145,7 +145,7 @@ public class PersonController {
             commentsService.addComment(acomment);//保存评论
             awish.setCommentNum(awish.getCommentNum()+1);//wish的评论数加1
             wishService.updateWish(awish);
-            return returnTree(model,"treePage");
+            return "redirect:/tree";
         }
         else
             return "loginPage";
@@ -197,7 +197,7 @@ public class PersonController {
             aWishToComment.setCollectionList(myCollection);
             aWishToComment.setCollectionNum(awish.getCollectionNum());
             model.addAttribute("aWishToComment",aWishToComment);
-            return "treePage";
+            return "redirect:/tree";
         }
         else
             return "loginPage";

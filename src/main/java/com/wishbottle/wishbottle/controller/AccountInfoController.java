@@ -41,14 +41,14 @@ public class AccountInfoController {
            return  returnTree(model);
         }
         presentAccount=new AccountInfo();
-        return "loginPage";
+        return  "redirect:/login";
     }
     //登录页面——登录
     @GetMapping("/login")
     public String  login(Model model){
         if(presentAccount.getEmail()!=null)
         {
-            return  returnTree(model);
+            return "redirect:/tree";
         }
         presentAccount=new AccountInfo();
         return "loginPage";
@@ -81,7 +81,7 @@ public class AccountInfoController {
             return "accountPage";
         }
        else
-           return "loginPage";
+            return  "redirect:/login";
     }
     //查询
     @PostMapping("/searchAccount")
@@ -96,7 +96,7 @@ public class AccountInfoController {
             return "accountPage";
         }
         else
-            return "loginPage";
+            return  "redirect:/login";
     }
     //登录验证
     @PostMapping("/loginPost")
@@ -105,7 +105,7 @@ public class AccountInfoController {
         List<AccountInfo> accountInfoList=accountInfoService.queryByEmailOrName(EmailOrName);
         if(accountInfoList.isEmpty()){
             System.out.println("无该用户");
-            return "loginPage";
+            return  "redirect:/login";
         }
         else{
             //登录成功
@@ -115,11 +115,11 @@ public class AccountInfoController {
                 Date date=new Date();
                 Log alog=new Log(presentAccount,ipStr,date,addressStr);
                 logService.save(alog);
-                 return returnTree(model);
+                return "redirect:/tree";
             }
             else {
                 System.out.println("账号与密码不匹配！");
-                return "loginPage";
+                return  "redirect:/login";
             }
         }
     }
@@ -135,10 +135,10 @@ public class AccountInfoController {
             AccountInfo account=new AccountInfo(Name,Email,PassWord);
             accountInfoService.addAccountInfo(account);
             presentAccount=account;
-            return  returnTree(model);
+            return "redirect:/tree";
         }
         else{
-            return  "loginPage";
+            return  "redirect:/login";
         }
     }
     //返回心愿、评论、被评论和收藏的list方法
