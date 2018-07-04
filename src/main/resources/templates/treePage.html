@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}">
     <!-- MAIN CSS -->
-    <link rel="stylesheet" th:href="@{assets/css/main_cg.css}">
+    <link rel="stylesheet" th:href="@{assets/css/main.css}">
     <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
     <link rel="stylesheet" th:href="@{assets/css/demo.css}">
     <!-- GOOGLE FONTS -->
@@ -37,15 +37,15 @@
             <a th:href="@{/index}"><img th:src="@{/assets/img/logo-dark.png}" alt="Klorofil Logo" class="img-responsive logo"></a>
         </div>
         <div class="container-fluid">
-            <ul class="nav navbar-nav navbar-left">
-                <li>
-                    <h1>&nbsp;&nbsp;<a th:href="@{tree}">树洞</a>&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-                </li>
-                <li>
-                    <h1><a th:href="@{wishSea}">心愿海</a>&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-                </li>
-                <li><h1><a href="#">心愿瓶</a>&nbsp;&nbsp;&nbsp;&nbsp;</h1></li>
-            </ul>
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+            <form class="navbar-form navbar-left"method="post" th:action="@{/searchAccount}" role="form">
+                <div class="input-group">
+                    <input type="text" name="searchBox" class="form-control" th:placeholder="${searchString}">
+                    <span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
+                </div>
+            </form>
             <div id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -88,6 +88,18 @@
         </div>
     </nav>
     <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li><a th:href="@{/tree}" class="active"><i class="lnr lnr-chart-bars"></i> <span>树洞</span></a></li>
+                    <li><a th:href="@{/wishSea}" class=""><i class="lnr lnr-code"></i> <span>心愿海</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
     <!-- MAIN -->
     <div class="main">
         <!-- MAIN CONTENT -->
@@ -96,7 +108,7 @@
                 <div class="panel panel-profile">
                     <div class="clearfix">
                         <!-- LEFT COLUMN -->
-                        <div class="profile-left" width="30%">
+                        <div class="profile-left">
                             <!-- PROFILE HEADER -->
                             <div class="profile-header">
                                 <div class="overlay"></div>
@@ -253,30 +265,25 @@
                                                                     <button type="submit" class="btn btn-default btn-xs" href="#" onclick="toggleCollect()">
                                                                         <span class="lnr lnr-heart" id="collectIcon"></span>收藏
                                                                         <span th:text="${Wish.getCollectionNum()}" id="collectNum">收藏数</span>
+                                                                        <span th:text="${aWishToComment.hasCollection(Wish.getWishID())}" id="isCollected"  style="display:none">收藏与否</span>
                                                                     </button>
                                                                     <script>
-                                                                        var wishID=[[${Wish.getWishID()}]];
-
-                                                                        var accountID=[[${presentAccount.getAccountID()}]];
-                                                                        //alert(wishID+"  "+accountID);
-                                                                        //var isCollected =[[${aWishToComment.hasCollection(10002,10001)}]];
-                                                                        var isCollected =[[${aWishToComment.hasCollection(wishID,accountID)}]];
-
-                                                                        //alert("数字"+[[${aWishToComment.hasCollection(10002,10001)}]]+"10002 10001");
-                                                                       // alert("方法"+[['${aWishToComment.hasCollection('+wishID+','+accountID+')}']]+wishID+" "+accountID);
-                                                                       //alert(isCollected);
-                                                                        function toggleCollect(){
+                                                                       function toggleCollect(){
+                                                                            var b=document.getElementById("isCollected");
                                                                             var a = document.getElementById("collectNum");
                                                                             var num = new Number(a.innerHTML);
-                                                                            if (isCollected) {
+                                                                            var isCollected=new Number(b.innerHTML);
+                                                                            if (isCollected == 1) {
                                                                                 num = num - 1;
+                                                                                isCollected = 0 ;
                                                                             }
                                                                             else
                                                                             {
-                                                                                num = num + 1;
+                                                                               num = num + 1;
+                                                                                isCollected = 1 ;
                                                                             }
                                                                             a.innerHTML = num;
-                                                                            isCollected = !isCollected;
+                                                                            b.innerHTML = isCollected;
                                                                         }
                                                                     </script>
                                                                     </form>

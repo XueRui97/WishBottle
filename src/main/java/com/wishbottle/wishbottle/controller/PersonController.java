@@ -34,7 +34,7 @@ public class PersonController {
             return returnTree(model,"treePage");
         }
         else
-            return "loginPage";
+            return  "redirect:/login";
     }
     //发布心愿
     @PostMapping("/addWish")
@@ -49,8 +49,7 @@ public class PersonController {
            return "redirect:/tree";
         }
         else
-            return "loginPage";
-
+            return  "redirect:/login";
     }
     //修改用户信息
     @PostMapping("/editPost")
@@ -81,7 +80,7 @@ public class PersonController {
             return "redirect:/tree";
         }
         else
-            return "loginPage";
+            return  "redirect:/login";
     }
     //删除个人心愿
     @GetMapping("/deleteMyWish/{WishID}")
@@ -92,25 +91,26 @@ public class PersonController {
 
             //delete collection
             List<Collection> collectionList=collectionService.getAllCollection();
-            for(Collection acollection :collectionList)
-                if(acollection.getWish().getWishID()==id)
-                    collectionService.deleteCollection(acollection);
+           if(!collectionList.isEmpty())
+                for(Collection acollection :collectionList)
+                     if(acollection.getWish().getWishID()==id)
+                            collectionService.deleteCollection(acollection);
 
             //delete comment
             commentsService.getAllComments();
             List<Comments> commentsList=commentsService.getAllComments();
-            if(commentsList.isEmpty())
-                System.out.println("commentList is empty");
-            for(Comments acomment:commentsList){
-                System.out.println(acomment. getCMID());
-                if(acomment.getWish().getWishID()==id)
-                    commentsService.deleteComment(acomment);}
+            if(!commentsList.isEmpty())
+                //System.out.println("commentList is empty");
+                for(Comments acomment:commentsList){
+                //System.out.println(acomment. getCMID());
+                   if(acomment.getWish().getWishID()==id)
+                        commentsService.deleteComment(acomment);}
             wishService.deleteWish(wishs.get());
             return "redirect:/tree";
         }
 
         else
-            return "loginPage";
+            return  "redirect:/login";
     }
     //删除发布的评论
     @GetMapping("/deleteMyComment/{CommentID}")
@@ -121,7 +121,7 @@ public class PersonController {
             return "redirect:/tree";
         }
         else
-            return "loginPage";
+            return  "redirect:/login";
     }
     //删除收藏心愿
     @GetMapping("/deleteMyCollection/{CollectionID}")
@@ -132,7 +132,7 @@ public class PersonController {
             return "redirect:/tree";
         }
         else
-            return "loginPage";
+            return  "redirect:/login";
     }
     //发表评论
     @PostMapping("/addComment")
@@ -148,7 +148,7 @@ public class PersonController {
             return "redirect:/tree";
         }
         else
-            return "loginPage";
+            return  "redirect:/login";
     }
     //添加或删除收藏
     @PostMapping("/collect")
@@ -196,11 +196,12 @@ public class PersonController {
             model.addAttribute("myCollection",myCollection);
             aWishToComment.setCollectionList(myCollection);
             aWishToComment.setCollectionNum(awish.getCollectionNum());
+            aWishToComment.setAccountInfoID(AccountInfoController.presentAccount.getAccountID());
             model.addAttribute("aWishToComment",aWishToComment);
             return "redirect:/tree";
         }
         else
-            return "loginPage";
+            return  "redirect:/login";
     }
     //返回心愿、心愿找评论、评论、被评论和收藏的list方法
     private String returnTree(Model model,String returnStr){
@@ -233,6 +234,7 @@ public class PersonController {
         List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myCollection",myCollection);
         aWishToComment.setCollectionList(myCollection);
+        aWishToComment.setAccountInfoID(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("aWishToComment",aWishToComment);
         return returnStr;
     }

@@ -36,11 +36,6 @@ public class AccountInfoController {
     //初始页面——登录
     @GetMapping()
     public String  first(Model model){
-        if(presentAccount.getEmail()!=null)
-        {
-           return  returnTree(model);
-        }
-        presentAccount=new AccountInfo();
         return  "redirect:/login";
     }
     //登录页面——登录
@@ -172,10 +167,8 @@ public class AccountInfoController {
         List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
         model.addAttribute("myCollection",myCollection);
         aWishToComment.setCollectionList(myCollection);
+        aWishToComment.setAccountInfoID(presentAccount.getAccountID());
         model.addAttribute("aWishToComment",aWishToComment);
-        //System.out.println(aWishToComment.hasCollection(10009,10001));
-        //System.out.println(aWishToComment.hasCollection(myCollection.get(0).getWish().getWishID(),myCollection.get(0).getAccountInfo().getAccountID()));
-
         return "treePage";
     }
 

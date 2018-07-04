@@ -15,6 +15,14 @@ public class WishToComments {
     //存放collection对象列表，用于查询是否已经收藏
     public List<Collection> collectionList=new ArrayList<>();
     private Integer collectionNum;
+    private Integer accountInfoID;
+    public Integer getAccountInfoID() {
+        return accountInfoID;
+    }
+
+    public void setAccountInfoID(Integer accountInfoID) {
+        this.accountInfoID = accountInfoID;
+    }
 
     public Integer getCollectionNum() {
         return collectionNum;
@@ -48,21 +56,14 @@ public class WishToComments {
         this.commentsList = commentsList;
     }
 
-    public boolean hasCollection(Integer wishID,Integer accountInfoID){
+    public Integer hasCollection(Integer wishID){
         for(Collection collection:collectionList) {
-            System.out.println("getwishID"+collection.getWish().getWishID());
-            System.out.println("wishID"+wishID);
-           //System.out.println(collection.getWish().getWishID().equals(wishID));
-            System.out.println("getAccountID"+collection.getAccountInfo().getAccountID());
-            System.out.println("accountID"+accountInfoID);
-            //System.out.println(collection.getAccountInfo().getAccountID().equals( accountInfoID));
             if (collection.getWish().getWishID().equals(wishID)
                     && collection.getAccountInfo().getAccountID().equals( accountInfoID)){
-
                 System.out.println(1);
-                return true;}
+                return 1;}
         }
-        return false;
+        return 0;
     }
     // 构造方法
     public WishToComments(Integer wishID, List<Comments> commentsList) {
