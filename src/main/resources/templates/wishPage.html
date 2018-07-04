@@ -119,84 +119,86 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">心愿管理</h3>
 							</div>
-							<div class="panel-body">
-								<table class="table table-bordered" style="table-layout: fixed;">
-									<thead>
-									<tr>
-										<th width="5%">#</th>
-										<th width="10%">心愿作者</th>
-										<th class="mwrap" width="15%"><div class="mwrap">标题</div></th>
-										<th class="mwrap" width="35%"><div class="mwrap">内容</div></th>
-										<th width="5%">可见性</th>
-										<!--th width="5%">浏览数</th-->
-										<th width="5%">点赞数</th>
-										<th width="10%">发布时间</th>
-										<th width="10%">操作</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr th:each="Wish : ${wishes}">
-										<td th:text="${wishes.indexOf(Wish)+1}">101</td>
-										<td th:text="${Wish.getAccountInfo().getNikeName()}">1001</td>
-										<td class="mwrap"><div  class="mwrap" th:text="${Wish.getTitle()}" th:title="${Wish.getTitle()}">标题</div></td>
-										<td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Wish.getWishID()}}"><div  class="mwrap" th:text="${Wish.getContent()}" th:title="${Wish.getContent()}">内容</div></a></td>
-										<td th:text="${Wish.showPermision()}">0</td>
-										<!--td th:text="${Wish.getBrowseNum()}">45</td-->
-										<td th:text="${Wish.getGoodNum()}">2</td>
-										<td th:text="${Wish.getRelTime().toString().substring(0,16)}">2018.6.22 14:28</td>
-										<td><a  href="#" data-toggle="modal" th:data-target="@{'#dialogWarning'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
-										<!-- 模态框（Modal） -->
-										<div class="modal fade" th:id="'dialog' + ${Wish.getWishID()}" tabindex="-1" role="dialog"  aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal"
-																aria-hidden="true">×
-														</button>
-														<h4 class="modal-title" th:text="${Wish.getTitle()}">
-															模态框（Modal）标题
-														</h4>
-													</div>
-													<div class="modal-body" th:text="${Wish.getContent()}">
-														按下 ESC 按钮退出。
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default"
-																data-dismiss="modal">关闭
-														</button>
-													</div>
-												</div><!-- /.modal-content -->
-											</div><!-- /.modal-dialog -->
-										</div><!-- /.modal -->
-										<!-- 模态框（Modal） -->
-										<div class="modal fade" th:id="'dialogWarning' + ${Wish.getWishID()}" tabindex="-1" role="dialog"  aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal"
-																aria-hidden="true">×
-														</button>
-														<h4 class="modal-title">
-															警告！
-														</h4>
-													</div>
-													<div class="modal-body">
-														确定要删除这条心愿吗？
-													</div>
-													<div class="modal-footer">
-														<a class="btn btn-danger"
-																th:href="@{'deleteWish/'+${Wish.getWishID()}}">删除
-														</a>
-														<button type="button" class="btn btn-default"
-																data-dismiss="modal">关闭
-														</button>
-													</div>
-												</div><!-- /.modal-content -->
-											</div><!-- /.modal-dialog -->
-										</div><!-- /.modal -->
-									</tr>
-									</tbody>
-								</table>
+							<div style="overflow:hidden;height: 720px;">
+								<div class="panel-body">
+									<table class="table table-bordered" style="table-layout: fixed;">
+										<thead>
+										<tr>
+											<th width="5%">#</th>
+											<th width="10%">心愿作者</th>
+											<th class="mwrap" width="15%"><div class="mwrap">标题</div></th>
+											<th class="mwrap" width="35%"><div class="mwrap">内容</div></th>
+											<th width="5%">可见性</th>
+											<!--th width="5%">浏览数</th-->
+											<th width="5%">点赞数</th>
+											<th width="10%">发布时间</th>
+											<th width="10%">操作</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr th:each="Wish : ${wishes}">
+											<td th:text="${wishes.indexOf(Wish)+1}">101</td>
+											<td th:text="${Wish.getAccountInfo().getNikeName()}">1001</td>
+											<td class="mwrap"><div  class="mwrap" th:text="${Wish.getTitle()}" th:title="${Wish.getTitle()}">标题</div></td>
+											<td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Wish.getWishID()}}"><div  class="mwrap" th:text="${Wish.getContent()}" th:title="${Wish.getContent()}">内容</div></a></td>
+											<td th:text="${Wish.showPermision()}">0</td>
+											<!--td th:text="${Wish.getBrowseNum()}">45</td-->
+											<td th:text="${Wish.getGoodNum()}">2</td>
+											<td th:text="${Wish.getRelTime().toString().substring(0,16)}">2018.6.22 14:28</td>
+											<td><a  href="#" data-toggle="modal" th:data-target="@{'#dialogWarning'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
+											<!-- 模态框（Modal） -->
+											<div class="modal fade" th:id="'dialog' + ${Wish.getWishID()}" tabindex="-1" role="dialog"  aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																	aria-hidden="true">×
+															</button>
+															<h4 class="modal-title" th:text="${Wish.getTitle()}">
+																模态框（Modal）标题
+															</h4>
+														</div>
+														<div class="modal-body" th:text="${Wish.getContent()}">
+															按下 ESC 按钮退出。
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																	data-dismiss="modal">关闭
+															</button>
+														</div>
+													</div><!-- /.modal-content -->
+												</div><!-- /.modal-dialog -->
+											</div><!-- /.modal -->
+											<!-- 模态框（Modal） -->
+											<div class="modal fade" th:id="'dialogWarning' + ${Wish.getWishID()}" tabindex="-1" role="dialog"  aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																	aria-hidden="true">×
+															</button>
+															<h4 class="modal-title">
+																警告！
+															</h4>
+														</div>
+														<div class="modal-body">
+															确定要删除这条心愿吗？
+														</div>
+														<div class="modal-footer">
+															<a class="btn btn-danger"
+																	th:href="@{'deleteWish/'+${Wish.getWishID()}}">删除
+															</a>
+															<button type="button" class="btn btn-default"
+																	data-dismiss="modal">关闭
+															</button>
+														</div>
+													</div><!-- /.modal-content -->
+												</div><!-- /.modal-dialog -->
+											</div><!-- /.modal -->
+										</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 						<!-- END BORDERED TABLE -->
