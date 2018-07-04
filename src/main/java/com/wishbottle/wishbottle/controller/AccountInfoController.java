@@ -136,6 +136,20 @@ public class AccountInfoController {
             return  "redirect:/login";
         }
     }
+    //超级用户注册管理员用户账号
+    @PostMapping("/signupAdmitPost")
+    public String signupAdmit(@RequestParam("signup-username") String name,@RequestParam("signup-email") String email,
+                        @RequestParam("signup-password") String password,Model model){
+        List<AccountInfo> accountInfoList1=accountInfoService.queryByEmailOrName(name);
+        List<AccountInfo> accountInfoList2=accountInfoService.queryByEmailOrName(email);
+        if(accountInfoList1.isEmpty()&&accountInfoList2.isEmpty()){
+            AccountInfo account=new AccountInfo(name,email,password);
+            account.setLevel(2);
+            accountInfoService.addAccountInfo(account);
+        }
+        return "redirect:/accountPage";
+
+    }
     //返回心愿、评论、被评论和收藏的list方法
     private String returnTree(Model model){
         model.addAttribute("presentAccount",presentAccount);

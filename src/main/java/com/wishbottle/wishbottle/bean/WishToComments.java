@@ -14,6 +14,8 @@ public class WishToComments {
     public ArrayList<WishToComments> wishToCommentsList=new ArrayList<>();
     //存放collection对象列表，用于查询是否已经收藏
     public List<Collection> collectionList=new ArrayList<>();
+    //存放good对象列表,用于查询是否已经点赞
+    public  List<Good> goodList=new ArrayList<>();
     private Integer collectionNum;
     private Integer accountInfoID;
     public Integer getAccountInfoID() {
@@ -55,11 +57,21 @@ public class WishToComments {
     public void setCommentsList(List<Comments> commentsList) {
         this.commentsList = commentsList;
     }
-
+    //判断是否已经收藏，１为已经收藏，０为未收藏
     public Integer hasCollection(Integer wishID){
         for(Collection collection:collectionList) {
             if (collection.getWish().getWishID().equals(wishID)
                     && collection.getAccountInfo().getAccountID().equals( accountInfoID)){
+                System.out.println(1);
+                return 1;}
+        }
+        return 0;
+    }
+    //判断是否已经点赞，１为已经点赞，０为未点赞
+    public Integer hasGood(Integer wishID){
+        for(Good good:goodList) {
+            if (good.getWish().getWishID().equals(wishID)
+                    && good.getAccountInfo().getAccountID().equals( accountInfoID)){
                 System.out.println(1);
                 return 1;}
         }
