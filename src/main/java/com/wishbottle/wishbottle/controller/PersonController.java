@@ -97,10 +97,14 @@ public class PersonController {
                     collectionService.deleteCollection(acollection);
 
             //delete comment
+            commentsService.getAllComments();
             List<Comments> commentsList=commentsService.getAllComments();
-            for(Comments acomment:commentsList)
+            if(commentsList.isEmpty())
+                System.out.println("commentList is empty");
+            for(Comments acomment:commentsList){
+                System.out.println(acomment. getCMID());
                 if(acomment.getWish().getWishID()==id)
-                    commentsService.deleteComment(acomment);
+                    commentsService.deleteComment(acomment);}
             wishService.deleteWish(wishs.get());
             return  returnTree(model,"redirect:/tree#tab-bottom-left1");
         }
@@ -205,9 +209,11 @@ public class PersonController {
         model.addAttribute("myWish",wishList);
         //
         WishToComments aWishToComment=//初始化，不能为空null
+                wishList.isEmpty()?new WishToComments():
                 new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
-        for(Wish wish:wishList)
-            aWishToComment.wishToCommentsList.add(
+        if(!wishList.isEmpty())
+            for(Wish wish:wishList)
+                aWishToComment.wishToCommentsList.add(
                     new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
 
         //点赞数
