@@ -40,6 +40,13 @@ public class AccountInfoController {
     public String  first(Model model){
         return  "redirect:/login";
     }
+
+    //账号设置
+    @GetMapping("/wishBottle")
+    public String  wishBottle(){
+        return "wishBottlePage";
+    }
+
     //登录页面——登录
     @GetMapping("/login")
     public String  login(Model model){
