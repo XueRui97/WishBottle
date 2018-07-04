@@ -96,7 +96,7 @@ public class PersonController {
                             collectionService.deleteCollection(acollection);
 
             //delete comment
-            commentsService.getAllComments();
+            //commentsService.getAllComments();
             List<Comments> commentsList=commentsService.getAllComments();
             if(!commentsList.isEmpty())
                 //System.out.println("commentList is empty");
@@ -104,6 +104,12 @@ public class PersonController {
                 //System.out.println(acomment. getCMID());
                    if(acomment.getWish().getWishID()==id)
                         commentsService.deleteComment(acomment);}
+            //delet good
+            List<Good> goodList=goodService.getAllGood();
+            if(!goodList.isEmpty())
+                for(Good agood:goodList)
+                    if(agood.getWish().getWishID()==id)
+                        goodService.deleteGood(agood);
             wishService.deleteWish(wishs.get());
             return "redirect:/tree";
         }

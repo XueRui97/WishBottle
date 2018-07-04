@@ -13,4 +13,6 @@ public interface GoodService {
     void deleteGood(Good good);
     //根据点赞者的账号ＩＤ进行查询,我的收藏
     List<Good> queryMyGood(Integer accountID);
+    //获取点赞列表
+    List<Good> getAllGood();
 }

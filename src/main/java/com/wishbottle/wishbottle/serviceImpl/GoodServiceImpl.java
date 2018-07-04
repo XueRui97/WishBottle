@@ -31,4 +31,8 @@ public class GoodServiceImpl implements GoodService {
     public List<Good> queryMyGood(Integer accountID) {
         return goodRepository.queryMyGood(accountID);
     }
+    @Override
+    public List<Good> getAllGood(){
+        return goodRepository.findAll();
+    }
 }
