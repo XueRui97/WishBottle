@@ -21,6 +21,23 @@
 	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
 
 
+	<!-- 表格分页 -->
+	<link rel="stylesheet" th:href="@{assets/jpages/css/jPages.css}">
+
+	<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js" ></script>
+	<script th:src="@{assets/jpages/js/jPages.js}"></script>
+
+	<script>
+        $(function(){
+            $("div.holder").jPages({
+                containerID : "movies",
+                previous : "上一页",
+                next : "下一页",
+                perPage : 16,
+                delay : 0
+            });
+        });
+	</script>
 
 	<style type="text/css">
 		.mwrap{
@@ -119,8 +136,9 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">心愿管理</h3>
 							</div>
-							<div style="overflow:hidden;height: 720px;">
+							<div>
 								<div class="panel-body">
+									<div class="holder"></div>
 									<table class="table table-bordered" style="table-layout: fixed;">
 										<thead>
 										<tr>
@@ -135,7 +153,7 @@
 											<th width="10%">操作</th>
 										</tr>
 										</thead>
-										<tbody>
+										<tbody id="movies">
 										<tr th:each="Wish : ${wishes}">
 											<td th:text="${wishes.indexOf(Wish)+1}">101</td>
 											<td th:text="${Wish.getAccountInfo().getNikeName()}">1001</td>
@@ -219,7 +237,7 @@
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
+
 <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="assets/scripts/klorofil-common.js"></script>

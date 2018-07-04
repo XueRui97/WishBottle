@@ -21,6 +21,26 @@
 	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}">
 	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
 
+
+
+	<!-- 表格分页 -->
+	<link rel="stylesheet" th:href="@{assets/jpages/css/jPages.css}">
+
+	<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js" ></script>
+	<script th:src="@{assets/jpages/js/jPages.js}"></script>
+
+	<script>
+        $(function(){
+            $("div.holder").jPages({
+                containerID : "movies",
+                previous : "上一页",
+                next : "下一页",
+                perPage : 16,
+                delay : 0
+            });
+        });
+	</script>
+
 	<style type="text/css">
 		.mwrap{
 			white-space: nowrap;
@@ -119,6 +139,7 @@
 								<h3 class="panel-title">评论管理</h3>
 							</div>
 							<div class="panel-body">
+								<div class="holder"></div>
 								<table class="table table-bordered" style="table-layout: fixed;">
 									<thead>
 									<tr>
@@ -131,7 +152,7 @@
 										<th width="10%">操作</th>
 									</tr>
 									</thead>
-									<tbody>
+									<tbody id="movies">
 									<tr th:each="Comments : ${comments}">
 										<td th:text="${comments.indexOf(Comments)+1}">1</td><!--#-->
 										<td th:text="${Comments.getAccountInfo().getNikeName()}">223.20.30.27</td><!--	评论者用户名-->
@@ -182,7 +203,7 @@
 														</h4>
 													</div>
 													<div class="modal-body">
-														确定要删除这条心愿吗？
+														确定要删除这条评论吗？
 													</div>
 													<div class="modal-footer">
 														<a class="btn btn-danger"
@@ -218,10 +239,8 @@
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
 <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="assets/vendor/toastr/toastr.min.js"></script>
 <script src="assets/scripts/klorofil-common.js"></script>
 </body>
 
