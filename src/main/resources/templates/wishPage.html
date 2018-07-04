@@ -128,7 +128,7 @@
 										<th class="mwrap" width="15%"><div class="mwrap">标题</div></th>
 										<th class="mwrap" width="35%"><div class="mwrap">内容</div></th>
 										<th width="5%">可见性</th>
-										<th width="5%">浏览数</th>
+										<!--th width="5%">浏览数</th-->
 										<th width="5%">点赞数</th>
 										<th width="10%">发布时间</th>
 										<th width="10%">操作</th>
@@ -141,7 +141,7 @@
 										<td class="mwrap"><div  class="mwrap" th:text="${Wish.getTitle()}" th:title="${Wish.getTitle()}">标题</div></td>
 										<td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Wish.getWishID()}}"><div  class="mwrap" th:text="${Wish.getContent()}" th:title="${Wish.getContent()}">内容</div></a></td>
 										<td th:text="${Wish.showPermision()}">0</td>
-										<td th:text="${Wish.getBrowseNum()}">45</td>
+										<!--td th:text="${Wish.getBrowseNum()}">45</td-->
 										<td th:text="${Wish.getGoodNum()}">2</td>
 										<td th:text="${Wish.getRelTime().toString().substring(0,16)}">2018.6.22 14:28</td>
 										<td><a  th:href="@{'deleteWish/'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>

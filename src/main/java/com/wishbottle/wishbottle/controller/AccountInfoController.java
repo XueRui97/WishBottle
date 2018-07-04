@@ -149,11 +149,12 @@ public class AccountInfoController {
         model.addAttribute("myWish",wishList);
         //
         WishToComments aWishToComment=//初始化，不能为空null
+                wishList.isEmpty()? new WishToComments():
                 new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
-        for(Wish wish:wishList)
-            aWishToComment.wishToCommentsList.add(
-                    new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
-        model.addAttribute("aWishToComment",aWishToComment);
+       if(!wishList.isEmpty())
+            for(Wish wish:wishList)
+                aWishToComment.wishToCommentsList.add(
+                        new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
 
         //点赞数
         int goodNum=0;
@@ -170,6 +171,11 @@ public class AccountInfoController {
         //我的收藏
         List<Collection> myCollection=collectionService.queryMyCollection(presentAccount.getAccountID());
         model.addAttribute("myCollection",myCollection);
+        aWishToComment.setCollectionList(myCollection);
+        model.addAttribute("aWishToComment",aWishToComment);
+        //System.out.println(aWishToComment.hasCollection(10009,10001));
+        //System.out.println(aWishToComment.hasCollection(myCollection.get(0).getWish().getWishID(),myCollection.get(0).getAccountInfo().getAccountID()));
+
         return "treePage";
     }
 

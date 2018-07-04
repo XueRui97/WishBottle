@@ -87,6 +87,7 @@ public class PersonController {
     @GetMapping("/deleteMyWish/{WishID}")
     public String deletMyWish(@PathVariable("WishID") Integer id, Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null){
+           // System.out.println("id"+id);
             Optional<Wish> wishs =wishService.findByID(id);
 
             //delete collection
@@ -163,7 +164,36 @@ public class PersonController {
                 awish.setCollectionNum(awish.getCollectionNum()-1);
                 wishService.updateWish(awish);
             }
-            return returnTree(model,"treePage");
+            //我的心愿
+            List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
+            model.addAttribute("myWish",wishList);
+            //
+            WishToComments aWishToComment=//初始化，不能为空null
+                    new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
+            for(Wish wish:wishList)
+                aWishToComment.wishToCommentsList.add(
+                        new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
+
+            //点赞数
+            int goodNum=0;
+            for(Wish wish:wishList){
+                goodNum+=wish.getGoodNum();
+            }
+            model.addAttribute("goodNum",goodNum);
+            //我的评论
+            List<Comments> myList=commentsService.queryByAccountID(AccountInfoController.presentAccount.getAccountID());
+            model.addAttribute("myComments",myList);
+            //对我的评论
+            List<Comments> otherList=commentsService.queryOtherComment(AccountInfoController.presentAccount.getAccountID());
+            model.addAttribute("otherComments",otherList);
+            model.addAttribute("presentAccount",AccountInfoController.presentAccount);
+            //我的收藏
+            List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
+            model.addAttribute("myCollection",myCollection);
+            aWishToComment.setCollectionList(myCollection);
+            aWishToComment.setCollectionNum(awish.getCollectionNum());
+            model.addAttribute("aWishToComment",aWishToComment);
+            return "treePage";
         }
         else
             return "loginPage";
@@ -179,7 +209,6 @@ public class PersonController {
         for(Wish wish:wishList)
             aWishToComment.wishToCommentsList.add(
                     new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
-
 
         //点赞数
         int goodNum=0;

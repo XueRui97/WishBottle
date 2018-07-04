@@ -266,10 +266,16 @@
                                                                         <span class="lnr lnr-heart" id="collectIcon"></span>收藏
                                                                         <span th:text="${Wish.getCollectionNum()}" id="collectNum">收藏数</span>
                                                                     </button>
-                                                                    <script>
+                                                                    <!--script>
                                                                         var wishID=[[${Wish.getWishID()}]];
+
                                                                         var accountID=[[${presentAccount.getAccountID()}]];
-                                                                        var isCollected = new Boolean([[${aWishToComment.hasCollection(wishID,accountID)}]]);
+                                                                       // alert(wishID+"  "+accountID);
+                                                                        //var isCollected =[[${aWishToComment.hasCollection(10002,10001)}]];
+                                                                        var isCollected =[[${aWishToComment.hasCollection(Wish,presentAccount)}]];
+                                                                        //alert("数字"+[[${aWishToComment.hasCollection(10002,10001)}]]+"10002 10001");
+                                                                       // alert("方法"+[['${aWishToComment.hasCollection('+wishID+','+accountID+')}']]+wishID+" "+accountID);
+                                                                       //alert(isCollected);
                                                                         function toggleCollect(){
                                                                             var a = document.getElementById("collectNum");
                                                                             var num = new Number(a.innerHTML);
@@ -283,7 +289,7 @@
                                                                             a.innerHTML = num;
                                                                             isCollected = !isCollected;
                                                                         }
-                                                                    </script>
+                                                                    </script-->
                                                                     </form>
                                                                     &nbsp;&nbsp;&nbsp;发布时间：
                                                                     <span th:text="${Wish.getRelTime().toString().substring(0,10)}">发布时间</span>
