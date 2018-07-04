@@ -10,7 +10,6 @@
 	<link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}">
 	<link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}">
 	<link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}">
-	<link rel="stylesheet" th:href="@{assets/vendor/chartist/css/chartist-custom.css}">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" th:href="@{assets/css/main.css}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -114,9 +113,49 @@
 					<div class="row">
 						<div class="col-md-12">
 							<!-- BORDERED TABLE -->
-							<div class="panel">
+							<div class="">
 								<div class="panel-heading">
-									<h3 class="panel-title">用户信息</h3>
+									<button data-toggle="modal" data-target="#addAdminAccount" class="btn btn-primary">添加管理员账号</button>
+								</button>
+									<!-- 模态框（Modal） -->
+									<div class="modal fade" id="addAdminAccount" tabindex="-1" role="dialog"  aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal"
+															aria-hidden="true">×
+													</button>
+													<h4 class="modal-title" >
+														添加管理员账号
+													</h4>
+												</div>
+												<form class="form-auth-small" method="post" th:action="@{/signupAdmitPost}" role="form">
+													<div class="modal-body">
+														<div class="form-group">
+															<label for="signup-username" class="control-label sr-only">用户名</label>
+															<input type="text" class="form-control" name="signup-username" id="signup-username" value="" placeholder="Username" required>
+														</div>
+														<div class="form-group">
+															<label for="signup-email" class="control-label sr-only">Email</label>
+															<input type="email" class="form-control" name="signup-email" id="signup-email" value="" placeholder="Email" required>
+														</div>
+														<div class="form-group">
+															<label for="signup-password" class="control-label sr-only">Password</label>
+															<input type="password" class="form-control" name="signup-password" id="signup-password" value="" placeholder="Password" required>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="submit" class="btn btn-primary"
+																data-dismiss="modal">注册
+														</button>
+														<button type="button" class="btn btn-default"
+																data-dismiss="modal">关闭
+														</button>
+													</div>
+												</form>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
 								</div>
 								<div class="panel-body">
 									<table class="table table-bordered">
@@ -125,7 +164,8 @@
 												<th width="5%">#</th>
 												<th width="10%">用户名</th>
 												<th width="10%">邮箱</th>
-												<th width="30%">自我介绍</th>
+												<th width="25%">自我介绍</th>
+												<th width="5%">账号权限</th>
 												<th width="15%">头像路径</th>
 												<th width="10%">出生日期</th>
 												<th width="10%">注册时间</th>
@@ -138,6 +178,7 @@
 												<td th:text="${AccountInfo.getNikeName()}">Steve</td><!--用户名-->
 												<td th:text="${AccountInfo.getEmail()}">wukr@enet.com</td><!--邮箱-->
 												<td th:text="${AccountInfo.getSelfIntro()}">自我介绍</td><!--自我介绍-->
+												<td>普通</td>
 												<td ><img th:src="${AccountInfo.getAvatar()}"> <a th:text="${AccountInfo.getAvatar()}" ></a></td><!--账号头像-->
 												<td th:text="${AccountInfo.getBirthday().toString().substring(0,10)}">2018.6.20</td><!--出生日期-->
 												<td th:text="${AccountInfo.getRegestTime().toString().substring(0,16)}"></td>

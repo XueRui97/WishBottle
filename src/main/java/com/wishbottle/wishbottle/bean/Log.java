@@ -68,4 +68,7 @@ public class Log {
     public void setAddress(String address) {
         Address = address;
     }
+
+    public Log() {
+    }
 }
