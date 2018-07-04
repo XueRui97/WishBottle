@@ -110,7 +110,10 @@ public class AccountInfoController {
                 Date date=new Date();
                 Log alog=new Log(presentAccount,ipStr,date,addressStr);
                 logService.save(alog);
-                return "redirect:/tree";
+                if(presentAccount.getLevel()==3)
+                    return "redirect:/tree";
+                else
+                    return "redirect:/accountPage";
             }
             else {
                 System.out.println("账号与密码不匹配！");
@@ -142,10 +145,12 @@ public class AccountInfoController {
                         @RequestParam("signup-password") String password,Model model){
         List<AccountInfo> accountInfoList1=accountInfoService.queryByEmailOrName(name);
         List<AccountInfo> accountInfoList2=accountInfoService.queryByEmailOrName(email);
+        //System.out.println(accountInfoList1.isEmpty()+"    "+accountInfoList2.isEmpty());
         if(accountInfoList1.isEmpty()&&accountInfoList2.isEmpty()){
             AccountInfo account=new AccountInfo(name,email,password);
             account.setLevel(2);
             accountInfoService.addAccountInfo(account);
+            //System.out.println("注册成功");
         }
         return "redirect:/accountPage";
 
