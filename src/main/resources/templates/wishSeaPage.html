@@ -19,6 +19,14 @@
     <!-- ICONS -->
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}">
     <link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
+
+    <script>
+        function changeLength(obj, str) {
+            var lg = obj.value.length;
+            var a = document.getElementById(str);
+            a.innerHTML = lg;
+        }
+    </script>
 </head>
 
 <body>
@@ -117,8 +125,31 @@
                                         </div>
                                         <div th:id="'dialog' + ${Wish.getWishID()}" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson
-                                                cred
+                                                <ul class="list-unstyled">
+                                                    <li>作者：评论内容1234555sssssssssss5</li>
+                                                    <li>作者：评论内容1234555sssssssssss5</li>
+                                                    <li>作者：评论内容1234555sssssssssss5</li>
+                                                    <li>作者：评论内容1234555sssssssssss5</li>
+                                                    <li>作者：评论内容1234555sssssssssss5</li>
+                                                </ul>
+                                                <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
+                                                    <div class="modal-body">
+                                                        <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" maxlength="140"  th:onkeyup="'changeLength(this,'+ ${Wish.getWishID()} + ')'" required=""></textarea>
+                                                        字数：<span th:id="${Wish.getWishID()}">0</span>/140
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">发表评论</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                    </div>
+                                                    <input type="hidden" name="wishID"  th:value="${Wish.getWishID()}">
+                                                </form>
+                                                <!--<ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
+                                                    <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                        <span th:text="${myWishCm.getCMContent()}">内容</span>
+                                                        <br>
+                                                        <span style="float: right" th:text="${myWishCm.getCMTime()}"></span><hr>
+                                                    </li>
+                                                </ul>-->
                                             </div>
                                         </div>
                                     </div>
