@@ -246,54 +246,64 @@
                                                                 <form method="post" th:action="@{/good}" role="form" target="hidden_frame">
                                                                     <input type="hidden" th:value="${Wish.getWishID()}" th:name="goodWishID">
                                                                     <button type="submit" class="btn btn-default btn-xs" href="#" onclick="toggleGood()">
-                                                                        <span class="lnr lnr-thumbs-up" id="goodIcon"></span>点赞
+                                                                        <span class="lnr lnr-thumbs-up" id="goodIcon"></span><span id="goodText">点赞</span>
                                                                         <span th:text="${Wish.getGoodNum()}" id="goodNum">点赞数</span>
                                                                         <span th:text="${aWishToComment.hasGood(Wish.getWishID())}" id="isGooded"  style="display:none">点赞与否</span>
                                                                     </button>
                                                                     <script>
                                                                         function toggleGood(){
+                                                                            var textSpan = document.getElementById("goodText");
+                                                                            var str = "点赞";
                                                                             var b=document.getElementById("isGooded");
                                                                             var a = document.getElementById("goodNum");
                                                                             var num = new Number(a.innerHTML);
                                                                             var isCollected=new Number(b.innerHTML);
                                                                             if (isCollected == 1) {
                                                                                 num = num - 1;
+                                                                                str = "点赞";
                                                                                 isCollected = 0 ;
                                                                             }
                                                                             else
                                                                             {
                                                                                 num = num + 1;
+                                                                                str = "已点赞";
                                                                                 isCollected = 1 ;
                                                                             }
                                                                             a.innerHTML = num;
                                                                             b.innerHTML = isCollected;
+                                                                            textSpan.innerHTML = str;
                                                                         }
                                                                     </script>
                                                                 </form>
                                                                 <form method="post" th:action="@{/collect}" role="form" target="hidden_frame">
                                                                     <input type="hidden" th:value="${Wish.getWishID()}" th:name="collectWishID">
                                                                     <button type="submit" class="btn btn-default btn-xs" href="#" onclick="toggleCollect()">
-                                                                        <span class="lnr lnr-heart" id="collectIcon"></span>收藏
+                                                                        <span class="lnr lnr-heart" id="collectIcon"></span><span id="collectText">收藏</span>
                                                                         <span th:text="${Wish.getCollectionNum()}" id="collectNum">收藏数</span>
                                                                         <span th:text="${aWishToComment.hasCollection(Wish.getWishID())}" id="isCollected"  style="display:none">收藏与否</span>
                                                                     </button>
                                                                     <script>
                                                                         function toggleCollect(){
+                                                                            var textSpan = document.getElementById("collectText");
+                                                                            var str="收藏";
                                                                             var b=document.getElementById("isCollected");
                                                                             var a = document.getElementById("collectNum");
                                                                             var num = new Number(a.innerHTML);
                                                                             var isCollected=new Number(b.innerHTML);
                                                                             if (isCollected == 1) {
                                                                                 num = num - 1;
+                                                                                str = "收藏";
                                                                                 isCollected = 0 ;
                                                                             }
                                                                             else
                                                                             {
                                                                                 num = num + 1;
+                                                                                str = "已收藏";
                                                                                 isCollected = 1 ;
                                                                             }
                                                                             a.innerHTML = num;
                                                                             b.innerHTML = isCollected;
+                                                                            textSpan.innerHTML = str;
                                                                         }
                                                                     </script>
                                                                 </form>
