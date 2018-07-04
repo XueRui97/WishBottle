@@ -21,11 +21,6 @@
     <link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
     <!-- 日期输入 -->
     <link th:href="@{assets/vendor/bootstrap/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="screen">
-    <style>
-        li{
-            list-style: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -282,7 +277,7 @@
                                                             <hr>
                                                             <div class="modal-body">
                                                                 <h4>评论内容：</h4>
-                                                                <ul th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
+                                                                <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
                                                                     <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
                                                                         <span th:text="${myWishCm.getCMContent()}">内容</span>
                                                                         <br>
