@@ -125,12 +125,12 @@
                                         </div>
                                         <div th:id="'dialog' + ${Wish.getWishID()}" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <ul class="list-unstyled">
-                                                    <li>作者：评论内容1234555sssssssssss5</li>
-                                                    <li>作者：评论内容1234555sssssssssss5</li>
-                                                    <li>作者：评论内容1234555sssssssssss5</li>
-                                                    <li>作者：评论内容1234555sssssssssss5</li>
-                                                    <li>作者：评论内容1234555sssssssssss5</li>
+                                                <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
+                                                    <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                        <span th:text="${myWishCm.getCMContent()}">内容</span>
+                                                        <br>
+                                                        <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
+                                                    </li>
                                                 </ul>
                                                 <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
                                                     <div class="modal-body">
@@ -143,13 +143,7 @@
                                                     </div>
                                                     <input type="hidden" name="wishID"  th:value="${Wish.getWishID()}">
                                                 </form>
-                                                <!--<ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
-                                                    <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
-                                                        <span th:text="${myWishCm.getCMContent()}">内容</span>
-                                                        <br>
-                                                        <span style="float: right" th:text="${myWishCm.getCMTime()}"></span><hr>
-                                                    </li>
-                                                </ul>-->
+
                                             </div>
                                         </div>
                                     </div>
