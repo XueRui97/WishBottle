@@ -31,7 +31,11 @@ public class WishSeaController {
             searchString = "Search...";
             //公开的心愿
             List<Wish> list = wishService.getByPermision(true);
+<<<<<<< HEAD
             Collections.reverse(list); // 倒序排列
+=======
+            Collections.reverse(list);
+>>>>>>> ea787f876d896863a6c19266eb0aa3c4e302d88c
             WishToComments aWishToComment=//初始化，不能为空null
                     list.isEmpty()?new WishToComments():
                             new WishToComments(list.get(0).getWishID(),commentsService.search(list.get(0).getWishID()));
