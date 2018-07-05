@@ -1,5 +1,6 @@
 package com.wishbottle.wishbottle.controller;
 
+import com.wishbottle.wishbottle.bean.Comments;
 import com.wishbottle.wishbottle.bean.Wish;
 import com.wishbottle.wishbottle.bean.WishToComments;
 import com.wishbottle.wishbottle.service.CommentsService;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -41,5 +44,21 @@ public class WishSeaController {
             return "wishSeaPage";
         } else
             return "loginPage";
+    }
+    //心愿海发表评论
+    @PostMapping("/addWishSeaComment")
+    public String adddComment(@RequestParam("cmEdit") String cmEdit,
+                              @RequestParam("wishID") Integer wishID,
+                              Model model){
+        if(AccountInfoController.presentAccount.getEmail()!=null){
+            Wish awish=wishService.findByID(wishID).get();
+            Comments acomment=new Comments(awish,AccountInfoController.presentAccount,cmEdit);
+            commentsService.addComment(acomment);//保存评论
+            awish.setCommentNum(awish.getCommentNum()+1);//wish的评论数加1
+            wishService.updateWish(awish);
+            return "redirect:/wishSea";
+        }
+        else
+            return  "redirect:/login";
     }
 }
