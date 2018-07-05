@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -30,6 +31,7 @@ public class WishSeaController {
             searchString = "Search...";
             //公开的心愿
             List<Wish> list = wishService.getByPermision(true);
+            Collections.reverse(list); // 倒序排列
             WishToComments aWishToComment=//初始化，不能为空null
                     list.isEmpty()?new WishToComments():
                             new WishToComments(list.get(0).getWishID(),commentsService.search(list.get(0).getWishID()));
