@@ -20,6 +20,24 @@
 	<link rel="apple-touch-icon" sizes="76x76" th:href="@{assets/img/apple-icon.png}">
 	<link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
 
+	<!-- 表格分页 -->
+	<link rel="stylesheet" th:href="@{assets/jpages/css/jPages.css}">
+
+	<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js" ></script>
+	<script th:src="@{assets/jpages/js/jPages.js}"></script>
+
+	<script>
+        $(function(){
+            $("div.holder").jPages({
+                containerID : "movies",
+                previous : "上一页",
+                next : "下一页",
+                perPage : 15,
+                delay : 0
+            });
+        });
+	</script>
+
 	<style type="text/css">
 		.mwrap{
 			white-space: nowrap;
@@ -124,7 +142,6 @@
 							<br>
 							<div class="panel">
 								<div class="panel-heading">
-									<h3>账号管理</h3>
 									<!-- 模态框（Modal） -->
 									<div class="modal fade" id="addAdminAccount" tabindex="-1" role="dialog"  aria-hidden="true">
 										<div class="modal-dialog">
@@ -165,13 +182,14 @@
 									</div><!-- /.modal -->
 								</div>
 								<div class="panel-body">
-									<table class="table table-bordered">
+									<div class="holder"></div>
+									<table class="table table-bordered" style="table-layout: fixed;">
 										<thead>
 											<tr>
 												<th width="5%">#</th>
 												<th width="10%">用户名</th>
 												<th width="10%">邮箱</th>
-												<th width="25%">自我介绍</th>
+												<th width="25%" class="mwrap"><div class="mwrap">自我介绍</div></th>
 												<th width="5%">账号权限</th>
 												<th width="15%">头像路径</th>
 												<th width="10%">出生日期</th>
@@ -179,24 +197,24 @@
 												<!--th>操作</th-->
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="movies">
 											<tr th:each="AccountInfo : ${account}">
 												<td th:text="${account.indexOf(AccountInfo)+1}">103</td><!--#-->
 												<td th:text="${AccountInfo.getNikeName()}">Steve</td><!--用户名-->
 												<td th:text="${AccountInfo.getEmail()}">wukr@enet.com</td><!--邮箱-->
-												<td th:text="${AccountInfo.getSelfIntro()}">自我介绍</td><!--自我介绍-->
+												<td class="mwrap"><div class="mwrap" th:text="${AccountInfo.getSelfIntro()}">自我介绍</div></td><!--自我介绍-->
 												<td ><script type="text/javascript">
                                                     var num = [[${AccountInfo.getLevel()}]];
                                                     //alert(num) ;
                                                     if (num==1)
                                                         document.write("超级");
                                                     if(num==2)
-                                                        document.write("管 理 员");
+                                                        document.write("管理员");
                                                     if(num==3)
                                                         document.write("普通");
 												</script>
 												</td>
-												<td ><img th:src="${AccountInfo.getAvatar()}"> <a th:text="${AccountInfo.getAvatar()}" ></a></td><!--账号头像-->
+												<td ><a th:text="${AccountInfo.getAvatar()}" ></a></td><!--账号头像-->
 												<td th:text="${AccountInfo.getBirthday().toString().substring(0,10)}">2018.6.20</td><!--出生日期-->
 												<td th:text="${AccountInfo.getRegestTime().toString().substring(0,16)}"></td>
 												<!--td><a th:href="@{'deleteAccount/'+${AccountInfo.getAccountID()}}"><span class="lnr lnr-trash"></span>删除</a></td-->
@@ -223,10 +241,9 @@
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
-	<script src="assets/vendor/jquery/jquery.min.js"></script>
+
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="assets/vendor/chartist/js/chartist.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
 </body>
 
