@@ -299,6 +299,10 @@
                                                         </h3>
                                                         <p th:text="${Wish.getContent()}">心愿内容</p>
                                                         <div><img class="min" th:src="${Wish.getPicurl()}"></div>
+                                                        <video class="min" controls="controls" >
+                                                            <source th:src="${Wish.getVideourl()}" type="video/ogg" />
+                                                            </object>
+                                                        </video>
                                                         <hr>
                                                         <span>
                                                 <a th:href="@{'#dialog'+${Wish.getWishID()}}">
