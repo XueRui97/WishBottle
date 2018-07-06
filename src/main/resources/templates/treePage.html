@@ -298,7 +298,7 @@
                                                             标题
                                                         </h3>
                                                         <p th:text="${Wish.getContent()}">心愿内容</p>
-                                                        <div><img class="min" src="http://img15.3lian.com/2015/f1/18/d/88.jpg"></div>
+                                                        <div><img class="min" th:src="${Wish.getPicurl()}"></div>
                                                         <hr>
                                                         <span>
                                                 <a th:href="@{'#dialog'+${Wish.getWishID()}}">
