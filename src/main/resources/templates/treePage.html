@@ -238,10 +238,16 @@
                                         <input name="wishTitle" type="text" class="form-control" placeholder="标题" required>
                                         <br>
                                         <textarea name="wishContent" class="form-control" placeholder="内容" rows="4" maxlength="240" onkeyup="changeLength(this, 'wishContentNum')" required></textarea>
-                                        字数：<span id="wishContentNum">0</span>/240
+                                        字数：<span id="wishContentNum">0</span>/240 <br>
+                                        <span>上传图片：
+                                            <input style="display:inline" id="file-pic" type="file" data-min-file-count="0" accept="image/*">
+                                        </span><br>
+                                        <span>上传视频：
+                                            <input style="display:inline" id="file-video" type="file" data-min-file-count="0" accept="video/*">
+                                        </span>
                                         <br>
                                         <span>可见性：</span>
-                                        <input name="visibility" value="self" type="radio" id="self">
+                                        <input name="visibility" value="self" type="radio" id="self" checked="false">
                                         <label for="self">仅自己</label>
                                         <input name="visibility" value="all" type="radio" id="all">
                                         <label for="all">所有人</label>
