@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/")
@@ -80,7 +81,7 @@ public class AccountInfoController {
             model.addAttribute("presentAccount",presentAccount);
             return "accountPage";
         }
-       else
+        else
             return  "redirect:/login";
     }
     //查询
@@ -131,23 +132,19 @@ public class AccountInfoController {
      */
     @PostMapping("/signupPost")
     public String  signup(@RequestParam("signup-username") String Name,@RequestParam("signup-email") String Email,
-                         @RequestParam("signup-password") String PassWord,Model model){
+                          @RequestParam("signup-password") String PassWord,Model model){
         List<AccountInfo> accountInfoList1=accountInfoService.queryByEmailOrName(Name);
         List<AccountInfo> accountInfoList2=accountInfoService.queryByEmailOrName(Email);
-        if(accountInfoList1.isEmpty()&&accountInfoList2.isEmpty()){
-            AccountInfo account=new AccountInfo(Name,Email,PassWord);
+        if(accountInfoList1.isEmpty()&&accountInfoList2.isEmpty()) {
+            AccountInfo account = new AccountInfo(Name, Email, PassWord);
             accountInfoService.addAccountInfo(account);
-            presentAccount=account;
-            return "redirect:/tree";
         }
-        else{
-            return  "redirect:/login";
-        }
+        return  "redirect:/login";
     }
     //超级用户注册管理员用户账号
     @PostMapping("/signupAdmitPost")
     public String signupAdmit(@RequestParam("signup-username") String name,@RequestParam("signup-email") String email,
-                        @RequestParam("signup-password") String password,Model model){
+                              @RequestParam("signup-password") String password,Model model){
         List<AccountInfo> accountInfoList1=accountInfoService.queryByEmailOrName(name);
         List<AccountInfo> accountInfoList2=accountInfoService.queryByEmailOrName(email);
         //System.out.println(accountInfoList1.isEmpty()+"    "+accountInfoList2.isEmpty());
@@ -176,8 +173,8 @@ public class AccountInfoController {
         //
         WishToComments aWishToComment=//初始化，不能为空null
                 wishList.isEmpty()? new WishToComments():
-                new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
-       if(!wishList.isEmpty())
+                        new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
+        if(!wishList.isEmpty())
             for(Wish wish:wishList)
                 aWishToComment.wishToCommentsList.add(
                         new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
@@ -204,44 +201,5 @@ public class AccountInfoController {
         aWishToComment.setAccountInfoID(presentAccount.getAccountID());
         model.addAttribute("aWishToComment",aWishToComment);
         return "treePage";
-    }
-
-    //跳转到上传文件的页面
-    @RequestMapping(value="/gouploadimg", method = RequestMethod.GET)
-    public String goUploadImg() {
-        //跳转到 templates 目录下的 uploadimg.html
-        return "uploadimg";
-    }
-
-    //处理文件上传
-    @RequestMapping(value="/testuploadimg", method = RequestMethod.POST)
-    public @ResponseBody String uploadImg(@RequestParam("file") MultipartFile file,
-                                          HttpServletRequest request) {
-        String contentType = file.getContentType();
-        String fileName = file.getOriginalFilename();
-        System.out.println("fileName-->" + fileName);
-        System.out.println("getContentType-->" + contentType);
-        //获取跟目录
-        File path = null;
-        try {
-            path = new File(ResourceUtils.getURL("classpath:").getPath());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        if(!path.exists()) path = new File("");
-        System.out.println("path:"+path.getAbsolutePath());
-
-        //如果上传目录为/static/images/upload/，则可以如下获取：
-        File upload = new File(path.getAbsolutePath(),"/src/main/resources/static/assets/img/ /");
-        if(!upload.exists()) upload.mkdirs();
-        System.out.println("upload url:"+upload.getAbsolutePath());
-        String filePath =upload.getAbsolutePath();
-        try {
-            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        //返回json
-        return "uploadimg success";
     }
 }

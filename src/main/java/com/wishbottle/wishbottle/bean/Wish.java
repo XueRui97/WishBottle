@@ -20,7 +20,26 @@ public class Wish {
     private  int CommentNum=0;//评论数
     private int GoodNum= 0;//点赞量
     private Date RelTime;//发布时间
+    private String picurl=null;//图片url
+    private String videourl=null;//视频url
 //get,set
+
+    public String getPicurl() {
+        return picurl;
+    }
+
+    public void setPicurl(String picurl) {
+        this.picurl = picurl;
+    }
+
+    public String getVideourl() {
+        return videourl;
+    }
+
+    public void setVideourl(String videourl) {
+        this.videourl = videourl;
+    }
+
     public Integer getWishID() {
         return WishID;
     }

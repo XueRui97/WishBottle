@@ -6,8 +6,12 @@ import com.wishbottle.wishbottle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -31,21 +35,6 @@ public class PersonController {
     public String tree(Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()==3){
             return returnTree(model,"treePage");
-        }
-        else
-            return  "redirect:/login";
-    }
-    //发布心愿
-    @PostMapping("/addWish")
-    public String addWish(@RequestParam("wishTitle") String wishTitle,
-                          @RequestParam("wishContent") String wishContent,
-                          @RequestParam("visibility") String visibility,
-                          Model model){
-        if(AccountInfoController.presentAccount.getEmail()!=null){
-            boolean  Permision=visibility.equals("all");
-            Wish awish=new Wish(AccountInfoController.presentAccount,wishTitle,wishContent,Permision);
-            wishService.addWish(awish);
-           return "redirect:/tree";
         }
         else
             return  "redirect:/login";
@@ -174,41 +163,7 @@ public class PersonController {
                 awish.setCollectionNum(awish.getCollectionNum()-1);
                 wishService.updateWish(awish);
             }
-            /*
-            //我的心愿
-            List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("myWish",wishList);
-            //
-            WishToComments aWishToComment=//初始化，不能为空null
-                    new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
-            for(Wish wish:wishList)
-                aWishToComment.wishToCommentsList.add(
-                        new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
-
-            //点赞数
-            int goodNum=0;
-            for(Wish wish:wishList){
-                goodNum+=wish.getGoodNum();
-            }
-            model.addAttribute("goodNum",goodNum);
-            //我的评论
-            List<Comments> myList=commentsService.queryByAccountID(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("myComments",myList);
-            //对我的评论
-            List<Comments> otherList=commentsService.queryOtherComment(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("otherComments",otherList);
-            model.addAttribute("presentAccount",AccountInfoController.presentAccount);
-            //我的收藏
-            List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("myCollection",myCollection);
-            aWishToComment.setCollectionList(myCollection);
-            aWishToComment.setCollectionNum(awish.getCollectionNum());
-            aWishToComment.setAccountInfoID(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("aWishToComment",aWishToComment);*/
             return "redirect:/tree";
-        //}
-        //else
-         //   return  "redirect:/login";
     }
     //添加或删除点赞
     @PostMapping("/good")
@@ -270,5 +225,57 @@ public class PersonController {
         model.addAttribute("aWishToComment",aWishToComment);
         return returnStr;
     }
-
+    //处理文件上传
+    @RequestMapping(value="/addWish", method = RequestMethod.POST)
+    public String addWish(@RequestParam("wishTitle") String wishTitle,
+                          @RequestParam("wishContent") String wishContent,
+                          @RequestParam("visibility") String visibility,
+                          @RequestParam("pic") MultipartFile pic,
+                           @RequestParam("video") MultipartFile video,
+                          Model model,HttpServletRequest request) {
+        boolean  Permision=visibility.equals("all");
+        Wish awish=new Wish(AccountInfoController.presentAccount,wishTitle,wishContent,Permision);
+        //String contentType = pic.getContentType();//文件类型
+        //String prefix=pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf(".")+1);//获取后缀
+        //System.out.println(prefix);
+        String picName =(new Date()).getTime()+"."+pic.getOriginalFilename().substring(pic.getOriginalFilename().lastIndexOf(".")+1);//picture文件名字
+        String videoName =(new Date()).getTime()+"."+video.getOriginalFilename().substring(video.getOriginalFilename().lastIndexOf(".")+1);//video文件名字
+        //System.out.println((new Date()).getTime());
+        //System.out.println(picName);
+        //System.out.println(videoName);
+        if(!pic.getOriginalFilename().isEmpty()||!video.getOriginalFilename().isEmpty()) {
+            //System.out.println("pappappapappapa");
+            //获取跟目录
+            File path = null;
+            try {
+                path = new File(ResourceUtils.getURL("classpath:").getPath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            if (!path.exists()) path = new File("");
+                 System.out.println("path:" + path.getAbsolutePath());
+            //上传目录为/src/main/resources/static/assets/...，则可以如下获取：
+            File picurl = new File(path.getAbsolutePath(), "/src/main/resources/static/assets/img/ /");
+            File videourl = new File(path.getAbsolutePath(), "/src/main/resources/static/assets/video/ /");
+            if (!picurl.exists()) picurl.mkdirs();
+            if (!videourl.exists()) videourl.mkdirs();
+            System.out.println("picture url:" + picurl.getAbsolutePath());
+            System.out.println("video  url:" + videourl.getAbsolutePath());
+            String picPath = picurl.getAbsolutePath();
+            String videoPath = videourl.getAbsolutePath();
+            try {
+                if (!pic.getOriginalFilename().isEmpty()) {
+                    FileUtil.uploadFile(pic.getBytes(), picPath, picName);
+                    awish.setPicurl("./assets/img/" + picName);
+                }
+                if (!video.getOriginalFilename().isEmpty()) {
+                    FileUtil.uploadFile(video.getBytes(), videoPath, videoName);
+                    awish.setVideourl("./assets/video/" + videoName);
+                }
+            } catch (Exception e) {
+            }
+        }
+        wishService.addWish(awish);
+        return "redirect:/tree";
+    }
 }
