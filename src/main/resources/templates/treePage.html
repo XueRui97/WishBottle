@@ -240,10 +240,10 @@
                                         <textarea name="wishContent" class="form-control" placeholder="内容" rows="4" maxlength="240" onkeyup="changeLength(this, 'wishContentNum')" required></textarea>
                                         字数：<span id="wishContentNum">0</span>/240 <br>
                                         <span>上传图片：
-                                            <input style="display:inline" id="file-pic" type="file" data-min-file-count="0" accept="image/*">
+                                            <input name="pic" style="display:inline" id="file-pic" type="file" data-min-file-count="0" accept="image/*">
                                         </span><br>
                                         <span>上传视频：
-                                            <input style="display:inline" id="file-video" type="file" data-min-file-count="0" accept="video/*">
+                                            <input name="video" style="display:inline" id="file-video" type="file" data-min-file-count="0" accept="video/*">
                                         </span>
                                         <br>
                                         <span>可见性：</span>
@@ -269,78 +269,44 @@
                             </div>
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="tab-bottom-left1">
-                                    <div class="table-responsive">
-                                        <table class="table table project-table" style="table-layout: fixed;">
-                                            <thead>
-                                            <tr>
-                                                <th class="mwrap" ><div class="mwrap">标题</div></th>
-                                                <th>评论数</th>
-                                                <th>点赞数</th>
-                                                <th>发布时间</th>
-                                                <th>操作</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="Wish : ${myWish}">
-                                                <td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#dialog'+${Wish.getWishID()}}"><div  class="mwrap" th:text="${Wish.getTitle()}" th:title="${Wish.getTitle()}">标题</div></a></td>
-                                                <td th:text="${Wish.getCommentNum()}">45</td>
-                                                <td th:text="${Wish.getGoodNum()}">2</td>
-                                                <td th:text="${Wish.getRelTime().toString().substring(0,16)}"></td>
-                                                <td><a  th:href="@{'deleteMyWish/'+${Wish.getWishID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
-                                                <!-- 模态框（Modal） -->
-                                                <div class="modal fade" th:id="'dialog' + ${Wish.getWishID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                    &times;
-                                                                </button>
-                                                                <h4 class="modal-title">
-                                                                    <span th:text="${Wish.getTitle()}">心愿标题</span><span> 作者: </span>
-                                                                    <span th:text="${Wish.getAccountInfo().getNikeName()}">作者</span>
-                                                                </h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h4>心愿内容：</h4>
-                                                                <p th:text="${Wish.getContent()}">心愿内容</p>
-                                                                <p>
-                                                                    <!--a  href="#"><span class="lnr lnr-thumbs-up"></span>点赞
-                                                                        <span th:text="${Wish.getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;-->
-                                                                <form method="post" th:action="@{/good}" role="form" target="hidden_frame">
-                                                                    <input type="hidden" th:value="${Wish.getWishID()}" th:name="goodWishID">
-                                                                    <button type="submit" class="btn btn-default btn-xs" href="#" onclick="toggleGood()">
-                                                                        <span class="lnr lnr-thumbs-up" id="goodIcon"></span><span id="goodText">点赞</span>
-                                                                        <span th:text="${Wish.getGoodNum()}" id="goodNum">点赞数</span>
-                                                                        <span th:text="${aWishToComment.hasGood(Wish.getWishID())}" id="isGooded"  style="display:none">点赞与否</span>
-                                                                    </button>
-                                                                </form>
-                                                                <form method="post" th:action="@{/collect}" role="form" target="hidden_frame">
-                                                                    <input type="hidden" th:value="${Wish.getWishID()}" th:name="collectWishID">
-                                                                    <button type="submit" class="btn btn-default btn-xs" href="#" onclick="toggleCollect()">
-                                                                        <span class="lnr lnr-heart" id="collectIcon"></span><span id="collectText">收藏</span>
-                                                                        <span th:text="${Wish.getCollectionNum()}" id="collectNum">收藏数</span>
-                                                                        <span th:text="${aWishToComment.hasCollection(Wish.getWishID())}" id="isCollected"  style="display:none">收藏与否</span>
-                                                                    </button>
-                                                                </form>
-                                                                &nbsp;&nbsp;&nbsp;发布时间：
-                                                                <span th:text="${Wish.getRelTime().toString().substring(0,10)}">发布时间</span>
-                                                                </p>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="modal-body">
-                                                                <h4>评论内容：</h4>
-                                                                <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
-                                                                    <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
-                                                                        <span th:text="${myWishCm.getCMContent()}">内容</span>
-                                                                        <br>
-                                                                        <span style="float: right" th:text="${myWishCm.getCMTime()}"></span><hr>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
+                                    <div th:each="Wish : ${myWish}">
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <div class="panel-group">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" style="background-color: white">
+                                                        <h3 th:text="${Wish.getTitle()}">
+                                                            标题
+                                                        </h3>
+                                                        <p th:text="${Wish.getContent()}">心愿内容</p>
+                                                        <hr>
+                                                        <span>
+                                                <a th:href="@{'#dialog'+${Wish.getWishID()}}">
+                                                    <span class="lnr lnr-thumbs-up"></span>点赞<span th:text="${Wish.getGoodNum()}"></span>
+                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a th:href="@{'#dialog'+${Wish.getWishID()}}">
+                                                    <span class="lnr lnr-heart"></span>收藏<span th:text="${Wish.getCollectionNum()}"></span>
+                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a data-toggle="collapse" data-parent="#accordion" th:href="@{'#dialog'+${Wish.getWishID()}}">
+                                                    <span class="lnr lnr-bubble"></span>评论<span th:text="${Wish.getCommentNum()}"></span>
+                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                发布时间：
+                                                <span th:text="${Wish.getRelTime().toString().substring(0,16)}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                作者：<a href="#"><span th:text="${Wish.getAccountInfo().getNikeName()}"></span></a>
+                                            </span>
+                                                    </div>
+                                                    <div th:id="'dialog' + ${Wish.getWishID()}" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
+                                                                <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                                    <span th:text="${myWishCm.getCMContent()}">内容</span>
+                                                                    <br>
+                                                                    <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
+                                                                </li>
+                                                            </ul>
+                                                            <form class="form-auth-small" method="post" th:action="@{/addWishSeaComment}" role="form">
                                                                 <div class="modal-body">
-                                                                    <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" maxlength="140" onkeyup="changeLength(this,'leftWordNum')" required=""></textarea>
-                                                                    字数：<span id="leftWordNum">0</span>/140
+                                                                    <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" maxlength="140"  th:onkeyup="'changeLength(this,'+ ${Wish.getWishID()} + ')'" required=""></textarea>
+                                                                    字数：<span th:id="${Wish.getWishID()}">0</span>/140
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="submit" class="btn btn-primary">发表评论</button>
@@ -348,12 +314,12 @@
                                                                 </div>
                                                                 <input type="hidden" name="wishID"  th:value="${Wish.getWishID()}">
                                                             </form>
-                                                        </div><!-- /.modal-content -->
+
+                                                        </div>
                                                     </div>
-                                                </div><!-- /.modal -->
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">查看更多</a></div>
                                 </div>
