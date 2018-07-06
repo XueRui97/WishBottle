@@ -254,7 +254,7 @@
                             <!-- INPUT -->
                             <div id="collapseOne" class="collapse">
                                 <div class="panel-body">
-                                    <form method="post" th:action="@{/addWish}" role="form">
+                                    <form enctype="multipart/form-data" method="post" action="/addWish" role="form">
                                         <input name="wishTitle" type="text" class="form-control" placeholder="标题" required>
                                         <br>
                                         <textarea name="wishContent" class="form-control" placeholder="内容" rows="4" maxlength="240" onkeyup="changeLength(this, 'wishContentNum')" required></textarea>
@@ -271,7 +271,7 @@
                                         <label for="self">仅自己</label>
                                         <input name="visibility" value="all" type="radio" id="all">
                                         <label for="all">所有人</label>
-                                        <button style="float:right;" type="submit" class="btn btn-primary">发布</button>
+                                        <input style="float:right;" type="submit" class="btn btn-primary" value="发布"></input>
                                     </form>
                                 </div>
                             </div>
