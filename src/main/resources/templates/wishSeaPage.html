@@ -27,22 +27,22 @@
             a.innerHTML = lg;
         }
 
-        function toggleCollect(){
-            var textSpan = document.getElementById("collectText");
-            //var str="收藏";
-            var b=document.getElementById("isCollected");
-            var a = document.getElementById("collectNum");
+        function toggleCollect(collectText,isCollectedB,collectNum){
+            var textSpan = document.getElementById(collectText);
+            var str="收藏";
+            var b=document.getElementById(isCollectedB);
+            var a = document.getElementById("collectNum);
             var num = new Number(a.innerHTML);
             var isCollected=new Number(b.innerHTML);
-            if (isCollected == 1) {
+            if (isCollected === 1) {
                 num = num - 1;
-                //str = "收藏";
+                str = "收藏";
                 isCollected = 0 ;
             }
             else
             {
                 num = num + 1;
-                //str = "已收藏";
+                str = "已收藏";
                 isCollected = 1 ;
             }
             a.innerHTML = num;
@@ -50,23 +50,23 @@
             textSpan.innerHTML = str;
         }
 
-        function toggleGood(){
-            var textSpan = document.getElementById("goodText");
-            //var str = "点赞";
-            var b=document.getElementById("isGooded");
-            var a = document.getElementById("goodNum");
+        function toggleGood(goodText, isGoodedB,goodNum){
+            var textSpan = document.getElementById(goodText);
+            var str = "点赞";
+            var b=document.getElementById(isGoodedB);
+            var a = document.getElementById(goodNum);
             var num = new Number(a.innerHTML);
-            var isCollected=new Number(b.innerHTML);
-            if (isCollected == 1) {
+            var isGooded=new Number(b.innerHTML);
+            if (isGooded === 1) {
                 num = num - 1;
-                //str = "点赞";
-                isCollected = 0 ;
+                str = "点赞";
+                isGooded = 0 ;
             }
             else
             {
                 num = num + 1;
-                //str = "已点赞";
-                isCollected = 1 ;
+                str = "已点赞";
+                isGooded = 1 ;
             }
             a.innerHTML = num;
             b.innerHTML = isCollected;
@@ -80,9 +80,7 @@
 <div id="wrapper">
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="brand">
-            <a th:href="@{/index}"><img th:src="@{/assets/img/logo-dark.png}" alt="Klorofil Logo" class="img-responsive logo"></a>
-        </div>
+
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left">
                 <li>
@@ -94,9 +92,8 @@
             </ul>
             <div id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right">
-
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img th:src="${presentAccount.getAvatar()}" class="img-circle" alt="Avatar"> <span th:text="${presentAccount.getNikeName()}">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/logout}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                         </ul>
