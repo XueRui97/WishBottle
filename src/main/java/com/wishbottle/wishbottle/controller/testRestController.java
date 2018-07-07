@@ -1,13 +1,8 @@
 package com.wishbottle.wishbottle.controller;
 
-import com.wishbottle.wishbottle.bean.AccountInfo;
+import com.wishbottle.wishbottle.bean.*;
 import com.wishbottle.wishbottle.bean.Collection;
-import com.wishbottle.wishbottle.bean.Log;
-import com.wishbottle.wishbottle.bean.Wish;
-import com.wishbottle.wishbottle.service.AccountInfoService;
-import com.wishbottle.wishbottle.service.CollectionService;
-import com.wishbottle.wishbottle.service.LogService;
-import com.wishbottle.wishbottle.service.WishService;
+import com.wishbottle.wishbottle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +18,10 @@ public class testRestController {
     WishService wishService;
     @Autowired
     CollectionService collectionService;
+    @Autowired
+    CommentsService commentsService;
+    @Autowired
+    GoodService goodService;
     static  AccountInfo presentAccount=new AccountInfo();
     //登录验证
     @PostMapping("/weChatLogin")
@@ -147,7 +146,7 @@ public class testRestController {
         map.put("myCollectionList",collectionList);
         return map;
     }
-    //获取个人心愿
+    //获取大众心愿
     @GetMapping("/PublicWish")
     public Map<String,Object>publicWish(){
         Map<String,Object> map=new HashMap<String, Object>();
@@ -155,5 +154,31 @@ public class testRestController {
         Collections.reverse(wishList);// 倒序排列
         map.put("publicWishList",wishList);
         return map;
+    }
+    //查询comment
+    @GetMapping("/weChatgetComment/{id}")
+    public Map<String,Object> getComment(@PathVariable("id") Integer id){
+        System.out.println("getComment");
+        Map<String,Object> map=new HashMap<String, Object>();
+        List<Comments> commentsList=commentsService.search(id);//根据wishID查询
+        System.out.println(commentsList.size());
+        //accountInfoList.add(presentAccount);
+        map.put("commentsList",commentsList);
+        return map;
+    }
+    //是否已经点赞
+    //查询comment
+    @GetMapping("/isGood/{id}")
+    public boolean isGood(@PathVariable("id") Integer id){
+        List<Good> goodList=goodService.searchByAccountIDAndWishID(presentAccount.getAccountID(),id);
+        if(goodList.isEmpty()){
+            Wish awish=wishService.findByID(id).get();
+            goodService.add(new Good(presentAccount,awish));
+            return true;
+        }
+        else {
+            goodService.deleteGood(goodList.get(0));
+            return false;
+        }
     }
 }

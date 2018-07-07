@@ -192,12 +192,15 @@ public class PersonController {
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myWish",wishList);
-        //
+
+        //获取全部心愿
+        List<Wish> allWishList=wishService.getAllWish();
         WishToComments aWishToComment=//初始化，不能为空null
                 wishList.isEmpty()?new WishToComments():
                 new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
-        if(!wishList.isEmpty())
-            for(Wish wish:wishList)
+        //关联所以wish到comment
+        if(!allWishList.isEmpty())
+            for(Wish wish:allWishList)
                 aWishToComment.wishToCommentsList.add(
                     new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
 

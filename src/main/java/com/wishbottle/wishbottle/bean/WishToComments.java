@@ -104,4 +104,5 @@ public class WishToComments {
     public void setGoodList(List<Good> goodList) {
         this.goodList = goodList;
     }
+
 }
