@@ -52,33 +52,30 @@
             });
         });
 
-        function toggssssleGood(obj){
-            alert('helo');
-            var t = obj.next().innerHTML;
-            alert(t);
-            alert('helo');
-            /*
-            var textSpan = document.getElementById(goodText);
-            var str = "点赞";
-            var b=document.getElementById(isGoodedB);
-            var a = document.getElementById(goodNum);
-            var num = new Number(a.innerHTML);
-            var isGooded=new Number(b.innerHTML);
-            if (isGooded === 1) {
-                num = num - 1;
-                str = "点赞";
-                isGooded = 0 ;
-            }
-            else
-            {
-                num = num + 1;
-                str = "已点赞";
-                isGooded = 1 ;
-            }
-            a.innerHTML = num;
-            b.innerHTML = isCollected;
-            textSpan.innerHTML = str;*/
-        }
+        $(document).ready(function(){
+            $(".collectButton").click(function(){
+                var isCollected = new Number($($(this).prev()).text());
+                var num = new Number($($($(this).children()).last()).text());
+                var collectIconObj = $($($(this).children()).first());  //图标obj
+
+                if (isCollected == 1) {
+                    num = num - 1;
+                    isCollected = 0 ;
+                    $(collectIconObj).attr("class", "lnr lnr-star");
+                }
+                else
+                {
+                    num = num + 1;
+                    isCollected = 1 ;
+                    $(collectIconObj).attr("class", "fa fa-star");
+                }
+                $($($(this).children()).last()).text(num);
+                $($(this).prev()).text(isCollected);
+                //textSpan.innerHTML = str;
+
+            });
+        });
+
     </script>
 </head>
 
@@ -140,7 +137,7 @@
 
                                                 <span th:text="${aWishToComment.hasCollection(Wish.getWishID())}"  style="display:none">收藏与否</span>
                                                 <a href="#" class="collectButton">
-                                                    <span class="lnr lnr-heart"></span>收藏<span th:text="${Wish.getCollectionNum()}"></span>
+                                                    <span class="lnr lnr-star"></span>收藏<span th:text="${Wish.getCollectionNum()}"></span>
                                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <a data-toggle="collapse" data-parent="#accordion" th:href="@{'#dialog'+${Wish.getWishID()}}">
                                                     <span class="lnr lnr-bubble"></span>评论<span th:text="${Wish.getCommentNum()}"></span>
