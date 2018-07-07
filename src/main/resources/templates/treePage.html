@@ -21,9 +21,8 @@
     <link rel="icon" type="image/png" sizes="96x96" th:href="@{assets/img/favicon.png}">
     <!-- 日期输入 -->
     <link th:href="@{assets/vendor/bootstrap/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="screen">
-
-
     <script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
+
     <style>
         .max{
             max-width:100%;max-height:100%;
@@ -32,6 +31,7 @@
             max-width:50%;max-height:50%;
         }
     </style>
+
     <script>
         $(function(){
             $('.min').click(function(){
@@ -49,51 +49,75 @@
             a.innerHTML = lg;
         }
 
-        function toggleCollect(){
-            var textSpan = document.getElementById("collectText");
-            //var str="收藏";
-            var b=document.getElementById("isCollected");
-            var a = document.getElementById("collectNum");
-            var num = new Number(a.innerHTML);
-            var isCollected=new Number(b.innerHTML);
-            if (isCollected == 1) {
-                num = num - 1;
-                //str = "收藏";
-                isCollected = 0 ;
-            }
-            else
-            {
-                num = num + 1;
-                //str = "已收藏";
-                isCollected = 1 ;
-            }
-            a.innerHTML = num;
-            b.innerHTML = isCollected;
-            textSpan.innerHTML = str;
-        }
 
-        function toggleGood(){
-            var textSpan = document.getElementById("goodText");
-            //var str = "点赞";
-            var b=document.getElementById("isGooded");
-            var a = document.getElementById("goodNum");
-            var num = new Number(a.innerHTML);
-            var isCollected=new Number(b.innerHTML);
-            if (isCollected == 1) {
-                num = num - 1;
-                //str = "点赞";
-                isCollected = 0 ;
-            }
-            else
-            {
-                num = num + 1;
-                //str = "已点赞";
-                isCollected = 1 ;
-            }
-            a.innerHTML = num;
-            b.innerHTML = isCollected;
-            textSpan.innerHTML = str;
-        }
+        $(document).ready(function(){
+            $(".goodButton").each(function(){
+                var isGooded = new Number($($(this).prev()).text());
+                var goodIconObj = $($($(this).children()).first());  //图标obj
+                if (isGooded == 1) {
+                    $(goodIconObj).attr("class", "fa fa-thumbs-up");
+                }
+                else
+                {
+                    $(goodIconObj).attr("class", "lnr lnr-thumbs-up");
+                }
+            });
+
+            $(".collectButton").each(function(){
+                var isCollected = new Number($($(this).prev()).text());
+                var collectIconObj = $($($(this).children()).first());  //图标obj
+                if (isCollected == 1) {
+                    $(collectIconObj).attr("class", "fa fa-star");
+                }
+                else
+                {
+                    $(collectIconObj).attr("class", "lnr lnr-star");
+                }
+            });
+
+
+
+            $(".goodButton").click(function(){
+                var isGooded = new Number($($(this).prev()).text());
+                var num = new Number($($($(this).children()).last()).text());
+                var goodIconObj = $($($(this).children()).first());  //图标obj
+                if (isGooded == 1) {
+                    num = num - 1;
+                    isGooded = 0 ;
+                    $(goodIconObj).attr("class", "lnr lnr-thumbs-up");
+                }
+                else
+                {
+                    num = num + 1;
+                    isGooded = 1 ;
+                    $(goodIconObj).attr("class", "fa fa-thumbs-up");
+                }
+                $($($(this).children()).last()).text(num);
+                $($(this).prev()).text(isGooded);
+                $(this).parent().submit();
+            });
+
+            $(".collectButton").click(function(){
+                var isCollected = new Number($($(this).prev()).text());
+                var num = new Number($($($(this).children()).last()).text());
+                var collectIconObj = $($($(this).children()).first());  //图标obj
+
+                if (isCollected == 1) {
+                    num = num - 1;
+                    isCollected = 0 ;
+                    $(collectIconObj).attr("class", "lnr lnr-star");
+                }
+                else
+                {
+                    num = num + 1;
+                    isCollected = 1 ;
+                    $(collectIconObj).attr("class", "fa fa-star");
+                }
+                $($($(this).children()).last()).text(num);
+                $($(this).prev()).text(isCollected);
+                $(this).parent().submit();
+            });
+        });
     </script>
 </head>
 
@@ -230,6 +254,12 @@
                                         <br>
                                         <textarea name="wishContent" class="form-control" placeholder="内容" rows="4" maxlength="240" onkeyup="changeLength(this, 'wishContentNum')" required></textarea>
                                         字数：<span id="wishContentNum">0</span>/240 <br>
+                                        <span>上传图片：
+                                            <input name="pic" style="display:inline" id="file-pic" type="file" data-min-file-count="0" accept="image/*">
+                                        </span><br>
+                                        <span>上传视频：
+                                            <input name="video" style="display:inline" id="file-video" type="file" data-min-file-count="0" accept="video/*">
+                                        </span>
                                         <br>
                                         <span>可见性：</span>
                                         <input name="visibility" value="self" type="radio" id="self" checked="false">
@@ -246,6 +276,7 @@
                             <div class="custom-tabs-line tabs-line-bottom left-aligned">
                                 <ul class="nav" role="tablist">
                                     <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">我的心愿</a></li>
+                                    <li><a href="#tab-bottom-left4" role="tab" data-toggle="tab">收藏的心愿</a></li>
                                 </ul>
                             </div>
                             <div class="tab-content">
@@ -261,19 +292,27 @@
                                                         <p th:text="${Wish.getContent()}">心愿内容</p>
                                                         <hr>
                                                         <span>
-                                                <a th:href="@{'#dialog'+${Wish.getWishID()}}">
-                                                    <span class="lnr lnr-thumbs-up"></span>点赞<span th:text="${Wish.getGoodNum()}"></span>
-                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <a th:href="@{'#dialog'+${Wish.getWishID()}}">
-                                                    <span class="lnr lnr-heart"></span>收藏<span th:text="${Wish.getCollectionNum()}"></span>
-                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <a data-toggle="collapse" data-parent="#accordion" th:href="@{'#dialog'+${Wish.getWishID()}}">
-                                                    <span class="lnr lnr-bubble"></span>评论<span th:text="${Wish.getCommentNum()}"></span>
-                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                发布时间：
-                                                <span th:text="${Wish.getRelTime().toString().substring(0,16)}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                作者：<a href="#"><span th:text="${Wish.getAccountInfo().getNikeName()}"></span></a>
-                                            </span>
+                                                            <form style="display: inline" method="post" th:action="@{/good}" role="form" target="hidden_frame">
+                                                                <input type="hidden" th:value="${Wish.getWishID()}" name="goodWishID">
+                                                                <span th:text="${aWishToComment.hasGood(Wish.getWishID())}"  style="display:none">点赞与否</span>
+                                                                <a href="javascript:void(0)" class="goodButton">
+                                                                    <span class="lnr lnr-thumbs-up"></span><span>点赞</span><span th:text="${Wish.getGoodNum()}"></span>
+                                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </form>
+                                                            <form style="display: inline" method="post" th:action="@{/collect}" role="form" target="hidden_frame">
+                                                                <input type="hidden" th:value="${Wish.getWishID()}" name="collectWishID">
+                                                                <span th:text="${aWishToComment.hasCollection(Wish.getWishID())}"  style="display:none">收藏与否</span>
+                                                                <a href="javascript:void(0)" class="collectButton">
+                                                                    <span class="lnr lnr-star"></span><span>收藏</span><span th:text="${Wish.getCollectionNum()}"></span>
+                                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </form>
+                                                            <a data-toggle="collapse" data-parent="#accordion" th:href="@{'#dialog'+${Wish.getWishID()}}">
+                                                                <span class="lnr lnr-bubble"></span><span>评论</span><span th:text="${Wish.getCommentNum()}"></span>
+                                                            </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            发布时间：
+                                                            <span th:text="${Wish.getRelTime().toString().substring(0,16)}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            作者：<a href="#"><span th:text="${Wish.getAccountInfo().getNikeName()}"></span></a>
+                                                        </span>
                                                     </div>
                                                     <div th:id="'dialog' + ${Wish.getWishID()}" class="panel-collapse collapse">
                                                         <div class="panel-body">
@@ -423,70 +462,65 @@
                                     <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">查看更多</a></div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-bottom-left4">
-                                    <div class="table-responsive">
-                                        <table class="table project-table">
-                                            <thead>
-                                            <tr>
-                                                <th>心愿标题</th>
-                                                <th>评论数</th>
-                                                <th>点赞数</th>
-                                                <th>收藏时间</th>
-                                                <th>操作</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="myCo : ${myCollection}">
-                                                <td class="mwrap"><a href="#" data-toggle="modal" th:data-target="@{'#myCo'+${myCo.getWish().getWishID()}}"><div  class="mwrap" th:text="${myCo.getWish().getTitle()}" th:title="${myCo.getWish().getTitle()}">标题</div></a></td>
-                                                <td th:text="${myCo.getWish().getCommentNum()}">45</td>
-                                                <td th:text="${myCo.getWish().getGoodNum()}">2</td>
-                                                <td th:text="${myCo.getCLTime().toString().substring(0,16)}"></td>
-                                                <td><a  th:href="@{'deleteMyCollection/'+${myCo.getCollectionID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
-                                                <!-- 模态框（Modal） -->
-                                                <div class="modal fade" th:id="'myCo' + ${myCo.getWish().getWishID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                    &times;
-                                                                </button>
-                                                                <h4 class="modal-title">
-                                                                    <span th:text="${myCo.getWish().getTitle()}">心愿标题</span><span> 作者: </span>
-                                                                    <span th:text="${myCo.getWish().getAccountInfo().getNikeName()}">作者</span>
-                                                                </h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h4>心愿内容：</h4>
-                                                                <p th:text="${myCo.getWish().getContent()}">心愿内容</p>
-                                                                <p>
-                                                                    <a href="#"><span class="lnr lnr-thumbs-up"></span>点赞
-                                                                        <span th:text="${myCo.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
-                                                                    <a href="#"><span class="lnr lnr-heart"></span>收藏
-                                                                        <span th:text="${myCo.getWish().getCollectionNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
-                                                                    <span th:text="${myCo.getCLTime().toString().substring(0,16)}">发布时间</span></p>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="modal-body">
-                                                                <h4>评论内容：</h4>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="#">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                            </div>
-                                                        </div><!-- /.modal-content -->
+                                    <div th:each="myCo : ${myCollection}">
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <div class="panel-group">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" style="background-color: white">
+                                                        <h3 th:text="${myCo.getWish().getTitle()}">
+                                                            标题
+                                                        </h3>
+                                                        <p th:text="${myCo.getWish().getContent()}">心愿内容</p>
+                                                        <hr>
+                                                        <span>
+                                                            <form style="display: inline" method="post" th:action="@{/good}" role="form" target="hidden_frame">
+                                                                <input type="hidden" th:value="${myCo.getWish().getWishID()}" name="goodWishID">
+                                                                <span th:text="${aWishToComment.hasGood(myCo.getWish().getWishID())}"  style="display:none">点赞与否</span>
+                                                                <a href="javascript:void(0)" class="goodButton">
+                                                                    <span class="lnr lnr-thumbs-up"></span><span>点赞</span><span th:text="${myCo.getWish().getGoodNum()}"></span>
+                                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </form>
+                                                            <form style="display: inline" method="post" th:action="@{/collect}" role="form" target="hidden_frame">
+                                                                <input type="hidden" th:value="${myCo.getWish().getWishID()}" name="collectWishID">
+                                                                <span th:text="${aWishToComment.hasCollection(myCo.getWish().getWishID())}"  style="display:none">收藏与否</span>
+                                                                <a href="javascript:void(0)" class="collectButton">
+                                                                    <span class="lnr lnr-star"></span><span>收藏</span><span th:text="${myCo.getWish().getCollectionNum()}"></span>
+                                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </form>
+                                                            <a data-toggle="collapse" data-parent="#accordion" th:href="@{'#myCollected'+${myCo.getWish().getWishID()}}">
+                                                                <span class="lnr lnr-bubble"></span><span>评论</span><span th:text="${myCo.getWish().getCommentNum()}"></span>
+                                                            </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            发布时间：
+                                                            <span th:text="${myCo.getWish().getRelTime().toString().substring(0,16)}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            作者：<a href="#"><span th:text="${myCo.getWish().getAccountInfo().getNikeName()}"></span></a>
+                                                        </span>
                                                     </div>
-                                                </div><!-- /.modal -->
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                    <div th:id="'myCollected' + ${myCo.getWish().getWishID()}" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(myCo.getWish().getWishID())}">
+                                                                <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                                    <span th:text="${myWishCm.getCMContent()}">内容</span>
+                                                                    <br>
+                                                                    <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
+                                                                </li>
+                                                            </ul>
+                                                            <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
+                                                                <div class="modal-body">
+                                                                    <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" maxlength="140"  th:onkeyup="'changeLength(this,'+ ${myCo.getWish().getWishID()} + ')'" required=""></textarea>
+                                                                    字数：<span th:id="${myCo.getWish().getWishID()}">0</span>/140
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary">发表评论</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                                </div>
+                                                                <input type="hidden" name="wishID"  th:value="${myCo.getWish().getWishID()}">
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="margin-top-30 text-center"><a href="#" class="btn btn-default">查看更多</a></div>
                                 </div>
