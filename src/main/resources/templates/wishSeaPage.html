@@ -126,9 +126,11 @@
                                             <p th:text="${Wish.getContent()}">心愿内容</p>
                                             <hr>
                                             <span>
+                                                <span th:text="${aWishToComment.hasGood(Wish.getWishID())}" id="isGooded"  style="display:none">点赞与否</span>
                                                 <a th:href="@{'#dialog'+${Wish.getWishID()}}">
                                                     <span class="lnr lnr-thumbs-up"></span>点赞<span th:text="${Wish.getGoodNum()}"></span>
                                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span th:text="${aWishToComment.hasCollection(Wish.getWishID())}" id="isCollected"  style="display:none">收藏与否</span>
                                                 <a th:href="@{'#dialog'+${Wish.getWishID()}}">
                                                     <span class="lnr lnr-heart"></span>收藏<span th:text="${Wish.getCollectionNum()}"></span>
                                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;

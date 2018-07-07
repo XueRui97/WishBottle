@@ -284,7 +284,7 @@
                                                                     <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
                                                                 </li>
                                                             </ul>
-                                                            <form class="form-auth-small" method="post" th:action="@{/addWishSeaComment}" role="form">
+                                                            <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
                                                                 <div class="modal-body">
                                                                     <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" maxlength="140"  th:onkeyup="'changeLength(this,'+ ${Wish.getWishID()} + ')'" required=""></textarea>
                                                                     字数：<span th:id="${Wish.getWishID()}">0</span>/140
