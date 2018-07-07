@@ -102,9 +102,7 @@
 <div id="wrapper">
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="brand">
-            <a th:href="@{/index}"><img th:src="@{/assets/img/logo-dark.png}" alt="Klorofil Logo" class="img-responsive logo"></a>
-        </div>
+
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left">
                 <li>
@@ -113,39 +111,12 @@
                 <li>
                     <h1><a th:href="@{wishSea}">心愿海</a>&nbsp;&nbsp;&nbsp;&nbsp;</h1>
                 </li>
-                <li><h1><a th:href="@{wishBottle}">心愿瓶</a>&nbsp;&nbsp;&nbsp;&nbsp;</h1></li>
             </ul>
             <div id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-                            <i class="lnr lnr-alarm"></i>
-                            <!--<span class="badge bg-danger">5</span>-->
-                        </a>
-                        <ul class="dropdown-menu notifications">
-                            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-                            <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-                            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-                            <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-                            <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-                            <li><a href="#" class="more">See all notifications</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img th:src="${presentAccount.getAvatar()}" class="img-circle" alt="Avatar"> <span th:text="${presentAccount.getNikeName()}">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Basic Use</a></li>
-                            <li><a href="#">Working With Data</a></li>
-                            <li><a href="#">Security</a></li>
-                            <li><a href="#">Troubleshooting</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="assets/img/user.png" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-                            <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-                            <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
                             <li><a th:href="@{/logout}"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                         </ul>
                     </li>
@@ -259,12 +230,6 @@
                                         <br>
                                         <textarea name="wishContent" class="form-control" placeholder="内容" rows="4" maxlength="240" onkeyup="changeLength(this, 'wishContentNum')" required></textarea>
                                         字数：<span id="wishContentNum">0</span>/240 <br>
-                                        <span>上传图片：
-                                            <input name="pic" style="display:inline" id="file-pic" type="file" data-min-file-count="0" accept="image/*">
-                                        </span><br>
-                                        <span>上传视频：
-                                            <input name="video" style="display:inline" id="file-video" type="file" data-min-file-count="0" accept="video/*">
-                                        </span>
                                         <br>
                                         <span>可见性：</span>
                                         <input name="visibility" value="self" type="radio" id="self" checked="false">
@@ -281,10 +246,6 @@
                             <div class="custom-tabs-line tabs-line-bottom left-aligned">
                                 <ul class="nav" role="tablist">
                                     <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">我的心愿</a></li>
-                                    <li><a href="#tab-bottom-left5" role="tab" data-toggle="tab">我发布的的评论</a></li>
-                                    <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">收到的评论</a></li>
-                                    <li><a href="#tab-bottom-left4" role="tab" data-toggle="tab">收藏的心愿</a></li>
-                                    <li><a href="#tab-bottom-left3" role="tab" data-toggle="tab">收到的消息</a></li>
                                 </ul>
                             </div>
                             <div class="tab-content">
@@ -298,7 +259,6 @@
                                                             标题
                                                         </h3>
                                                         <p th:text="${Wish.getContent()}">心愿内容</p>
-                                                        <div><img class="min" src="http://img15.3lian.com/2015/f1/18/d/88.jpg"></div>
                                                         <hr>
                                                         <span>
                                                 <a th:href="@{'#dialog'+${Wish.getWishID()}}">
@@ -324,7 +284,7 @@
                                                                     <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
                                                                 </li>
                                                             </ul>
-                                                            <form class="form-auth-small" method="post" th:action="@{/addWishSeaComment}" role="form">
+                                                            <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
                                                                 <div class="modal-body">
                                                                     <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" maxlength="140"  th:onkeyup="'changeLength(this,'+ ${Wish.getWishID()} + ')'" required=""></textarea>
                                                                     字数：<span th:id="${Wish.getWishID()}">0</span>/140
