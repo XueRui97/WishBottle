@@ -2,6 +2,8 @@
 package com.wishbottle.wishbottle.service;
 
 import com.wishbottle.wishbottle.bean.Wish;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,4 +29,8 @@ public interface WishService {
     List<Wish> getByAccountID(Integer accountID);
     //更新心愿,修改心愿
     Wish updateWish(Wish awish);
+    //获取点赞量前十的
+    List<Wish> getTop10();
+    //随机获取10个心愿
+    List<Wish> getRan10();
 }

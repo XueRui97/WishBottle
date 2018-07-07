@@ -41,6 +41,10 @@ public class WishSeaController {
                 for(Wish wish:list)
                     aWishToComment.wishToCommentsList.add(
                             new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
+            List<Wish> top10=wishService.getTop10();//今日点赞量前十的心愿
+            List<Wish> ranWish=wishService.getRan10();//随机产生的十个心愿
+            model.addAttribute("top10Wishes",top10);
+            model.addAttribute("randomWishes", ranWish);
             model.addAttribute("aWishToComment",aWishToComment);
             model.addAttribute("wishes", list);
             model.addAttribute("searchString", searchString);

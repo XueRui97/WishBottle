@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -40,6 +42,7 @@ public class AccountInfoController {
     //初始页面——登录
     @GetMapping()
     public String  first(Model model){
+        List<Wish> wishes=wishService.getRan10();
         return  "redirect:/login";
     }
     //登录页面——登录

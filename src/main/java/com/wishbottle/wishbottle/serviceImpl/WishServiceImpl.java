@@ -6,8 +6,8 @@ import com.wishbottle.wishbottle.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class WishServiceImpl implements WishService {
@@ -62,5 +62,45 @@ public class WishServiceImpl implements WishService {
     @Override
     public Wish updateWish(Wish awish) {
         return WishRepository.save(awish);
+    }
+    //获取点赞前十的wish
+    @Override
+    public List<Wish> getTop10(){
+        List<Wish> wishes=WishRepository.queryOrderByGoodNum();
+        int num=0;
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+        String date=(df.format(new Date()));
+        List<Wish> re=new ArrayList<>();
+        for(Wish wish:wishes)
+            if(num<10)
+                if((df.format(wish.getRelTime())).equals(date))
+                {num++;re.add(wish);}
+        return re;
+    }
+    //随机获取10个心愿
+    @Override
+    public List<Wish> getRan10(){
+        List<Wish> all=WishRepository.findAll();
+        List<Wish> re=new ArrayList<>();
+        int[] num=new int[10];//记录已经获取的数字
+        int ran=0,length=all.size();
+        Random r=new Random();
+        if(length==0)
+            return null;
+        if(length<=10)
+            return all;
+        while(ran<10){
+            num[ran]=r.nextInt(length);
+            int i=0;
+            //排除重复随机数
+            while(i<ran&&num[i]!=num[ran])
+                i++;
+            if(i==ran) {
+                re.add(all.get(num[ran]));
+               //System.out.println(num[ran]);
+                ran++;
+            }
+        }
+        return re;
     }
 }
