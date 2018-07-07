@@ -12,6 +12,8 @@ public interface WishService {
     Optional<Wish> findByID(Integer id);
     //删除心愿
     void deleteWish(Wish wish);
+    //删除
+    void deleteWish(Integer id);
     //模糊查询
     //根据心愿发布者的用户名、心愿标题、心愿内容查询心愿
     List<Wish> search(String search);
