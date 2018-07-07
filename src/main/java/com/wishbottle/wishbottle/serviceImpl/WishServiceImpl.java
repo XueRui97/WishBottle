@@ -26,6 +26,12 @@ public class WishServiceImpl implements WishService {
     public void deleteWish(Wish wish) {
         WishRepository.delete(wish);
     }
+    //删除心愿
+    @Override
+    public void deleteWish(Integer id) {
+        WishRepository.deleteById(id);
+    }
+
     //模糊查询
     //根据心愿发布者的用户名、心愿标题、心愿内容查询心愿
     @Override

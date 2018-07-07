@@ -86,6 +86,10 @@ public class Wish {
     public void setPermision(boolean permision) {
         Permision = permision;
     }
+    public boolean getPermision(){
+        return Permision;
+    }
+
 
     public int getCollectionNum() {
         return CollectionNum;
