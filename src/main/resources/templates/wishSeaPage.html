@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!-- VENDOR CSS -->
-    <link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{assets/vendor/bootstrap/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{assets/vendor/font-awesome/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{assets/vendor/linearicons/style.css}">
     <!-- MAIN CSS -->
@@ -210,21 +210,30 @@
                         </div>
                         </div>
                     </div>
-                    <nav class="col-lg-3 hidden-xs hidden-sm hidden-md">
-                        <div style="position: fixed">
-                            <div>今日热门
-                                <div th:each="top10Wish : ${top10Wishes}">
-                                    <span th:text="${top10Wishes.indexOf(top10Wish)+1}+'. '"></span><a th:text="${top10Wish.getTitle()}" th:href="'wish/' + ${top10Wish.getWishID()}"></a>
-                                </div>
-                            </div>
-                            <br><br><br>
-                            <div>随机心愿
-                                <div th:each="randomWish : ${randomWishes}">
-                                    <a th:text="${randomWish.getTitle()}" th:href="'wish/' + ${randomWish.getWishID()}"></a>
+                    <div class="col-lg-3 hidden-xs hidden-sm hidden-md">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div style="position: fixed">
+                                    <div class="panel panel-default">
+                                        <!-- Default panel contents -->
+                                        <div class="panel-heading" style="padding-bottom: 10px;padding-top: 10px;">今日热门</div>
+                                        <!-- List group -->
+                                        <div class="list-group" th:each="top10Wish : ${top10Wishes}">
+                                            <a th:href="'wish/' + ${top10Wish.getWishID()}" class="list-group-item"><span th:text="${top10Wishes.indexOf(top10Wish)+1}+'. '"></span><span th:text="${top10Wish.getTitle()}"></span><span th:text="${top10Wish.getGoodNum()}" class="badge">14</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <!-- Default panel contents -->
+                                        <div class="panel-heading" style="padding-bottom: 10px;padding-top: 10px;">随机心愿</div>
+                                        <!-- List group -->
+                                        <div class="list-group" th:each="randomWish : ${randomWishes}">
+                                            <a th:href="'wish/' + ${randomWish.getWishID()}" class="list-group-item" th:text="${randomWish.getTitle()}">Cras justo odio</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </nav>
+                    </div>
 
                     <div class="col-lg-1"></div>
                 </div>

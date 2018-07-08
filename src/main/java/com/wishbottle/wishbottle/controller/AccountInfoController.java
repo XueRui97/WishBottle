@@ -45,8 +45,6 @@ public class AccountInfoController {
        List<Wish> wishes=wishService.getRan10();
       return  "redirect:/login";
 
-
-
     }
     //登录页面——登录
     @GetMapping("/login")
