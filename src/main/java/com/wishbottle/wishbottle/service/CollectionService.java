@@ -22,4 +22,6 @@ public interface CollectionService {
     Collection add(Collection acollection);
     //根据AccountID 和WishID查询
     List<Collection> searchByAccountIDAndWishID(Integer accountID,Integer wishID);
+    //是否已经收藏过
+    boolean hasCollection(Integer accountID,Integer wishID);
 }

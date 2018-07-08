@@ -33,4 +33,5 @@ public interface WishService {
     List<Wish> getTop10();
     //随机获取10个心愿
     List<Wish> getRan10();
+
 }

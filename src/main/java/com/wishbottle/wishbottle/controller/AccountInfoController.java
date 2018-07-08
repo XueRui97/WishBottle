@@ -42,8 +42,9 @@ public class AccountInfoController {
     //初始页面——登录
     @GetMapping()
     public String  first(Model model){
-        List<Wish> wishes=wishService.getRan10();
-        return  "redirect:/login";
+       List<Wish> wishes=wishService.getRan10();
+      return  "redirect:/login";
+
     }
     //登录页面——登录
     @GetMapping("/login")

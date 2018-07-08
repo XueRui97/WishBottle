@@ -55,4 +55,12 @@ public class CollectionServiceImpl implements CollectionService {
    public  List<Collection> searchByAccountIDAndWishID(Integer accountID,Integer wishID){
         return collectionRepository.searchByAccountIDAndWishID(accountID,wishID);
     }
+    //是否已经收藏
+    @Override
+    public boolean hasCollection(Integer accountID,Integer wishID){
+        List<Collection> collectionList=collectionRepository.searchByAccountIDAndWishID(accountID,wishID);
+        if(!collectionList.isEmpty())
+            return true;
+        return false;
+    }
 }

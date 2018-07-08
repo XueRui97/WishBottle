@@ -15,4 +15,7 @@ public interface GoodService {
     List<Good> queryMyGood(Integer accountID);
     //获取点赞列表
     List<Good> getAllGood();
+    //是否已经点赞
+    boolean hasGood(Integer accountID,Integer wishID);
+
 }

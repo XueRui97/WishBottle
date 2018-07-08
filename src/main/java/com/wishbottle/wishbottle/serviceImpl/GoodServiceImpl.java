@@ -35,4 +35,11 @@ public class GoodServiceImpl implements GoodService {
     public List<Good> getAllGood(){
         return goodRepository.findAll();
     }
+    @Override
+    public boolean hasGood(Integer accountID,Integer wishID){
+        List<Good> wishes=goodRepository.searchByAccountIDAndWishID(accountID,wishID);
+        if(!wishes.isEmpty())
+            return true;
+        return false;
+    }
 }
