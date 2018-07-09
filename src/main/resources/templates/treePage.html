@@ -23,6 +23,22 @@
     <link th:href="@{assets/vendor/bootstrap/css/bootstrap-datetimepicker.min.css}" rel="stylesheet" media="screen">
     <script th:src="@{assets/vendor/jquery/jquery.min.js}"></script>
 
+    <!-- 表格分页 -->
+    <link rel="stylesheet" th:href="@{assets/jpages/css/jPages.css}">
+    <script th:src="@{assets/jpages/js/jPages.js}"></script>
+
+    <script>
+        $(function(){
+            $("div.holder").jPages({
+                containerID : "movies",
+                previous : "上一页",
+                next : "下一页",
+                perPage : 10,
+                delay : 0
+            });
+        });
+    </script>
+
     <style>
         .max{
             max-width:100%;max-height:100%;
@@ -281,6 +297,8 @@
                             </div>
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="tab-bottom-left1">
+                                    <div class="holder"></div>
+                                    <div id="movies">
                                     <div th:each="Wish : ${myWish}">
                                         <div class="col-lg-12 col-md-12 col-xs-12">
                                             <div class="panel-group">
@@ -341,7 +359,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="margin-top-30 text-center"><a href="javascript:void(0)" class="btn btn-default">查看更多</a></div>
+                                    </div>
+                                    <div class="holder"></div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-bottom-left2">
                                     <div class="table-responsive">
