@@ -171,12 +171,14 @@
                                         <hr>
                                         <span>
                                             <form style="display: inline" method="post" th:action="@{/good}" role="form" target="hidden_frame">
+                                                <input type="hidden" th:value="${myCo.getWish().getWishID()}" name="goodWishID">
                                                 <span th:text="${aWishToComment.hasGood(Wish.getWishID())}"  style="display:none">点赞与否</span>
                                                 <a href="javascript:void(0)" class="goodButton">
                                                     <span class="lnr lnr-thumbs-up"></span><span>点赞</span><span th:text="${Wish.getGoodNum()}"></span>
                                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
                                             </form>
                                             <form style="display: inline" method="post" th:action="@{/collect}" role="form" target="hidden_frame">
+                                                <input type="hidden" th:value="${myCo.getWish().getWishID()}" name="collectWishID">
                                                 <span th:text="${aWishToComment.hasCollection(Wish.getWishID())}"  style="display:none">收藏与否</span>
                                                 <a href="javascript:void(0)" class="collectButton">
                                                     <span class="lnr lnr-star"></span><span>收藏</span><span th:text="${Wish.getCollectionNum()}"></span>
