@@ -293,6 +293,7 @@
                                 <ul class="nav" role="tablist">
                                     <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">我的心愿</a></li>
                                     <li><a href="#tab-bottom-left4" role="tab" data-toggle="tab">收藏的心愿</a></li>
+                                    <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">我评论的心愿</a></li>
                                 </ul>
                             </div>
                             <div class="tab-content">
@@ -363,122 +364,66 @@
                                     <div class="holder"></div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-bottom-left2">
-                                    <div class="table-responsive">
-                                        <table class="table project-table">
-                                            <thead>
-                                            <tr>
-                                                <th>评论者</th>
-                                                <th>评论内容</th>
-                                                <th>评论时间</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="otherCm : ${otherComments}">
-                                                <td><img  th:src="${otherCm.getAccountInfo().getAvatar()}" width="22px" alt="Avatar" class="avatar img-circle"> <a href="javascript:void(0)" th:text="${otherCm.getAccountInfo().getNikeName()}">Michael</a></td>
-                                                <td class="mwrap"><a href="javascript:void(0)" data-toggle="modal" th:data-target="@{'#otherCm'+${otherCm.getCMID()}}"><div  class="mwrap" th:text="${otherCm.getCMContent()}" th:title="${otherCm.getCMContent()}">标题</div></a></td>
-                                                <td th:text="${otherCm.getCMTime().toString().substring(0,16)}"></td>
-                                                <!-- 模态框（Modal） -->
-                                                <div class="modal fade" th:id="'otherCm' + ${otherCm.getCMID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                    &times;
-                                                                </button>
-                                                                <h4 class="modal-title">
-                                                                    <span th:text="${otherCm.getWish().getTitle()}">心愿标题</span><span> 作者: </span>
-                                                                    <span th:text="${otherCm.getWish().getAccountInfo().getNikeName()}">作者</span>
-                                                                </h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h4>心愿内容：</h4>
-                                                                <p th:text="${otherCm.getWish().getContent()}">心愿内容</p>
-                                                                <p>
-                                                                    <a href="javascript:void(0)"><span class="lnr lnr-thumbs-up"></span>点赞
-                                                                        <span th:text="${otherCm.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
-                                                                    <a href="javascript:void(0)"><span class="lnr lnr-heart"></span>收藏
-                                                                        <span th:text="${otherCm.getWish().getCollectionNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
-                                                                    <span th:text="${otherCm.getCMTime().toString().substring(0,16)}">发布时间</span></p>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="modal-body">
-                                                                <h4>评论内容：</h4>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                            </div>
-                                                        </div><!-- /.modal-content -->
+                                    <div th:each="myCo : ${myCollection}">
+                                        <div class="col-lg-12 col-md-12 col-xs-12">
+                                            <div class="panel-group">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" style="background-color: white">
+                                                        <h3 th:text="${myCo.getWish().getTitle()}">
+                                                            标题
+                                                        </h3>
+                                                        <p th:text="${myCo.getWish().getContent()}">心愿内容</p>
+                                                        <hr>
+                                                        <span>
+                                                            <form style="display: inline" method="post" th:action="@{/good}" role="form" target="hidden_frame">
+                                                                <input type="hidden" th:value="${myCo.getWish().getWishID()}" name="goodWishID">
+                                                                <span th:text="${aWishToComment.hasGood(myCo.getWish().getWishID())}"  style="display:none">点赞与否</span>
+                                                                <a href="javascript:void(0)" class="goodButton">
+                                                                    <span class="lnr lnr-thumbs-up"></span><span>点赞</span><span th:text="${myCo.getWish().getGoodNum()}"></span>
+                                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </form>
+                                                            <form style="display: inline" method="post" th:action="@{/collect}" role="form" target="hidden_frame">
+                                                                <input type="hidden" th:value="${myCo.getWish().getWishID()}" name="collectWishID">
+                                                                <span th:text="${aWishToComment.hasCollection(myCo.getWish().getWishID())}"  style="display:none">收藏与否</span>
+                                                                <a href="javascript:void(0)" class="collectButton">
+                                                                    <span class="lnr lnr-star"></span><span>收藏</span><span th:text="${myCo.getWish().getCollectionNum()}"></span>
+                                                                </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            </form>
+                                                            <a data-toggle="collapse" data-parent="#accordion" th:href="@{'#myCollected'+${myCo.getWish().getWishID()}}">
+                                                                <span class="lnr lnr-bubble"></span><span>评论</span><span th:text="${myCo.getWish().getCommentNum()}"></span>
+                                                            </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            发布时间：
+                                                            <span th:text="${myCo.getWish().getRelTime().toString().substring(0,16)}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            作者：<a href="javascript:void(0)"><span th:text="${myCo.getWish().getAccountInfo().getNikeName()}"></span></a>
+                                                        </span>
                                                     </div>
-                                                </div><!-- /.modal -->
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="margin-top-30 text-center"><a href="javascript:void(0)" class="btn btn-default">查看更多</a></div>
-                                </div>
-                                <div class="tab-pane fade" id="tab-bottom-left3">   <!--待做-->
-                                    <ul class="list-unstyled activity-timeline">
-                                        <li>
-                                            <img src="assets/img/user1.png" width="34px" alt="Avatar" class="avatar img-circle" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">Michael</a>
-                                            评论了你的心愿：<a href="javascript:void(0)" data-toggle="modal" data-target="#myMessage">“我发表过的心愿标题”</a> <p><span class="timestamp">2 minutes ago</span></p>
-                                        </li>
-                                        <!-- 模态框（Modal） -->
-                                        <div class="modal fade" id="myMessage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                            &times;
-                                                        </button>
-                                                        <h4 class="modal-title">
-                                                            心愿标题     by:作者XXX
-                                                        </h4>
+                                                    <div th:id="'myCollected' + ${myCo.getWish().getWishID()}" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(myCo.getWish().getWishID())}">
+                                                                <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                                    <span th:text="${myWishCm.getCMContent()}">内容</span>
+                                                                    <br>
+                                                                    <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
+                                                                </li>
+                                                            </ul>
+                                                            <form class="form-auth-small" method="post" th:action="@{/addComment}" role="form">
+                                                                <div class="modal-body">
+                                                                    <textarea name="cmEdit" class="form-control" placeholder="发表内容" rows="4" maxlength="140"  th:onkeyup="'changeLength(this,'+ ${myCo.getWish().getWishID()} + ')'" required=""></textarea>
+                                                                    字数：<span th:id="${myCo.getWish().getWishID()}">0</span>/140
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary">发表评论</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                                </div>
+                                                                <input type="hidden" name="wishID"  th:value="${myCo.getWish().getWishID()}">
+                                                            </form>
+
+                                                        </div>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <h4>心愿内容：</h4>
-                                                        <p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
-                                                        <p><span class="lnr lnr-thumbs-up"></span>点赞45  <span class="lnr lnr-heart"></span>收藏41   时间：2018-6-25 15:46</p>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="modal-body">
-                                                        <h4>评论内容：</h4>
-                                                        <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                        <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                        <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                        <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                        <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                        <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                    </div>
-                                                </div><!-- /.modal-content -->
-                                            </div><!-- /.modal -->
+                                                </div>
+                                            </div>
                                         </div>
-                                        <li>
-                                            <img src="assets/img/user1.png" width="34px" alt="Avatar" class="avatar img-circle" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">Michael</a>
-                                            点赞了你的心愿：<a href="javascript:void(0)">“我发表过的心愿标题”</a> <p><span class="timestamp">4 hours ago</span></p>
-                                        </li>
-                                        <li>
-                                            <img src="assets/img/user1.png" width="34px" alt="Avatar" class="avatar img-circle" />&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)">Michael</a>
-                                            评论了你的心愿：<a href="javascript:void(0)">“我发表过的心愿标题”</a> <p><span class="timestamp">1 days ago</span></p>
-                                        </li>
-                                    </ul>
-                                    <div class="margin-top-30 text-center"><a href="javascript:void(0)" class="btn btn-default">查看更多</a></div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-bottom-left4">
                                     <div th:each="myCo : ${myCollection}">
@@ -541,71 +486,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="margin-top-30 text-center"><a href="javascript:void(0)" class="btn btn-default">查看更多</a></div>
-                                </div>
-                                <div class="tab-pane fade" id="tab-bottom-left5">
-                                    <div class="table-responsive">
-                                        <table class="table project-table">
-                                            <thead>
-                                            <tr>
-                                                <th>评论内容</th>
-                                                <th>评论时间</th>
-                                                <th>操作</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="myCm : ${myComments}">
-                                                <td class="mwrap"><a href="javascript:void(0)" data-toggle="modal" th:data-target="@{'#myCm'+${myCm.getCMID()}}"><div  class="mwrap" th:text="${myCm.getCMContent()}" th:title="${myCm.getCMContent()}">内容</div></a></td>
-                                                <td th:text="${myCm.getCMTime().toString().substring(0,16)}"></td>
-                                                <td><a  th:href="@{'deleteMyComment/'+${myCm.getCMID()}}"><span class="lnr lnr-trash"></span>删除</a></td>
-                                                <!-- 模态框（Modal） -->
-                                                <div class="modal fade" th:id="'myCm' + ${myCm.getCMID()}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                                    &times;
-                                                                </button>
-                                                                <h4 class="modal-title">
-                                                                    <span th:text="${myCm.getWish().getTitle()}">心愿标题</span><span> 作者: </span>
-                                                                    <span th:text="${myCm.getWish().getAccountInfo().getNikeName()}">作者</span>
-                                                                </h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h4>心愿内容：</h4>
-                                                                <p th:text="${myCm.getWish().getContent()}">心愿内容</p>
-                                                                <p>
-                                                                    <a href="javascript:void(0)"><span class="lnr lnr-thumbs-up"></span>点赞
-                                                                        <span th:text="${myCm.getWish().getGoodNum()}">点赞数</span></a>&nbsp;&nbsp;&nbsp;
-                                                                    <a href="javascript:void(0)"><span class="lnr lnr-heart"></span>收藏
-                                                                        <span th:text="${myCm.getWish().getCollectionNum()}">收藏数</span></a>&nbsp;&nbsp;&nbsp;发布时间：
-                                                                    <span th:text="${myCm.getWish().getRelTime().toString().substring(0,16)}">发布时间</span></p>
-                                                            </div>
-                                                            <hr>
-                                                            <div class="modal-body">
-                                                                <h4>评论内容：</h4>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                                <p><a href="javascript:void(0)">Steve</a>: 评论回复内容methodologies via best-of-breed </p>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <textarea name="wishContent" class="form-control" placeholder="发表内容" rows="4" required=""></textarea>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">发表评论</button>
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                                            </div>
-                                                        </div><!-- /.modal-content -->
-                                                    </div>
-                                                </div><!-- /.modal -->
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="margin-top-30 text-center"><a href="javascript:void(0)" class="btn btn-default">查看更多</a></div>
                                 </div>
                             </div>
                             <!-- END TABBED CONTENT -->
