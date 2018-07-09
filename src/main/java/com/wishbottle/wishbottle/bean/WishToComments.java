@@ -21,17 +21,17 @@ public class WishToComments {
 
     //判断是否已经收藏，１为已经收藏，０为未收藏
     public Integer hasCollection(Integer wishID){
-        System.out.println(wishID);
+        //System.out.println(wishID);
         if(!collectionList.isEmpty())
             for(Collection collection:collectionList) {
                 if (collection.getWish().getWishID().equals(wishID)
                         && collection.getAccountInfo().getAccountID().equals( accountInfoID)){
-                    System.out.println(1);
-                    System.out.println(collection.getWish().getTitle());
+                   //// System.out.println(1);
+                   // System.out.println(collection.getWish().getTitle());
                          return 1;}
         }
-        System.out.println("collectionList"+collectionList.size());
-        System.out.println(0);
+        //System.out.println("collectionList"+collectionList.size());
+       // System.out.println(0);
         return 0;
     }
     //判断是否已经点赞，１为已经点赞，０为未点赞

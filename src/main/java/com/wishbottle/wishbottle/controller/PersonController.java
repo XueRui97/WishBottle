@@ -227,10 +227,10 @@ public class PersonController {
                 }
         model.addAttribute("myCommentWish",myCommentWish);
         //测试
-        for(Wish awish:myCommentWish)
-        {
-            System.out.println(awish.getWishID());
-        }
+        //for(Wish awish:myCommentWish)
+       // {
+       //     System.out.println(awish.getWishID());
+       // }
         //对我的评论
         List<Comments> otherList=commentsService.queryOtherComment(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("otherComments",otherList);

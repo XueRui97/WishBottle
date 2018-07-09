@@ -91,7 +91,7 @@ public class WishSeaController {
             model.addAttribute("randomWishes", ranWish);
            /*model.addAttribute("id",id);
             return "redirect:/oneWishPage/"+id;*/
-           System.out.println("adddddddddddddddd");
+          // System.out.println("adddddddddddddddd");
             return "oneWishPage";
         }
         else

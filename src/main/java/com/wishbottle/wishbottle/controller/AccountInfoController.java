@@ -70,6 +70,14 @@ public class AccountInfoController {
     @GetMapping("/index")
     public String index(Model model){
         if(presentAccount.getEmail()!=null) {
+            List<AccountInfo> list=accountInfoService.getAllAccountInfo();
+            model.addAttribute("accountNum",list.size());//用户总数
+            List<Wish> wishes=wishService.getAllWish();
+            model.addAttribute("wishNum",wishes.size());//心愿总数
+            List<Comments> commentsList = commentsService.getAllComments();
+            model.addAttribute("commentNum",commentsList.size());//评论总数
+            List<Good> goodList=goodService.getAllGood();
+            model.addAttribute("goodNum",goodList.size());//点赞总数
             model.addAttribute("presentAccount",presentAccount);
             return "index";
         }
