@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -35,6 +36,7 @@ public class WishController {
         if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()<=2) {
             searchString="Search...";
             List<Wish> list=wishService.getAllWish();
+            Collections.reverse(list);// 倒序排列
             model.addAttribute("wishes",list);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
@@ -98,6 +100,7 @@ public class WishController {
             else {
                 wishList = wishService.search("%" + this.searchString + "%");
             }
+            Collections.reverse(wishList);// 倒序排列
             model.addAttribute("wishes",wishList);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);

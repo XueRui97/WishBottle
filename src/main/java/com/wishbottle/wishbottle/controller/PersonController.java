@@ -2,6 +2,7 @@
 package com.wishbottle.wishbottle.controller;
 
 import com.wishbottle.wishbottle.bean.*;
+import com.wishbottle.wishbottle.bean.Collection;
 import com.wishbottle.wishbottle.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/")
@@ -193,10 +192,12 @@ public class PersonController {
     private String returnTree(Model model,String returnStr){
         //我的心愿
         List<Wish> wishList=wishService.getByAccountID(AccountInfoController.presentAccount.getAccountID());
+        Collections.reverse(wishList);// 倒序排列
         model.addAttribute("myWish",wishList);
 
         //获取全部心愿
         List<Wish> allWishList=wishService.getAllWish();
+        Collections.reverse(allWishList);// 倒序排列
         WishToComments aWishToComment=//初始化，不能为空null
                 wishList.isEmpty()?new WishToComments():
                 new WishToComments(wishList.get(0).getWishID(),commentsService.search(wishList.get(0).getWishID()));
@@ -215,13 +216,31 @@ public class PersonController {
         //我的评论
         List<Comments> myList=commentsService.queryByAccountID(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("myComments",myList);
+        //我评论的心愿
+        List<Wish> myCommentWish=new ArrayList<>();
+        Integer accountID=AccountInfoController.presentAccount.getAccountID();
+        for(WishToComments aa:aWishToComment.wishToCommentsList)//对所有wishToComment进行遍历
+            for(Comments cc:aa.getCommentsList())//遍历comments,当评论的accountID为本人ID加入myCommentWish
+                if(cc.getAccountInfo().getAccountID().equals(accountID)){
+                myCommentWish.add(wishService.findByID(cc.getWish().getWishID()).get());
+                break;
+                }
+        model.addAttribute("myCommentWish",myCommentWish);
+        //测试
+        for(Wish awish:myCommentWish)
+        {
+            System.out.println(awish.getWishID());
+        }
         //对我的评论
         List<Comments> otherList=commentsService.queryOtherComment(AccountInfoController.presentAccount.getAccountID());
         model.addAttribute("otherComments",otherList);
         model.addAttribute("presentAccount",AccountInfoController.presentAccount);
         //我的收藏
         List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
+        Collections.reverse(myCollection);// 倒序排列
         model.addAttribute("myCollection",myCollection);
+
+
         //我的赞
         List<Good> myGood=goodService.queryMyGood(AccountInfoController.presentAccount.getAccountID());
         aWishToComment.setGoodList(myGood);

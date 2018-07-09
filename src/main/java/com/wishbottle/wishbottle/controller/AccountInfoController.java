@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -80,6 +81,7 @@ public class AccountInfoController {
     public String account(Model model){
         if(presentAccount.getEmail()!=null&&presentAccount.getLevel()<=2){
             List<AccountInfo> list=accountInfoService.getAllAccountInfo();
+            Collections.reverse(list);// 倒序排列
             model.addAttribute("account",list);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",presentAccount);
@@ -95,6 +97,7 @@ public class AccountInfoController {
             if (!searchBox.isEmpty())
                 this.searchString=searchBox;
             List<AccountInfo> accountInfoList=accountInfoService.search("%"+ this.searchString+"%");
+            Collections.reverse(accountInfoList);// 倒序排列
             model.addAttribute("account",accountInfoList);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",presentAccount);

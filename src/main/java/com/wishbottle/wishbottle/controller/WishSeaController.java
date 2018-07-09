@@ -97,43 +97,6 @@ public class WishSeaController {
         else
             return "redirect:/loginPage";
     }
-    @RequestMapping("/oneWishPage")
-    public String  oneWishPage(@ModelAttribute("form") Model form, Model model){
-        if (AccountInfoController.presentAccount.getEmail() != null && AccountInfoController.presentAccount.getLevel() == 3) {
-            model=form;
-        return "redirect:/oneWishPage";
-    }
-        else
-                return "redirect:/loginPage";
-}
-    @GetMapping("/oneWishPage/{id}")
-    public String  oneWishPage(@PathVariable("id")Integer id,Model model){
-        if (AccountInfoController.presentAccount.getEmail() != null && AccountInfoController.presentAccount.getLevel() == 3) {
-            //获取心愿
-            Wish wish = wishService.findByID(id).get();
-            WishToComments aWishToComment =//初始化，不能为空null
-                    new WishToComments(wish.getWishID(), commentsService.search(wish.getWishID()));
-            //关联所以wish到comment
-            aWishToComment.wishToCommentsList.add(
-                    new WishToComments(wish.getWishID(), commentsService.search(wish.getWishID())));
-            model.addAttribute("presentAccount", AccountInfoController.presentAccount);
-            //我的收藏
-            List<Collection> myCollection = collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("myCollection", myCollection);
-            //我的赞
-            List<Good> myGood = goodService.queryMyGood(AccountInfoController.presentAccount.getAccountID());
-            aWishToComment.setGoodList(myGood);
-            aWishToComment.setCollectionList(myCollection);
-            aWishToComment.setAccountInfoID(AccountInfoController.presentAccount.getAccountID());
-            model.addAttribute("aWishToComment", aWishToComment);
-            model.addAttribute("Wish", wish);
-            model.addAttribute("top10Wishes", top10);
-            model.addAttribute("randomWishes", ranWish);
-            return "redirect:/oneWishPage";
-        }
-        else
-            return "redirect:/loginPage";
-    }
     //心愿海发表评论
     @PostMapping("/addWishSeaComment")
     public String adddComment(@RequestParam("cmEdit") String cmEdit,

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -24,6 +25,7 @@ public class LogController {
     public String log(Model model){
         if(AccountInfoController.presentAccount.getEmail()!=null&&AccountInfoController.presentAccount.getLevel()<=2) {
             List<Log> list=logService.getAllLog();
+            Collections.reverse(list);// 倒序排列
             model.addAttribute("logs",list);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
@@ -50,6 +52,7 @@ public class LogController {
             else {
                 logList = logService.search("%" + this.searchString + "%");
             }
+            Collections.reverse(logList);// 倒序排列
             model.addAttribute("logs",logList);
             model.addAttribute("searchString",searchString);
             model.addAttribute("presentAccount",AccountInfoController.presentAccount);
