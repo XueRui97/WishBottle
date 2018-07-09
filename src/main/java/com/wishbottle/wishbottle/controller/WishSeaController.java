@@ -1,9 +1,9 @@
 package com.wishbottle.wishbottle.controller;
 
-import com.wishbottle.wishbottle.bean.Comments;
-import com.wishbottle.wishbottle.bean.Wish;
-import com.wishbottle.wishbottle.bean.WishToComments;
+import com.wishbottle.wishbottle.bean.*;
+import com.wishbottle.wishbottle.service.CollectionService;
 import com.wishbottle.wishbottle.service.CommentsService;
+import com.wishbottle.wishbottle.service.GoodService;
 import com.wishbottle.wishbottle.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +23,10 @@ public class WishSeaController {
     private WishService wishService;
     @Autowired
     private CommentsService commentsService;
+    @Autowired
+    private CollectionService collectionService;
+    @Autowired
+    private GoodService goodService;
     String searchString="Search...";
     //心愿海
     @GetMapping("/wishSea")
@@ -41,6 +45,14 @@ public class WishSeaController {
                 for(Wish wish:list)
                     aWishToComment.wishToCommentsList.add(
                             new WishToComments(wish.getWishID(),commentsService.search(wish.getWishID())));
+            //我的收藏
+            List<Collection> myCollection=collectionService.queryMyCollection(AccountInfoController.presentAccount.getAccountID());
+            //model.addAttribute("myCollection",myCollection);
+            //我的赞
+            List<Good> myGood=goodService.queryMyGood(AccountInfoController.presentAccount.getAccountID());
+            aWishToComment.setGoodList(myGood);
+            aWishToComment.setCollectionList(myCollection);
+            aWishToComment.setAccountInfoID(AccountInfoController.presentAccount.getAccountID());
             List<Wish> top10=wishService.getTop10();//今日点赞量前十的心愿
             List<Wish> ranWish=wishService.getRan10();//随机产生的十个心愿
             model.addAttribute("top10Wishes",top10);

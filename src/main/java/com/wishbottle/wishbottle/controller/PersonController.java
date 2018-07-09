@@ -171,6 +171,7 @@ public class PersonController {
         //if(AccountInfoController.presentAccount.getEmail()!=null){
         List<Good> goodList=goodService.searchByAccountIDAndWishID(
                 AccountInfoController.presentAccount.getAccountID(),WishID);
+        //System.out.println(goodList.size());
         Wish awish=wishService.findByID(WishID).get();
         if(goodList.isEmpty())
         {
@@ -185,6 +186,7 @@ public class PersonController {
             awish.setGoodNum(awish.getGoodNum()-1);
             wishService.updateWish(awish);
         }
+        //System.out.println(awish.getGoodNum());
         return "redirect:/tree";
     }
     //返回心愿、心愿找评论、评论、被评论和收藏的list方法

@@ -181,6 +181,7 @@ public class testRestController {
         System.out.println("getComment");
         Map<String, Object> map = new HashMap<String, Object>();
         List<Comments> commentsList = commentsService.search(id);//根据wishID查询
+        System.out.println(id);
         System.out.println(commentsList.size());
         //accountInfoList.add(presentAccount);
         map.put("commentsList", commentsList);
@@ -220,7 +221,8 @@ public class testRestController {
         System.out.println("collectio");
         System.out.println(collectionList.get().getWish().getTitle());
         //别人对该心愿的评论
-        List<Comments> commentsList = commentsService.queryOtherComment(collectionList.get().getWish().getAccountInfo().getAccountID());
+        //根据wishid进行查询
+        List<Comments> commentsList = commentsService.search(collectionList.get().getWish().getWishID());
         System.out.println("别人对wish的评论");
         System.out.println(commentsList.size());
         //map.put("collectionList",collectionList);
@@ -276,5 +278,24 @@ public class testRestController {
         //accountInfoList.add(presentAccount);
         map.put("commentsList", commentsList);
         return map;
+    }
+    //删除collection by collectionid
+    @GetMapping("/weChatDeleteCollection/{id}")
+    public boolean deleteCollection(@PathVariable("id") Integer id) {
+        Optional<Collection> collectionList=collectionService.findByID(id);
+        Collection acollection=collectionList.get();
+        Wish awish=acollection.getWish();
+        System.out.println(awish.getCollectionNum());
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            collectionService.deleteCollection(acollection);
+        }
+        catch(Exception e){
+            return false;
+        }
+        awish.setCollectionNum(awish.getCollectionNum()-1);//删除一个收藏，wish的收藏数减1
+        wishService.updateWish(awish);
+        System.out.println(awish.getCollectionNum());
+        return true;
     }
 }

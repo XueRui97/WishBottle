@@ -32,13 +32,17 @@ public class WishToComments {
     }
     //判断是否已经点赞，１为已经点赞，０为未点赞
     public Integer hasGood(Integer wishID){
+        System.out.println(wishID);
         if(!goodList.isEmpty())
             for(Good good:goodList) {
                 if (good.getWish().getWishID().equals(wishID)
                         && good.getAccountInfo().getAccountID().equals( accountInfoID)){
-                            //System.out.println(1);
+                            System.out.println(1);
                              return 1;}
+
         }
+        System.out.println("goodList"+goodList.size());
+        System.out.println(0);
         return 0;
     }
     // 构造方法
