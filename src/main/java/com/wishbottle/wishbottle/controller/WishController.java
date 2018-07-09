@@ -1,11 +1,10 @@
 //心愿控制类
 package com.wishbottle.wishbottle.controller;
 
-import com.wishbottle.wishbottle.bean.Collection;
-import com.wishbottle.wishbottle.bean.Comments;
-import com.wishbottle.wishbottle.bean.Wish;
+import com.wishbottle.wishbottle.bean.*;
 import com.wishbottle.wishbottle.service.CollectionService;
 import com.wishbottle.wishbottle.service.CommentsService;
+import com.wishbottle.wishbottle.service.GoodService;
 import com.wishbottle.wishbottle.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +26,8 @@ public class WishController {
     private CollectionService collectionService;
     @Autowired
     private CommentsService commentsService;
+    @Autowired
+    private GoodService goodService;
     String searchString="Search...";
     //跳转到心愿管理页面
     @GetMapping("/wishPage")
@@ -52,15 +53,22 @@ public class WishController {
 
             //delete collection
             List<Collection> collectionList=collectionService.getAllCollection();
-            for(Collection acollection :collectionList)
-                if(acollection.getWish().getWishID()==id)
-                    collectionService.deleteCollection(acollection);
+            if(!collectionList.isEmpty())
+                for(Collection acollection :collectionList)
+                    if(acollection.getWish().getWishID()==id)
+                        collectionService.deleteCollection(acollection);
 
             //delete comment
             List<Comments> commentsList=commentsService.getAllComments();
-            for(Comments acomment:commentsList)
-                if(acomment.getWish().getWishID()==id)
-                    commentsService.deleteComment(acomment);
+            if(!commentsList.isEmpty())
+                for(Comments acomment:commentsList)
+                    if(acomment.getWish().getWishID()==id)
+                        commentsService.deleteComment(acomment);
+            //delete Good
+            List<Good> goodList=goodService.searchByWishID(id);
+            if(!goodList.isEmpty())
+                for(Good good:goodList)
+                 goodService.deleteGood(good);
 
             wishService.deleteWish(wishs.get());
             List<Wish> list=wishService.getAllWish();

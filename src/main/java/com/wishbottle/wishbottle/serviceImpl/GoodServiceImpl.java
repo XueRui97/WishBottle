@@ -42,4 +42,9 @@ public class GoodServiceImpl implements GoodService {
             return true;
         return false;
     }
+
+    @Override
+    public List<Good> searchByWishID(Integer wishID) {
+        return goodRepository.searchByWishID(wishID);
+    }
 }

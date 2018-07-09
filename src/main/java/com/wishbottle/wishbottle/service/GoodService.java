@@ -17,5 +17,6 @@ public interface GoodService {
     List<Good> getAllGood();
     //是否已经点赞
     boolean hasGood(Integer accountID,Integer wishID);
-
+    //根据wishID查询good
+    List<Good> searchByWishID(Integer wishID);
 }
