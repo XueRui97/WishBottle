@@ -330,13 +330,25 @@
                                                             </a>&nbsp;&nbsp;&nbsp;&nbsp;
                                                             发布时间：
                                                             <span th:text="${Wish.getRelTime().toString().substring(0,16)}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            作者：<a href="javascript:void(0)"><span th:text="${Wish.getAccountInfo().getNikeName()}"></span></a>
+                                                            作者：<a href="javascript:void(0)"   title="用户简介"  data-trigger='hover focus'
+                                                                  data-container="body" data-toggle="popover" data-placement="top" data-html="true"
+                                                                  th:data-content="'<ul class=&quot;list-unstyled list-justify&quot;>
+                                                  <li>用户名:  <span>' + ${Wish.getAccountInfo().getNikeName()} +'</span></li>
+                                                  <li>出生日期:  <span>' +${Wish.getAccountInfo().getBirthday().toString().substring(0,10)} +'</span></li>
+                                                  <li>邮箱:  <span>' + ${Wish.getAccountInfo().getEmail()} + '</span></li>
+                                              </ul>'"><span th:text="${Wish.getAccountInfo().getNikeName()}"></span></a>
                                                         </span>
                                                     </div>
                                                     <div th:id="'dialog' + ${Wish.getWishID()}" class="panel-collapse collapse">
                                                         <div class="panel-body">
                                                             <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(Wish.getWishID())}">
-                                                                <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                                <li><a href="javascript:void(0)"   title="用户简介"  data-trigger='hover focus'
+                                                                       data-container="body" data-toggle="popover" data-placement="top" data-html="true"
+                                                                       th:data-content="'<ul class=&quot;list-unstyled list-justify&quot;>
+                                                  <li>用户名:  <span>' + ${Wish.getAccountInfo().getNikeName()} +'</span></li>
+                                                  <li>出生日期:  <span>' +${Wish.getAccountInfo().getBirthday().toString().substring(0,10)} +'</span></li>
+                                                  <li>邮箱:  <span>' + ${Wish.getAccountInfo().getEmail()} + '</span></li>
+                                              </ul>'"><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span></a><span>： </span>
                                                                     <span th:text="${myWishCm.getCMContent()}">内容</span>
                                                                     <br>
                                                                     <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
@@ -394,13 +406,25 @@
                                                             </a>&nbsp;&nbsp;&nbsp;&nbsp;
                                                             发布时间：
                                                             <span th:text="${myCo.getWish().getRelTime().toString().substring(0,16)}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            作者：<a href="javascript:void(0)"><span th:text="${myCo.getWish().getAccountInfo().getNikeName()}"></span></a>
+                                                            作者：<a href="javascript:void(0)"   title="用户简介"  data-trigger='hover focus'
+                                                                  data-container="body" data-toggle="popover" data-placement="top" data-html="true"
+                                                                  th:data-content="'<ul class=&quot;list-unstyled list-justify&quot;>
+                                                  <li>用户名:  <span>' + ${myCo.getWish().getAccountInfo().getNikeName()} +'</span></li>
+                                                  <li>出生日期:  <span>' +${myCo.getWish().getAccountInfo().getBirthday().toString().substring(0,10)} +'</span></li>
+                                                  <li>邮箱:  <span>' + ${myCo.getWish().getAccountInfo().getEmail()} + '</span></li>
+                                              </ul>'"><span th:text="${myCo.getWish().getAccountInfo().getNikeName()}"></span></a>
                                                         </span>
                                                     </div>
                                                     <div th:id="'myCollected' + ${myCo.getWish().getWishID()}" class="panel-collapse collapse">
                                                         <div class="panel-body">
                                                             <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(myCo.getWish().getWishID())}">
-                                                                <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                                <li><a href="javascript:void(0)"   title="用户简介"  data-trigger='hover focus'
+                                                                       data-container="body" data-toggle="popover" data-placement="top" data-html="true"
+                                                                       th:data-content="'<ul class=&quot;list-unstyled list-justify&quot;>
+                                                  <li>用户名:  <span>' + ${myCo.getWish().getAccountInfo().getNikeName()} +'</span></li>
+                                                  <li>出生日期:  <span>' +${myCo.getWish().getAccountInfo().getBirthday().toString().substring(0,10)} +'</span></li>
+                                                  <li>邮箱:  <span>' + ${myCo.getWish().getAccountInfo().getEmail()} + '</span></li>
+                                              </ul>'"><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span></a><span>： </span>
                                                                     <span th:text="${myWishCm.getCMContent()}">内容</span>
                                                                     <br>
                                                                     <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
@@ -456,13 +480,25 @@
                                                             </a>&nbsp;&nbsp;&nbsp;&nbsp;
                                                             发布时间：
                                                             <span th:text="${myCo.getWish().getRelTime().toString().substring(0,16)}"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            作者：<a href="javascript:void(0)"><span th:text="${myCo.getWish().getAccountInfo().getNikeName()}"></span></a>
+                                                            作者：<a href="javascript:void(0)"   title="用户简介"  data-trigger='hover focus'
+                                                                  data-container="body" data-toggle="popover" data-placement="top" data-html="true"
+                                                                  th:data-content="'<ul class=&quot;list-unstyled list-justify&quot;>
+                                                  <li>用户名:  <span>' + ${myCo.getWish().getAccountInfo().getNikeName()} +'</span></li>
+                                                  <li>出生日期:  <span>' +${myCo.getWish().getAccountInfo().getBirthday().toString().substring(0,10)} +'</span></li>
+                                                  <li>邮箱:  <span>' + ${myCo.getWish().getAccountInfo().getEmail()} + '</span></li>
+                                              </ul>'"><span th:text="${myCo.getWish().getAccountInfo().getNikeName()}"></span></a>
                                                         </span>
                                                     </div>
                                                     <div th:id="'myCollected' + ${myCo.getWish().getWishID()}" class="panel-collapse collapse">
                                                         <div class="panel-body">
                                                             <ul class="list-unstyled" th:each="myWishCm : ${aWishToComment.getByWishID(myCo.getWish().getWishID())}">
-                                                                <li><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span><span>： </span>
+                                                                <li><a href="javascript:void(0)"   title="用户简介"  data-trigger='hover focus'
+                                                                       data-container="body" data-toggle="popover" data-placement="top" data-html="true"
+                                                                       th:data-content="'<ul class=&quot;list-unstyled list-justify&quot;>
+                                                  <li>用户名:  <span>' + ${myCo.getWish().getAccountInfo().getNikeName()} +'</span></li>
+                                                  <li>出生日期:  <span>' +${myCo.getWish().getAccountInfo().getBirthday().toString().substring(0,10)} +'</span></li>
+                                                  <li>邮箱:  <span>' + ${myCo.getWish().getAccountInfo().getEmail()} + '</span></li>
+                                              </ul>'"><span th:text="${myWishCm.getAccountInfo().getNikeName()}">作者</span></a><span>： </span>
                                                                     <span th:text="${myWishCm.getCMContent()}">内容</span>
                                                                     <br>
                                                                     <span style="float: right" th:text="${myWishCm.getCMTime().toString().substring(0,16)}"></span><hr>
@@ -528,6 +564,11 @@
         startView: 2,
         minView: 2,
         forceParse: 0
+    });
+</script>
+<script>
+    $(function () {
+        $("[data-toggle='popover']").popover();
     });
 </script>
 </body>

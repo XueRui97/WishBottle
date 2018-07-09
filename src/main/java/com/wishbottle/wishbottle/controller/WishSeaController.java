@@ -66,7 +66,7 @@ public class WishSeaController {
             return "loginPage";
     }
     //查询一个心愿
-    @GetMapping("/wish/{wishID}")
+    @GetMapping("/wish{wishID}")
     public String  getoneWish(@PathVariable("wishID")Integer id,Model model) {
         if (AccountInfoController.presentAccount.getEmail() != null && AccountInfoController.presentAccount.getLevel() == 3) {
          //获取心愿
