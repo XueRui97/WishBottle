@@ -244,10 +244,10 @@
                                 <div style="position: fixed">
                                     <div class="panel panel-default">
                                         <!-- Default panel contents -->
-                                        <div class="panel-heading" style="padding-bottom: 10px;padding-top: 10px;width: 300px;">今日热门</div>
+                                        <div class="panel-heading" style="padding-bottom: 10px;padding-top: 10px;width: 350px;">今日热门</div>
                                         <!-- List group -->
                                         <div class="list-group" th:each="top10Wish : ${top10Wishes}">
-                                            <a th:href="'wish' + ${top10Wish.getWishID()}" class="list-group-item"><span th:text="${top10Wishes.indexOf(top10Wish)+1}+'. '"></span><span th:text="${top10Wish.getTitle()}"></span><span th:text="${top10Wish.getGoodNum()}" class="badge">14</span></a>
+                                            <a th:href="'wish' + ${top10Wish.getWishID()}" class="list-group-item"><span th:text="${top10Wishes.indexOf(top10Wish)+1}+'. '"></span><span th:text="${#strings.abbreviate(top10Wish.getTitle(),20)}"></span><span th:text="${top10Wish.getGoodNum()}" class="badge">14</span></a>
                                         </div>
                                     </div>
                                     <div class="panel panel-default">
@@ -255,7 +255,7 @@
                                         <div class="panel-heading" style="padding-bottom: 10px;padding-top: 10px;">随机心愿</div>
                                         <!-- List group -->
                                         <div class="list-group" th:each="randomWish : ${randomWishes}">
-                                            <a th:href="'wish' + ${randomWish.getWishID()}" class="list-group-item" th:text="${randomWish.getTitle()}">Cras justo odio</a>
+                                            <a th:href="'wish' + ${randomWish.getWishID()}" class="list-group-item" th:text="${#strings.abbreviate(randomWish.getTitle(),20)}">Cras justo odio</a>
                                         </div>
                                     </div>
                                 </div>
