@@ -249,7 +249,7 @@
 
                                             <div class="profile-info">
                                                 <h4 class="heading">个人介绍</h4>
-                                                <textarea name="introEdit" th:text="${presentAccount.getSelfIntro()}" th:value="${presentAccount.getSelfIntro()}" class="form-control" placeholder="个人介绍" rows="4" required=""></textarea>
+                                                <textarea name="introEdit" maxlength="100" th:text="${presentAccount.getSelfIntro()}" th:value="${presentAccount.getSelfIntro()}" class="form-control" placeholder="个人介绍" rows="4" required=""></textarea>
                                             </div>
                                             <div class="text-center"><a href="#profile" data-toggle="tab" class="btn btn-default">返回</a>&nbsp;<button type="submit"  class="btn btn-primary">保存修改</button></div>
                                         </form>
@@ -268,7 +268,7 @@
                             <div id="collapseOne" class="collapse">
                                 <div class="panel-body">
                                     <form enctype="multipart/form-data" method="post" action="/addWish" role="form">
-                                        <input name="wishTitle" type="text" class="form-control" placeholder="标题" required>
+                                        <input name="wishTitle" maxlength="60" type="text" class="form-control" placeholder="标题" required>
                                         <br>
                                         <textarea name="wishContent" class="form-control" placeholder="内容" rows="4" maxlength="240" onkeyup="changeLength(this, 'wishContentNum')" required></textarea>
                                         字数：<span id="wishContentNum">0</span>/240 <br>
